@@ -26,8 +26,8 @@ def pca_calc(inpath, pca_num_components, emb_col="UniRep Embedding"):
 
 if __name__ == "__main__":
     # Settings
-    inpath = "data/unirepEmbeddings.csv"
-    pca_num_components = 190
-    emb_col = "UniRep Embedding"
+    inpath = "data/protbertEmbeddings.csv"
+    pca_num_components = 10
+    emb_col = "Protbert Embedding"
 
     pca_calc(inpath, pca_num_components, emb_col)

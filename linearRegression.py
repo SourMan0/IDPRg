@@ -7,7 +7,9 @@ import ast
 from pathlib import Path
 
 def linear_regression(inpath, test_size, emb_col, alphas=[0.001, 0.01, 0.1, 1, 10, 100, 500, 1000, 10000], outpath=None):
-    # df = pd.read_csv(inpath)
+    # df = pd.read_csv(inpath)  # Standard CSV read
+
+    # Special handling for Unirep (embedding is a list as a string)
     df = pd.read_csv(inpath, converters={emb_col: ast.literal_eval})
 
     X = df[emb_col].tolist()
@@ -27,7 +29,6 @@ def linear_regression(inpath, test_size, emb_col, alphas=[0.001, 0.01, 0.1, 1, 1
     test_rmse = ((y_test - y_pred_test) ** 2).mean() ** 0.5
     train_rmse = ((y_train - y_pred_train) ** 2).mean() ** 0.5
     alpha = pipe.named_steps['ridge'].alpha_
-    params = pipe.named_steps['ridge'].get_params()
 
     print(f"Test RMSE: {test_rmse}")
     print(f"Train RMSE: {train_rmse}")

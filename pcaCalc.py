@@ -4,21 +4,30 @@ from sklearn.decomposition import PCA
 import ast
 from pathlib import Path
 
-# Settings
-inpath = "data/unirepEmbeddings.csv"
-pca_num_components = 10
+def pca_calc(inpath, pca_num_components, emb_col="UniRep Embedding"):
+    #df = pd.read_csv(inpath)    # Standard CSV read
 
-df = pd.read_csv(inpath, converters={"UniRep Embedding": ast.literal_eval})
-emb = df["UniRep Embedding"].tolist()
-print(f"Reducing dimensions from {len(emb[0])} to {pca_num_components}")
+    # Special handling for Unirep (embedding is a list as a string)
+    df = pd.read_csv(inpath, converters={emb_col: ast.literal_eval})
 
-# Define PCA and scaler
-pca = PCA(n_components=pca_num_components, svd_solver="randomized", random_state=42)
-scaler = StandardScaler(with_mean=True)
+    emb = df[emb_col].tolist()
+    print(f"Reducing dimensions from {len(emb[0])} to {pca_num_components}")
 
-# Transform embeddings
-emb = scaler.fit_transform(emb)
-emb = pca.fit_transform(emb)
+    # Define PCA and scaler
+    pca = PCA(n_components=pca_num_components, svd_solver="randomized", random_state=42)
+    scaler = StandardScaler(with_mean=True)
 
-df["UniRep Embedding"] = emb
-df.to_csv(f"data/{Path(inpath).stem}_pca_{pca_num_components}.csv", index=False)
+    # Transform embeddings
+    emb = scaler.fit_transform(emb)
+    emb = pca.fit_transform(emb)
+
+    df[emb_col] = emb.tolist()
+    df.to_csv(f"data/{Path(inpath).stem}PCA{pca_num_components}.csv", index=False)
+
+if __name__ == "__main__":
+    # Settings
+    inpath = "data/unirepEmbeddings.csv"
+    pca_num_components = 190
+    emb_col = "UniRep Embedding"
+
+    pca_calc(inpath, pca_num_components, emb_col)

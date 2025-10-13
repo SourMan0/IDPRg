@@ -1,1 +1,9 @@
-data/unirepEmbeddings.csv
+data/unirep_allRaw.csv
+data/unirep_inliersRaw.csv
+data/unirep_allNormalized.csv
+data/unirep_allNormalizedWithInliers.csv
+data/unirep_allNormalizedNaive.csv
+data/unirep_inliersNormalized.csv
+data/unirep_inliersNormalizedWithAll.csv
+data/unirep_inliersNormalizedNaive.csv
+__pycache__/

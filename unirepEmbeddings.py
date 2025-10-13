@@ -2,8 +2,9 @@ from jax_unirep import get_reps
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
+from pathlib import Path
 
-def unirep_embed(inpath, pca_toggle=False, pca_num_components=1):
+def unirep_embed(inpath, outpath=None, pca_toggle=False, pca_num_components=1):
     prot_df = pd.read_csv(inpath)
 
     # CSV cleaning
@@ -24,12 +25,15 @@ def unirep_embed(inpath, pca_toggle=False, pca_num_components=1):
 
     prot_df["UniRep Embedding"] = avg.tolist()
 
-    prot_df.to_csv("unirepEmbeddings.csv", index=False)
+    if outpath is None:
+        outpath = f"data/unirep_{Path(inpath).stem}.csv"
+
+    prot_df.to_csv(outpath, index=False)
 
 if __name__ == "__main__":
     # Settings
-    inpath = "data/allRaw.csv"
+    inpath = "data/inliersRaw.csv"
     pca_toggle = False  # If toggled, will do PCA on embeddings before saving
     pca_num_components = 190
 
-    unirep_embed(inpath, pca_toggle, pca_num_components)
+    unirep_embed(inpath, pca_toggle=pca_toggle, pca_num_components=pca_num_components)

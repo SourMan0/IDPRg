@@ -8,8 +8,8 @@ import os
 # ===============================
 # CONFIG
 # ===============================
-INPUT_FILE = "data/allNormalizedWithInliers.csv"
-OUTPUT_FILE = "data/protbertEmbeddings-allNormalizedWithInliers.csv"
+INPUT_FILE = "data/inliersNormalizedWithAll.csv"
+OUTPUT_FILE = "data/protbertEmbeddings-inliersNormalizedWithAll.csv"
 
 # ===============================
 # LOAD DATASET

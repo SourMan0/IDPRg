@@ -36,5 +36,5 @@ for layer in range(n_layers):
 for layer, dims in pca_results.items():
     for dim, arr in dims.items():
         filename = f"12esmPCA/layer{layer}_pca{dim}.npy"
-        np.save(filename, arr.astype(np.float32))
+        np.save(filename, arr.astype(np.float64))
         print(f"Saved {filename} with shape {arr.shape}")

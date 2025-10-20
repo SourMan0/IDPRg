@@ -8,14 +8,8 @@ import os
 # ===============================
 # CONFIG
 # ===============================
-INPUT_FILE = "IDPRg/data/rawData.csv"
-OUTPUT_FILE = "protbertEmbeddings.csv"
-
-# Candidate names for sequence column
-SEQ_COL_CANDIDATES = [
-    "sequence", "Sequence", "Experimental Sequence",
-    "Seq", "Protein Sequence", "Amino Acid Sequence"
-]
+INPUT_FILE = "data/allNormalizedWithInliers.csv"
+OUTPUT_FILE = "data/protbertEmbeddings-allNormalizedWithInliers.csv"
 
 # ===============================
 # LOAD DATASET
@@ -25,27 +19,34 @@ if not os.path.exists(INPUT_FILE):
 
 print(f"Loading dataset from: {INPUT_FILE}")
 df = pd.read_csv(INPUT_FILE)
-print(f"Loaded {len(df)} rows.")
-print("\nColumns found in CSV:")
-print(df.columns.tolist())
-print("\nFirst few rows:")
-print(df.head(3))
+print(f"Loaded {len(df)} rows with columns: {df.columns.tolist()}\n")
+
+if df.shape[1] != 2:
+    raise ValueError(f"Expected exactly 2 columns (sequence and Rg), but found {df.shape[1]}.")
 
 # ===============================
-# DETECT SEQUENCE COLUMN
+# DETECT SEQUENCE AND TARGET COLUMNS
 # ===============================
-seq_col = None
-for col in SEQ_COL_CANDIDATES:
-    if col in df.columns:
-        seq_col = col
-        break
+def is_sequence_column(series):
+    """Heuristic: a sequence column will have mostly alphabetic strings (A-Z) of length > 10."""
+    try:
+        sample_values = series.dropna().astype(str).head(10)
+        return sample_values.apply(lambda x: x.isalpha() and len(x) > 10).mean() > 0.5
+    except Exception:
+        return False
 
-if seq_col not in df.columns:
-    raise ValueError(f"Sequence column '{seq_col}' not found in the dataset.")
+col1, col2 = df.columns
+if is_sequence_column(df[col1]):
+    seq_col, rg_col = col1, col2
+elif is_sequence_column(df[col2]):
+    seq_col, rg_col = col2, col1
+else:
+    raise ValueError("Could not automatically detect which column contains amino acid sequences.")
 
-print(f"\nUsing column '{seq_col}' for sequences.")
+print(f"Detected sequence column: '{seq_col}'")
+print(f"Detected target (Rg) column: '{rg_col}'\n")
 
-# Drop missing/blank sequences
+# Clean sequences
 df = df[df[seq_col].notna() & (df[seq_col].astype(str).str.strip() != "")]
 df[seq_col] = df[seq_col].astype(str).str.strip()
 print(f"{len(df)} valid sequences after cleaning.\n")
@@ -53,7 +54,7 @@ print(f"{len(df)} valid sequences after cleaning.\n")
 # ===============================
 # LOAD PROTBERT MODEL
 # ===============================
-print("🔹 Loading ProtBERT model and tokenizer (Rostlab/prot_bert)...")
+print("Loading ProtBERT model and tokenizer (Rostlab/prot_bert)...")
 tokenizer = BertTokenizer.from_pretrained("Rostlab/prot_bert", do_lower_case=False)
 model = BertModel.from_pretrained("Rostlab/prot_bert")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -65,19 +66,14 @@ print(f"Model loaded. Using device: {device}\n")
 # FUNCTION: GET EMBEDDING
 # ===============================
 def get_protbert_embedding(sequence: str) -> np.ndarray:
-    """
-    Compute mean-pooled ProtBERT embedding for a single protein sequence.
-    """
-    # Clean sequence
+    """Compute mean-pooled ProtBERT embedding for a single protein sequence."""
     sequence = sequence.upper().replace(" ", "")
     sequence = " ".join(list(sequence))
     sequence = sequence.replace("U", "X").replace("Z", "X").replace("O", "X")
 
-    # Tokenize
     encoded_input = tokenizer(sequence, return_tensors="pt", padding=True)
     encoded_input = {k: v.to(device) for k, v in encoded_input.items()}
 
-    # Forward pass
     with torch.no_grad():
         outputs = model(**encoded_input)
         hidden_states = outputs.last_hidden_state.squeeze(0)
@@ -96,7 +92,7 @@ for idx, seq in tqdm(enumerate(df[seq_col]), total=len(df)):
         emb = get_protbert_embedding(seq)
         embeddings.append(emb)
     except Exception as e:
-        print(f"⚠️ Error on row {idx}: {e}")
+        print(f"Error on row {idx}: {e}")
         failed_indices.append(idx)
         embeddings.append(np.zeros(1024))
 
@@ -106,9 +102,10 @@ for idx, seq in tqdm(enumerate(df[seq_col]), total=len(df)):
 embeddings = np.vstack(embeddings)
 emb_df = pd.DataFrame(embeddings, columns=[f"emb_{i}" for i in range(embeddings.shape[1])])
 emb_df.insert(0, "Sequence", df[seq_col].values)
+emb_df["Rg (nm)"] = df[rg_col].values
 
 emb_df.to_csv(OUTPUT_FILE, index=False)
 print(f"\nSaved embeddings for {len(df)} sequences to '{OUTPUT_FILE}'")
 
 if failed_indices:
-    print(f"⚠️ {len(failed_indices)} sequences failed to embed (indices: {failed_indices})")
+    print(f"Warning: {len(failed_indices)} sequences failed to embed (indices: {failed_indices})")

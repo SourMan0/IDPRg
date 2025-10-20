@@ -6,7 +6,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 
 
-x = torch.load('esm_embeddings/esm6layer.pt')
+x = torch.load('esm_embeddings/esm12layer.pt')
 print(x.shape)
 
 X_np = np.array(x.detach().cpu())
@@ -35,6 +35,6 @@ for layer in range(n_layers):
 
 for layer, dims in pca_results.items():
     for dim, arr in dims.items():
-        filename = f"esmPCA/layer{layer}_pca{dim}.csv"
-        np.savetxt(filename, arr, delimiter=",")
+        filename = f"12esmPCA/layer{layer}_pca{dim}.npy"
+        np.save(filename, arr.astype(np.float32))
         print(f"Saved {filename} with shape {arr.shape}")

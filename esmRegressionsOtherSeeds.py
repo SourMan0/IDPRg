@@ -1,4 +1,4 @@
-#Move to parent directory to remake csvs 
+#Move to parent directory to remake csvsp 
 import numpy as np
 import csv
 from sklearn.gaussian_process import GaussianProcessRegressor

@@ -1,48 +1,145 @@
-import os
-import pandas as pd
 import numpy as np
+import pandas as pd
+import csv
 from doAllRegressions import evaluate_models_rmse
 
-def main(embedding_filename, target_column=None, output_dir=".", output_filename="regression_results.csv"):
+# ======================
+# Load label sequences
+# ======================
 
-    # 1. Construct full path from 'data' directory
-    data_dir = "data"
-    embedding_path = os.path.join(data_dir, embedding_filename)
+all_points_df = pd.read_csv('training/all_points.csv')
+inliers_df = pd.read_csv('training/inliers.csv')
 
-    if not os.path.exists(embedding_path):
-        raise FileNotFoundError(f"Embedding file not found at: {embedding_path}")
+all_sequences = all_points_df['Sequence'].to_list()
+inlier_sequences = inliers_df['Sequence'].to_list()
 
-    # 2. Load embeddings dynamically
-    df = pd.read_csv(embedding_path)
-    print(f"Loaded embeddings from {embedding_path}: {df.shape[0]} samples, {df.shape[1]} columns")
+# ======================
+# Load ProtBERT PCA embeddings
+# ======================
 
-    # 3. Identify feature and target columns
-    if target_column is None:
-        target_column = df.columns[-1]
-        print(f"No target column specified. Using last column: {target_column}")
+PCAvals = [10, 20, 50, 100, 190]
+protbert_features = {}          # features for all sequences
+protbert_inlier_features = {}   # features for inliers only
 
-    # 4. Extract and convert features/target to numeric arrays
-    X = df.drop(columns=[target_column]).apply(pd.to_numeric, errors="coerce").fillna(0).values
-    y = pd.to_numeric(df[target_column], errors="coerce").fillna(0).values
+for p in PCAvals:
+    # Load PCA embeddings
+    df = pd.read_csv(f'data/protbertEmbeddings2PCA{p}2.csv')
+    df = df.iloc[:, :-1]  # drop last column (old Rg)
+    df.columns = ['sequence'] + [f'pc{i+1}' for i in range(df.shape[1] - 1)]
 
-    # 5. Run regression evaluation
-    print("\nRunning regression evaluations...")
-    results = evaluate_models_rmse(X, y)
+    # ----------------------
+    # Filter embeddings to match all_points.csv
+    # ----------------------
+    df_all = df[df['sequence'].isin(all_sequences)].copy()
+    X_all = df_all.drop(columns=['sequence']).to_numpy()
+    protbert_features[p] = X_all
 
-    # 6. Prepare output directory
-    os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, output_filename)
+    # ----------------------
+    # Filter embeddings to match inliers.csv
+    # ----------------------
+    df_inl = df[df['sequence'].isin(inlier_sequences)].copy()
+    X_inl = df_inl.drop(columns=['sequence']).to_numpy()
+    protbert_inlier_features[p] = X_inl
 
-    # 7. Convert to DataFrame and save
-    results_df = pd.DataFrame(results, columns=["Model", "Split", "R2", "RMSE"])
-    results_df.to_csv(output_path, index=False)
-    print(f"\nResults saved to {output_path}")
+    # Print for sanity check
+    print(f'Loaded PCA{p}: {X_all.shape[0]} sequences (all), {X_inl.shape[0]} sequences (inliers)')
 
+# ======================
+# Load Rg label data (same as ESM version)
+# ======================
 
-if __name__ == "__main__":
-    # Example usage
-    main(
-        embedding_filename="protbertEmbeddingsPCA190.csv",
-        output_dir="protBertRegressionResults",
-        output_filename="PCA190RegressionSummary.csv"
-    )
+labelHeaders = [
+    'Sequence', 'Rg (nm)', 'Rg normalized w/0.427', 'Rg normalized w/0.5 (nm)', 'Rg normalized w/0.418 (nm)',
+    'Rg w/pH regressed out', 'Rg normalized w/0.427 w/pH regressed out', 'Rg normalized w/0.5 w/pH regressed out',
+    'Rg normalized w/0.418 w/pH regressed out', 'Rg w/buffer regressed out', 'Rg normalized w/0.427 w/buffer regressed out',
+    'Rg normalized w/0.5 w/buffer regressed out', 'Rg normalized w/0.418 w/buffer regressed out',
+    'Rg w/experimental pH regressed out', 'Rg normalized w/0.427 w/experimental pH regressed out',
+    'Rg normalized w/0.5 w/experimental pH regressed out', 'Rg normalized w/0.418 w/experimental pH regressed out',
+    'Rg w/experimental buffer regressed out', 'Rg normalized w/0.427 w/experimental buffer regressed out',
+    'Rg normalized w/0.5 w/experimental buffer regressed out', 'Rg normalized w/0.418 w/experimental buffer regressed out'
+]
+
+labels = [[] for _ in range(len(labelHeaders) - 1)]
+inlierLabels = [[] for _ in range(len(labelHeaders) - 1)]
+
+with open('training/all_points.csv', newline='') as f:
+    reader = csv.reader(f)
+    next(reader)
+    for row in reader:
+        for i, val in enumerate(row[1:]):
+            labels[i].append(float(val))
+
+with open('training/inliers.csv', newline='') as f:
+    reader = csv.reader(f)
+    next(reader)
+    for row in reader:
+        for i, val in enumerate(row[1:]):
+            inlierLabels[i].append(float(val))
+
+labels = np.array(labels, dtype=float)
+inlierLabels = np.array(inlierLabels, dtype=float)
+
+# ======================
+# Prepare inlier features (remove outliers)
+# ======================
+
+outlierIndices = [123, 136, 151, 158, 171, 185]
+inl = np.ones(190, dtype=bool)
+inl[outlierIndices] = False
+
+# ======================
+# Label splits for descriptive output
+# ======================
+
+labelSplits = [
+    ['Rg w/no norm', 'No regr out'],
+    ['Rg norm w/0.427', 'No regr out'],
+    ['Rg norm w/0.5', 'No regr out'],
+    ['Rg norm w/0.418', 'No regr out'],
+    ['Rg w/no norm', 'pH regr out'],
+    ['Rg norm w/0.427', 'pH regr out'],
+    ['Rg norm w/0.5', 'pH regr out'],
+    ['Rg norm w/0.418', 'pH regr out'],
+    ['Rg w/no norm', 'buffer regr out'],
+    ['Rg norm w/0.427', 'buffer regr out'],
+    ['Rg norm w/0.5', 'buffer regr out'],
+    ['Rg norm w/0.418', 'buffer regr out'],
+    ['Rg w/no norm', 'expr pH only regr out'],
+    ['Rg norm w/0.427', 'expr pH only regr out'],
+    ['Rg norm w/0.5', 'expr pH only regr out'],
+    ['Rg norm w/0.418', 'expr pH only regr out'],
+    ['Rg w/no norm', 'expr buffer only regr out'],
+    ['Rg norm w/0.427', 'expr buffer only regr out'],
+    ['Rg norm w/0.5', 'expr buffer only regr out'],
+    ['Rg norm w/0.418', 'expr buffer only regr out']
+]
+
+# ======================
+# Run regressions and save results for multiple seeds
+# ======================
+
+for idx, seed in enumerate([43, 44, 45, 46]):
+    outfile = f'protbertLosses{idx+1}.csv'
+    with open(outfile, 'w', newline='') as f:
+        writer = csv.writer(f)
+        header = ['Normalization', 'Regressing out', 'Points', 'Model', 'PCA Components', 'Regression Type', 'Test Split', 'Test R2 Score', 'RMSE Score']
+        writer.writerow(header)
+
+        for label_idx, ls in enumerate(labelSplits):
+            y_all = labels[label_idx]
+            y_inl = inlierLabels[label_idx]
+
+            for p in PCAvals:
+                X = protbert_features[p]
+                Xi = protbert_inlier_features[p]
+
+                losses_all = evaluate_models_rmse(X, y_all, seed)
+                losses_inl = evaluate_models_rmse(Xi, y_inl, seed)
+
+                for loss in losses_all:
+                    writer.writerow([ls[0], ls[1], 'All', 'ProtBERT', p, loss[0], loss[1], loss[2], loss[3]])
+
+                for loss in losses_inl:
+                    writer.writerow([ls[0], ls[1], 'Inliers', 'ProtBERT', p, loss[0], loss[1], loss[2], loss[3]])
+
+print("ProtBERT regression runs completed. Results saved to protbertLosses*.csv")

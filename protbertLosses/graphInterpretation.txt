@@ -1,0 +1,57 @@
+1️⃣ Mean RMSE by Regression Type and PCA Components
+
+What it shows: Each group of bars represents the mean RMSE for a particular number of PCA components (10, 20, 50, 100, 190) across regression models (GPR, Kernel Ridge, Lasso, Linear, Ridge).
+
+Interpretation:
+
+Lower bars = better models (since RMSE measures prediction error).
+
+Most regressors perform similarly for low PCA dimensions (10–50).
+
+However, Linear Regression performs poorly at PCA = 100 and PCA = 190 — its RMSE spikes dramatically, suggesting instability or overfitting in those configurations.
+
+GPR and Kernel Ridge consistently maintain low RMSEs, indicating they’re robust across PCA settings.
+
+2️⃣ R² vs RMSE Scatter (Colored by Seed)
+
+What it shows: Each point is one model configuration, with:
+
+X-axis: RMSE (lower is better)
+
+Y-axis: R² (higher is better)
+
+Color: Different random seeds
+
+Interpretation:
+
+The top-left corner (high R², low RMSE) indicates the best models.
+
+Most points cluster near R² = 0, meaning many models don’t explain much variance in the data.
+
+Some points have strongly negative R², showing they perform worse than just predicting the mean.
+
+There’s no major visible bias by seed — the color mix is fairly uniform — suggesting that model performance is consistent across seeds.
+
+Only a small subset of configurations achieve both low RMSE and high R² — those would be your top-performing runs.
+
+3️⃣ RMSE Distribution per Seed (Box Plot)
+
+What it shows: The spread of RMSE scores for each seed.
+
+Interpretation:
+
+The boxes are quite similar, meaning each seed yields roughly the same error distribution — this indicates stable training across random initializations.
+
+There are outliers (circles above the whiskers) — those are bad runs with unusually high RMSE.
+
+Median RMSEs across seeds are all near 0.3–0.4, reinforcing that no single seed performed drastically better or worse overall.
+
+🧩 Overall Takeaway
+
+The best-performing regressors are likely GPR and Kernel Ridge.
+
+Linear Regression performs inconsistently and often poorly at higher PCA dimensions.
+
+Seed variation has minimal effect, suggesting your models are not overly sensitive to initialization.
+
+Focus future tuning on PCA ≤ 50 and GPR/Kernel Ridge models — that’s where performance is most reliable.

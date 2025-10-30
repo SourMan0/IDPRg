@@ -1,0 +1,6 @@
+Normalization,Regressing out,Points,Model,PCA Components,Regression Type,Test Split,Test R2 Score,RMSE Score,Seed
+Rg norm w/0.5,pH regr out,All,ProtBERT,50,Kernel Ridge,90/10,0.4849139033326862,0.035364456738195,1
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,50,Kernel Ridge,90/10,0.7167219097525239,0.0354333797976761,1
+Rg norm w/0.5,pH regr out,All,ProtBERT,50,GPR,90/10,0.463994565877367,0.0360754430561882,1
+Rg norm w/0.5,pH regr out,All,ProtBERT,100,GPR,90/10,0.4518652877064196,0.0364813356411483,1
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,190,Kernel Ridge,90/10,0.699363418174869,0.0365028689132116,1

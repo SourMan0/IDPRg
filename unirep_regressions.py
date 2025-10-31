@@ -81,7 +81,7 @@ results = pd.DataFrame(columns=["Normalization","Regressing out","Points","Princ
 all_points = pd.read_csv("training/all_points.csv")
 inliers = pd.read_csv("training/inliers.csv")
 
-output_csv = "results/unirepLosses.csv"
+output_csv = "losses/unirepLosses46.csv"
 file_exists = os.path.isfile(output_csv)
 
 # if file doesn't exist yet, write header once so the CSV is initialized
@@ -97,7 +97,7 @@ for i in range(len(all_paths)):
         df_X = pd.read_csv(all_paths[i], converters={emb_col: ast.literal_eval})
         X = df_X[emb_col].tolist()
         y = all_points[rg_col].tolist()
-        single_results = reg.evaluate_models_rmse(X, y)
+        single_results = reg.evaluate_models_rmse(X, y, random_state=46)
         for result in single_results:
             results.loc[len(results)] = {
                 "Normalization": norm_type,
@@ -122,7 +122,7 @@ for i in range(len(inlier_paths)):
         df_X = pd.read_csv(inlier_paths[i], converters={emb_col: ast.literal_eval})
         X = df_X[emb_col].tolist()
         y = inliers[rg_col].tolist()
-        single_results = reg.evaluate_models_rmse(X, y)
+        single_results = reg.evaluate_models_rmse(X, y, random_state=46)
         for result in single_results:
             results.loc[len(results)] = {
                 "Normalization": norm_type,

@@ -21,7 +21,7 @@ medSplit = []
 smallSplit = []
 
 allLosses = []
-with open('esmLosses.csv', newline='') as f:
+with open('losses/esmLosses1.csv', newline='') as f:
 
 
     reader = csv.reader(f)

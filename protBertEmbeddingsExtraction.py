@@ -8,8 +8,8 @@ import os
 # ===============================
 # CONFIG
 # ===============================
-INPUT_FILE = "data/inliersNormalizedWithAll.csv"
-OUTPUT_FILE = "data/protbertEmbeddings-inliersNormalizedWithAll.csv"
+INPUT_FILE = "data/rawData.csv"
+OUTPUT_FILE = "data/protBertEmbeddings2.csv"
 
 # ===============================
 # LOAD DATASET
@@ -21,11 +21,8 @@ print(f"Loading dataset from: {INPUT_FILE}")
 df = pd.read_csv(INPUT_FILE)
 print(f"Loaded {len(df)} rows with columns: {df.columns.tolist()}\n")
 
-if df.shape[1] != 2:
-    raise ValueError(f"Expected exactly 2 columns (sequence and Rg), but found {df.shape[1]}.")
-
 # ===============================
-# DETECT SEQUENCE AND TARGET COLUMNS
+# DETECT SEQUENCE COLUMN
 # ===============================
 def is_sequence_column(series):
     """Heuristic: a sequence column will have mostly alphabetic strings (A-Z) of length > 10."""
@@ -35,18 +32,15 @@ def is_sequence_column(series):
     except Exception:
         return False
 
-col1, col2 = df.columns
-if is_sequence_column(df[col1]):
-    seq_col, rg_col = col1, col2
-elif is_sequence_column(df[col2]):
-    seq_col, rg_col = col2, col1
-else:
-    raise ValueError("Could not automatically detect which column contains amino acid sequences.")
+seq_col_candidates = [col for col in df.columns if is_sequence_column(df[col])]
+if not seq_col_candidates:
+    raise ValueError("Could not detect a sequence column automatically.")
+seq_col = seq_col_candidates[0]
+print(f"Detected sequence column: '{seq_col}'\n")
 
-print(f"Detected sequence column: '{seq_col}'")
-print(f"Detected target (Rg) column: '{rg_col}'\n")
-
-# Clean sequences
+# ===============================
+# CLEAN SEQUENCES
+# ===============================
 df = df[df[seq_col].notna() & (df[seq_col].astype(str).str.strip() != "")]
 df[seq_col] = df[seq_col].astype(str).str.strip()
 print(f"{len(df)} valid sequences after cleaning.\n")
@@ -97,12 +91,11 @@ for idx, seq in tqdm(enumerate(df[seq_col]), total=len(df)):
         embeddings.append(np.zeros(1024))
 
 # ===============================
-# SAVE RESULTS
+# SAVE RESULTS (sequence + embeddings only)
 # ===============================
 embeddings = np.vstack(embeddings)
 emb_df = pd.DataFrame(embeddings, columns=[f"emb_{i}" for i in range(embeddings.shape[1])])
 emb_df.insert(0, "Sequence", df[seq_col].values)
-emb_df["Rg (nm)"] = df[rg_col].values
 
 emb_df.to_csv(OUTPUT_FILE, index=False)
 print(f"\nSaved embeddings for {len(df)} sequences to '{OUTPUT_FILE}'")

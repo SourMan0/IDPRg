@@ -1,0 +1,1001 @@
+Normalization,Regressing out,Points,Model,PCA Components,Regression Type,RMSE Score
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,190,Kernel Ridge,0.05438325818456367
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,190,GPR,0.05499604308410724
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,100,Kernel Ridge,0.05565858716162537
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,190,Kernel Ridge,0.05572837334132241
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,50,Kernel Ridge,0.055820497281631666
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,100,GPR,0.0560305449162187
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,50,GPR,0.056695072660938796
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,100,Kernel Ridge,0.05675448679625028
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,50,Kernel Ridge,0.056847492411634774
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,20,GPR,0.057220100063342626
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,190,Ridge,0.057288708707616424
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,190,Ridge,0.05728875935841508
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,100,Ridge,0.05783139730664568
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,100,Ridge,0.0578314613569706
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,50,Ridge,0.05813934440926164
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,50,Ridge,0.05813954318765457
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,10,GPR,0.058178788351744413
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,20,Kernel Ridge,0.05832050076340701
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,100,Lasso,0.05901891620294564
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,100,Lasso,0.05901913609650803
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,50,Lasso,0.059402850620091346
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,50,Lasso,0.059403057751673365
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,20,Kernel Ridge,0.059438356875678444
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,10,Kernel Ridge,0.05944180863178588
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,190,Lasso,0.05988006515239331
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,190,Lasso,0.05988036902562154
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,190,GPR,0.06028886036324114
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,20,Ridge,0.060523268786651756
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,20,Ridge,0.06052415741851112
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,20,Linear,0.06171341073819412
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,20,Linear,0.0617144153490596
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,20,Lasso,0.062267124961491255
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,20,Lasso,0.06226753052339564
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,10,Kernel Ridge,0.06403500645418418
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,100,Lasso,0.06543684758651652
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,190,Lasso,0.06543908475710991
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,10,Ridge,0.06559804728032129
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,10,Ridge,0.06559898322508358
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,100,GPR,0.066451367576243
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,50,GPR,0.06645376720970629
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,10,Linear,0.0665101891658043
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,10,Linear,0.06651117138782449
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,10,Lasso,0.066647286505577
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,10,Lasso,0.06664833756823589
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,50,Linear,0.06792639881336755
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,50,Linear,0.06792661485310494
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,50,Kernel Ridge,0.06881437988560525
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,190,Ridge,0.06884631006519197
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,190,Kernel Ridge,0.06886019600976245
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,50,Lasso,0.06926250859567488
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,100,Ridge,0.06935340735654405
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,100,Kernel Ridge,0.06998327004439102
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,50,Ridge,0.07017647285535965
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,190,Linear,0.07103267757087352
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,190,Linear,0.071032693035714
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,20,Lasso,0.07162968163360016
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,190,GPR,0.0718893002200983
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,20,GPR,0.0721273738752352
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,100,GPR,0.0721281611645233
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,50,GPR,0.07214971792267023
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,10,GPR,0.0723352127020706
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,20,Kernel Ridge,0.07255654019712073
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,20,Ridge,0.07287709329111038
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,10,Kernel Ridge,0.07389202985635748
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,10,Lasso,0.07390720903151815
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,10,Ridge,0.07482787949874653
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,20,GPR,0.07537336211179498
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,20,Linear,0.07635911990665321
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,10,Linear,0.07656401800508546
+Rg norm w/0.5,pH regr out,All,ProtBERT,10,Kernel Ridge,0.07820972287938673
+Rg norm w/0.5,pH regr out,All,ProtBERT,100,Kernel Ridge,0.07883973144263688
+Rg norm w/0.5,pH regr out,All,ProtBERT,20,GPR,0.07897120189178987
+Rg norm w/0.5,pH regr out,All,ProtBERT,190,Kernel Ridge,0.07923769012604194
+Rg norm w/0.5,pH regr out,All,ProtBERT,50,Kernel Ridge,0.07997031300886094
+Rg norm w/0.5,pH regr out,All,ProtBERT,100,GPR,0.08065665269000784
+Rg norm w/0.5,pH regr out,All,ProtBERT,190,GPR,0.08068606922793864
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,190,GPR,0.08081897625648721
+Rg norm w/0.5,pH regr out,All,ProtBERT,50,GPR,0.08108060868264728
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,190,Kernel Ridge,0.08126843826928733
+Rg norm w/0.5,pH regr out,All,ProtBERT,20,Kernel Ridge,0.08139799842822686
+Rg norm w/0.5,pH regr out,All,ProtBERT,10,GPR,0.08182540017899963
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,100,GPR,0.0820736400171861
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,190,Kernel Ridge,0.08251632152070225
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,100,Kernel Ridge,0.08253162258358476
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,50,GPR,0.08274438198735327
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,20,GPR,0.08324765368878914
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,20,Kernel Ridge,0.0836490561094083
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,50,Kernel Ridge,0.08370960175051828
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,10,GPR,0.08381183305173573
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,100,Kernel Ridge,0.08398571259825771
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,50,Linear,0.0841994430248456
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,190,GPR,0.08491227810872161
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,190,Ridge,0.08513189408479642
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,190,Ridge,0.0851319548581227
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,190,Kernel Ridge,0.08538761008679203
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,100,Ridge,0.08591828040720802
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,100,Ridge,0.08591837486808195
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,100,GPR,0.08621834853513266
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,50,Ridge,0.08644519452563625
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,50,Ridge,0.08644537173170935
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,190,Kernel Ridge,0.08670626083349618
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,100,Kernel Ridge,0.08671272932978034
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,50,Kernel Ridge,0.08676662740907577
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,10,Kernel Ridge,0.08688458384048818
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,50,GPR,0.08689923093749968
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,20,GPR,0.08744291955925106
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,20,Kernel Ridge,0.08782546864836609
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,10,GPR,0.08794209181706614
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,50,Kernel Ridge,0.08799642392313396
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,100,Kernel Ridge,0.08824082775791292
+Rg norm w/0.418,No regr out,All,ProtBERT,50,Kernel Ridge,0.08824349583366226
+Rg norm w/0.418,No regr out,All,ProtBERT,20,Kernel Ridge,0.08833844473287185
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,190,GPR,0.08859146434895028
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,20,Kernel Ridge,0.08863532007985321
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,190,Ridge,0.0895063836573397
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,190,Ridge,0.08950644478769659
+Rg norm w/0.418,No regr out,All,ProtBERT,100,Kernel Ridge,0.08973493510941227
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,20,Ridge,0.0898357711590736
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,20,Ridge,0.08983697432142922
+Rg norm w/0.418,No regr out,All,ProtBERT,190,Kernel Ridge,0.09007296972582919
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,100,Lasso,0.09024960964636809
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,100,Lasso,0.09024990715382153
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,190,Lasso,0.09026372167141618
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,190,Lasso,0.09026401495164171
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,100,Ridge,0.09032834985010836
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,100,Ridge,0.09032844790725565
+Rg norm w/0.418,No regr out,All,ProtBERT,10,Kernel Ridge,0.09056812181113817
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,50,Ridge,0.09088322631802415
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,50,Ridge,0.09088339762513026
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,50,Kernel Ridge,0.09113077541147317
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,10,Kernel Ridge,0.09120739228888099
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,20,Linear,0.09125505295674403
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,20,Linear,0.09125644724940453
+Rg norm w/0.5,buffer regr out,All,ProtBERT,190,GPR,0.09150326142304523
+Rg norm w/0.5,buffer regr out,All,ProtBERT,100,GPR,0.09152302587185186
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,10,Kernel Ridge,0.09160800890268699
+Rg norm w/0.5,buffer regr out,All,ProtBERT,10,GPR,0.0916107847197244
+Rg norm w/0.5,buffer regr out,All,ProtBERT,20,GPR,0.09161636680767755
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,20,Lasso,0.09167393192416882
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,20,Lasso,0.0916749131006534
+Rg norm w/0.5,buffer regr out,All,ProtBERT,50,GPR,0.0917871635245985
+Rg norm w/0.5,buffer regr out,All,ProtBERT,100,Kernel Ridge,0.09204727630757448
+Rg norm w/0.5,buffer regr out,All,ProtBERT,190,Kernel Ridge,0.09212152357949231
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,20,Kernel Ridge,0.09235178075567031
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,50,Lasso,0.09290833571681036
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,50,Lasso,0.09290883313100094
+Rg norm w/0.5,buffer regr out,All,ProtBERT,50,Kernel Ridge,0.09292766833371674
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,190,GPR,0.09297007884300841
+Rg norm w/0.5,buffer regr out,All,ProtBERT,10,Kernel Ridge,0.09304372242982052
+Rg norm w/0.5,buffer regr out,All,ProtBERT,20,Kernel Ridge,0.0932996309568583
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,20,Ridge,0.09450549338717608
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,20,Ridge,0.09450674366416939
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,100,Lasso,0.09577854980729021
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,100,Lasso,0.09577935729517884
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,20,Linear,0.09597390515952207
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,20,Linear,0.09597535840744996
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,10,Kernel Ridge,0.09606702288876828
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,10,Ridge,0.09611082787411392
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,10,Ridge,0.09611192427293054
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,20,Lasso,0.09621341946560164
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,20,Lasso,0.0962145443384081
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,190,Lasso,0.09640192311620309
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,190,Lasso,0.09640238547584472
+Rg norm w/0.5,pH regr out,All,ProtBERT,100,Lasso,0.09663728378121923
+Rg norm w/0.5,pH regr out,All,ProtBERT,190,Lasso,0.09663751197230473
+Rg norm w/0.418,No regr out,All,ProtBERT,100,Lasso,0.09663932493801618
+Rg norm w/0.418,No regr out,All,ProtBERT,190,Lasso,0.09663955365957437
+Rg norm w/0.5,pH regr out,All,ProtBERT,50,Lasso,0.09668128023391921
+Rg norm w/0.418,No regr out,All,ProtBERT,50,Lasso,0.0966833968181222
+Rg norm w/0.5,pH regr out,All,ProtBERT,10,Lasso,0.09705275163147525
+Rg norm w/0.418,No regr out,All,ProtBERT,10,Lasso,0.09705434851211169
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,10,Linear,0.09710094202156085
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,10,Linear,0.09710207954614793
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,10,Lasso,0.09727840589398833
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,10,Lasso,0.09727939287353075
+Rg norm w/0.5,pH regr out,All,ProtBERT,20,Lasso,0.09756839258019223
+Rg norm w/0.418,No regr out,All,ProtBERT,20,Lasso,0.0975703827699616
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,100,GPR,0.09760413354252369
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,50,Lasso,0.0978542075133193
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,50,Lasso,0.09785497360120075
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,50,GPR,0.09819720641500275
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,10,GPR,0.09854069882799378
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,50,Kernel Ridge,0.09973142587144068
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,50,Linear,0.09987704409071842
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,50,Linear,0.09987705825392316
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,100,Lasso,0.10046943184010154
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,190,Lasso,0.10053922257713162
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,190,Kernel Ridge,0.10056331149285419
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,190,Ridge,0.10080899870233023
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,100,Kernel Ridge,0.10083639974425618
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,190,GPR,0.10091256043591113
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,10,Ridge,0.10093945282795079
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,10,Ridge,0.10094057373946334
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,20,GPR,0.1011408569316067
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,100,GPR,0.10116769113820968
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,50,GPR,0.10119020417124254
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,10,GPR,0.10143790183133883
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,100,Ridge,0.10149214404943906
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,20,Lasso,0.10192376351767163
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,10,Linear,0.1019324043913855
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,10,Linear,0.10193356475723116
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,50,Lasso,0.10196362285903565
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,10,Lasso,0.10214636383987623
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,10,Lasso,0.10214745395952622
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,190,Linear,0.10218624640047523
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,100,GPR,0.10241817753580985
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,50,Ridge,0.10271171610146022
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,20,Kernel Ridge,0.10271317644574
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,50,GPR,0.10310419709193241
+Rg norm w/0.5,pH regr out,All,ProtBERT,20,Ridge,0.10409547887629995
+Rg norm w/0.418,No regr out,All,ProtBERT,20,Ridge,0.10409629686917045
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,10,Kernel Ridge,0.1043182851110313
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,50,Kernel Ridge,0.1043976457111524
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,10,Lasso,0.1045621460417175
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,50,Linear,0.10479909743043546
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,50,Linear,0.10479914638919506
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,190,Kernel Ridge,0.10485672896445103
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,190,Linear,0.10497537900943994
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,190,Linear,0.1049754852536255
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,190,GPR,0.10543977188535085
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,20,Ridge,0.10555098153517584
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,20,GPR,0.10567252775844793
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,100,Kernel Ridge,0.10567813060761154
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,100,GPR,0.1057031027296947
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,50,GPR,0.10572577438925233
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,190,Ridge,0.1057651451480142
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,10,GPR,0.10598188480190646
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,100,Lasso,0.10602622947277424
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,190,Lasso,0.10610755462167802
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,100,Ridge,0.10647269653100587
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,20,Lasso,0.10671604066798056
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,50,Lasso,0.10683620657981631
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,10,Ridge,0.10754858534045279
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,20,Kernel Ridge,0.1076935575656377
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,50,Ridge,0.10775157590414706
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,10,Lasso,0.10880786910383532
+Rg norm w/0.5,buffer regr out,All,ProtBERT,10,Lasso,0.10919559664728053
+Rg norm w/0.5,buffer regr out,All,ProtBERT,20,Lasso,0.109195597895639
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,10,Kernel Ridge,0.10924567631479894
+Rg norm w/0.5,buffer regr out,All,ProtBERT,50,Lasso,0.10942365313727208
+Rg norm w/0.5,buffer regr out,All,ProtBERT,190,Lasso,0.10942868778772642
+Rg norm w/0.5,buffer regr out,All,ProtBERT,100,Lasso,0.10942899052573037
+Rg norm w/0.5,pH regr out,All,ProtBERT,20,Linear,0.10949335691006523
+Rg norm w/0.418,No regr out,All,ProtBERT,20,Linear,0.10949426608920394
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,50,Kernel Ridge,0.10962603388559876
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,10,Linear,0.10977094935064702
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,100,Kernel Ridge,0.10988757559927892
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,20,Linear,0.110053941318831
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,190,Kernel Ridge,0.11007453390788846
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,190,Linear,0.11022102144405244
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,190,Linear,0.11022114620392658
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,50,Kernel Ridge,0.11047769568015177
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,20,Ridge,0.11063214262626343
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,20,GPR,0.11081400890308253
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,10,Kernel Ridge,0.11132741721216143
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,20,Kernel Ridge,0.11141077816027047
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,190,Kernel Ridge,0.11143098474951225
+Rg norm w/0.5,pH regr out,All,ProtBERT,10,Ridge,0.11167104477718971
+Rg norm w/0.418,No regr out,All,ProtBERT,10,Ridge,0.11167381767953832
+Rg norm w/0.427,pH regr out,All,ProtBERT,10,Kernel Ridge,0.11186160948461017
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,100,Kernel Ridge,0.11187497473665646
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,10,Ridge,0.11261548056628073
+Rg norm w/0.427,pH regr out,All,ProtBERT,190,GPR,0.11297167116680895
+Rg norm w/0.427,pH regr out,All,ProtBERT,100,Kernel Ridge,0.1130658477095469
+Rg norm w/0.427,pH regr out,All,ProtBERT,20,GPR,0.11308379000567785
+Rg norm w/0.427,pH regr out,All,ProtBERT,190,Kernel Ridge,0.11308647575740173
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,20,Kernel Ridge,0.11339684758806363
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,190,Ridge,0.11364924329257135
+Rg norm w/0.5,pH regr out,All,ProtBERT,50,Ridge,0.1137679059522117
+Rg norm w/0.418,No regr out,All,ProtBERT,50,Ridge,0.11376800752302689
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,100,Ridge,0.11389083188052108
+Rg norm w/0.5,pH regr out,All,ProtBERT,190,Ridge,0.1140476058411475
+Rg norm w/0.418,No regr out,All,ProtBERT,190,Ridge,0.11404768291348273
+Rg norm w/0.427,pH regr out,All,ProtBERT,50,Kernel Ridge,0.1142971516762933
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,10,Kernel Ridge,0.11441285797369675
+Rg norm w/0.5,pH regr out,All,ProtBERT,10,Linear,0.11448647293096766
+Rg norm w/0.418,No regr out,All,ProtBERT,10,Linear,0.11449009559723249
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,10,Linear,0.11490174244102987
+Rg norm w/0.5,pH regr out,All,ProtBERT,100,Ridge,0.11513180291273688
+Rg norm w/0.418,No regr out,All,ProtBERT,100,Ridge,0.11513210189853551
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,20,Linear,0.11529554451015328
+Rg norm w/0.427,pH regr out,All,ProtBERT,100,GPR,0.11541640033458783
+Rg norm w/0.427,pH regr out,All,ProtBERT,50,GPR,0.11624616479195521
+Rg norm w/0.427,pH regr out,All,ProtBERT,20,Kernel Ridge,0.11630003348382174
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,20,GPR,0.11633002176431086
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,50,Ridge,0.11667616649128017
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,190,Ridge,0.1167506932045269
+Rg norm w/0.418,pH regr out,All,ProtBERT,10,Kernel Ridge,0.11723088035299299
+Rg norm w/0.427,pH regr out,All,ProtBERT,10,GPR,0.117471192084778
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,100,Ridge,0.11748758452757685
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,190,GPR,0.1181728527630186
+Rg norm w/0.418,pH regr out,All,ProtBERT,20,GPR,0.11850495123369735
+Rg norm w/0.418,pH regr out,All,ProtBERT,100,Kernel Ridge,0.11853142212325733
+Rg norm w/0.418,pH regr out,All,ProtBERT,190,Kernel Ridge,0.11855400041133696
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,50,Ridge,0.11870144437040896
+Rg norm w/0.418,pH regr out,All,ProtBERT,50,Kernel Ridge,0.11981440966572389
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,20,Ridge,0.11982678165503553
+Rg norm w/0.5,buffer regr out,All,ProtBERT,20,Ridge,0.12005429431975619
+Rg norm w/0.418,pH regr out,All,ProtBERT,190,GPR,0.12006257094879395
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,190,GPR,0.12041103762396095
+Rg norm w/0.418,pH regr out,All,ProtBERT,100,GPR,0.12079928819601575
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,20,Ridge,0.12102127002938372
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,100,Lasso,0.12142786158440304
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,190,Lasso,0.12149753470118042
+Rg norm w/0.418,pH regr out,All,ProtBERT,50,GPR,0.12177828596125444
+Rg norm w/0.418,pH regr out,All,ProtBERT,20,Kernel Ridge,0.12184750706019169
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,20,Lasso,0.12242976959790962
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,50,Linear,0.12270818388515549
+Rg norm w/0.5,buffer regr out,All,ProtBERT,10,Ridge,0.12303765428942297
+Rg norm w/0.418,pH regr out,All,ProtBERT,10,GPR,0.12307360453701786
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,20,Lasso,0.12384976008701498
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,50,Lasso,0.12389506558919224
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,20,Linear,0.12410499081119646
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,100,Lasso,0.12420408844609566
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,20,Linear,0.1247403103688327
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,100,GPR,0.12504953973070063
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,50,Lasso,0.1251381947945445
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,190,Lasso,0.12566080943144667
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,50,GPR,0.12602526602762276
+Rg norm w/0.5,buffer regr out,All,ProtBERT,10,Linear,0.1264127635438312
+Rg norm w/0.5,buffer regr out,All,ProtBERT,20,Linear,0.1265156168381425
+Rg norm w/0.5,buffer regr out,All,ProtBERT,190,Ridge,0.1266752237223896
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,10,Ridge,0.12680777998533369
+Rg norm w/0.427,buffer regr out,All,ProtBERT,190,GPR,0.12719526759332053
+Rg norm w/0.5,buffer regr out,All,ProtBERT,50,Ridge,0.1273541097503236
+Rg norm w/0.5,buffer regr out,All,ProtBERT,100,Ridge,0.1274277214935697
+Rg norm w/0.427,buffer regr out,All,ProtBERT,100,GPR,0.12781557251423337
+Rg norm w/0.427,buffer regr out,All,ProtBERT,20,GPR,0.12809973822112328
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,10,GPR,0.12834563563409948
+Rg norm w/0.427,buffer regr out,All,ProtBERT,50,GPR,0.12859587838695544
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,10,Linear,0.12863184234275726
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,50,Linear,0.12865315376106387
+Rg norm w/0.427,buffer regr out,All,ProtBERT,190,Kernel Ridge,0.12873166722004425
+Rg norm w/0.427,buffer regr out,All,ProtBERT,10,GPR,0.1287992560979509
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,10,Ridge,0.12894664408076525
+Rg norm w/0.427,No regr out,All,ProtBERT,10,Kernel Ridge,0.12941191899357352
+Rg norm w/0.427,buffer regr out,All,ProtBERT,100,Kernel Ridge,0.1295274851882265
+Rg norm w/0.427,buffer regr out,All,ProtBERT,50,Kernel Ridge,0.1297524416393033
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,10,Linear,0.13004318688465102
+Rg norm w/0.427,buffer regr out,All,ProtBERT,10,Kernel Ridge,0.13013822710087916
+Rg norm w/0.427,No regr out,All,ProtBERT,50,Kernel Ridge,0.1302354758574785
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,10,Lasso,0.1305732968428061
+Rg norm w/0.427,buffer regr out,All,ProtBERT,20,Kernel Ridge,0.1306230970849695
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,100,GPR,0.13072634565962696
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,10,GPR,0.1328490218193333
+Rg norm w/0.418,buffer regr out,All,ProtBERT,190,GPR,0.13297571843988826
+Rg norm w/0.427,No regr out,All,ProtBERT,100,Kernel Ridge,0.13298469271814892
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,10,Lasso,0.13315808318681485
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,50,GPR,0.13330278460178246
+Rg norm w/0.418,buffer regr out,All,ProtBERT,100,GPR,0.13339094444486269
+Rg norm w/0.418,buffer regr out,All,ProtBERT,20,GPR,0.13369934697927482
+Rg norm w/0.418,buffer regr out,All,ProtBERT,50,GPR,0.13381474826215103
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,20,GPR,0.13423767616525636
+Rg norm w/0.418,buffer regr out,All,ProtBERT,190,Kernel Ridge,0.13437188506991915
+Rg norm w/0.418,buffer regr out,All,ProtBERT,10,GPR,0.1344872513854429
+Rg norm w/0.418,buffer regr out,All,ProtBERT,100,Kernel Ridge,0.1352503312923222
+Rg norm w/0.418,buffer regr out,All,ProtBERT,50,Kernel Ridge,0.13550494966475798
+Rg norm w/0.5,No regr out,All,ProtBERT,10,Kernel Ridge,0.13554252166741707
+Rg norm w/0.418,buffer regr out,All,ProtBERT,10,Kernel Ridge,0.13585594528484785
+Rg norm w/0.418,buffer regr out,All,ProtBERT,20,Kernel Ridge,0.1363789033369555
+Rg norm w/0.5,No regr out,All,ProtBERT,50,Kernel Ridge,0.13650085311442736
+Rg norm w/0.427,No regr out,All,ProtBERT,20,Kernel Ridge,0.13751797693892434
+Rg norm w/0.427,No regr out,All,ProtBERT,190,Kernel Ridge,0.1380607304886771
+Rg norm w/0.427,pH regr out,All,ProtBERT,20,Lasso,0.1386126339077027
+Rg norm w/0.427,No regr out,All,ProtBERT,20,Lasso,0.138612797428599
+Rg norm w/0.427,pH regr out,All,ProtBERT,10,Lasso,0.1392319180397207
+Rg norm w/0.427,pH regr out,All,ProtBERT,190,Lasso,0.13923199975212952
+Rg norm w/0.427,pH regr out,All,ProtBERT,100,Lasso,0.13923199975218475
+Rg norm w/0.427,pH regr out,All,ProtBERT,50,Lasso,0.13923200035834118
+Rg norm w/0.427,No regr out,All,ProtBERT,10,Lasso,0.13923213019134065
+Rg norm w/0.427,No regr out,All,ProtBERT,190,Lasso,0.1392322118740397
+Rg norm w/0.427,No regr out,All,ProtBERT,100,Lasso,0.13923221187409515
+Rg norm w/0.427,No regr out,All,ProtBERT,50,Lasso,0.13923221248051976
+Rg norm w/0.5,No regr out,All,ProtBERT,100,Kernel Ridge,0.13939539467306128
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,20,GPR,0.14116372000581723
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,10,GPR,0.14317515086283397
+Rg norm w/0.5,No regr out,All,ProtBERT,20,Kernel Ridge,0.1440829040474005
+Rg norm w/0.5,No regr out,All,ProtBERT,190,Kernel Ridge,0.14466944937138257
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,190,Linear,0.14524679655728248
+Rg norm w/0.5,No regr out,All,ProtBERT,100,Lasso,0.14552989229819066
+Rg norm w/0.418,pH regr out,All,ProtBERT,100,Lasso,0.14553087660382413
+Rg norm w/0.5,No regr out,All,ProtBERT,190,Lasso,0.14553179883603087
+Rg norm w/0.418,pH regr out,All,ProtBERT,190,Lasso,0.14553278429115982
+Rg norm w/0.5,No regr out,All,ProtBERT,20,Lasso,0.14588559339659016
+Rg norm w/0.418,pH regr out,All,ProtBERT,20,Lasso,0.1458860167974015
+Rg norm w/0.5,No regr out,All,ProtBERT,10,Lasso,0.14601964079633806
+Rg norm w/0.418,pH regr out,All,ProtBERT,10,Lasso,0.14601972209672232
+Rg norm w/0.5,No regr out,All,ProtBERT,50,Lasso,0.1460197259321542
+Rg norm w/0.418,pH regr out,All,ProtBERT,50,Lasso,0.14601980726914315
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,10,GPR,0.1500604679666467
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,50,Linear,0.1505065805008319
+Rg norm w/0.427,pH regr out,All,ProtBERT,20,Ridge,0.15078469113825047
+Rg norm w/0.427,No regr out,All,ProtBERT,20,Ridge,0.1507857732038735
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,190,Linear,0.15098612341314732
+Rg norm w/0.418,No regr out,All,ProtBERT,10,GPR,0.1521766680644052
+Rg norm w/0.418,No regr out,All,ProtBERT,190,GPR,0.15536792431544383
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,50,Kernel Ridge,0.15758050397504061
+Rg norm w/0.427,pH regr out,All,ProtBERT,20,Linear,0.15795448618524086
+Rg norm w/0.418,pH regr out,All,ProtBERT,20,Ridge,0.1579546227252108
+Rg norm w/0.427,No regr out,All,ProtBERT,20,Linear,0.15795547119825695
+Rg norm w/0.5,No regr out,All,ProtBERT,20,Ridge,0.15795573907136373
+Rg norm w/0.427,buffer regr out,All,ProtBERT,10,Lasso,0.158113481472574
+Rg norm w/0.427,buffer regr out,All,ProtBERT,100,Lasso,0.1581134913873579
+Rg norm w/0.427,buffer regr out,All,ProtBERT,50,Lasso,0.1581134917681052
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,190,Linear,0.15848105246122654
+Rg norm w/0.427,buffer regr out,All,ProtBERT,190,Lasso,0.15859021347007526
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,50,Kernel Ridge,0.15873450489908428
+Rg norm w/0.427,buffer regr out,All,ProtBERT,20,Lasso,0.15884226393560627
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,190,Kernel Ridge,0.15930208633810647
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,100,Kernel Ridge,0.15980641314523775
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,20,Kernel Ridge,0.16089252812017887
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,10,Kernel Ridge,0.1613274203992286
+Rg norm w/0.5,pH regr out,All,ProtBERT,50,Linear,0.16148773133585675
+Rg norm w/0.418,No regr out,All,ProtBERT,50,Linear,0.16149080280033332
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,190,Kernel Ridge,0.16152577464157847
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,190,Linear,0.1616586954192408
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,100,Kernel Ridge,0.1618819026699588
+Rg norm w/0.427,pH regr out,All,ProtBERT,10,Ridge,0.16225334956576662
+Rg norm w/0.427,No regr out,All,ProtBERT,10,Ridge,0.16225697682258
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,190,Ridge,0.16358308653177833
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,100,Ridge,0.1638371010407981
+Rg norm w/0.418,No regr out,All,ProtBERT,50,GPR,0.1639252558791064
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,50,Linear,0.16398118868179748
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,10,Kernel Ridge,0.16445610028194768
+Rg norm w/0.427,No regr out,All,ProtBERT,190,Ridge,0.16473195502077623
+Rg norm w/0.427,pH regr out,All,ProtBERT,190,Ridge,0.16473211374147503
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,50,Kernel Ridge,0.16495198612654569
+Rg norm w/0.427,No regr out,All,ProtBERT,50,Ridge,0.16501718276107127
+Rg norm w/0.427,pH regr out,All,ProtBERT,50,Ridge,0.16501723410173366
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,20,Kernel Ridge,0.1653340401301235
+Rg norm w/0.418,pH regr out,All,ProtBERT,20,Linear,0.1653899418593567
+Rg norm w/0.5,No regr out,All,ProtBERT,20,Linear,0.16539092860385
+Rg norm w/0.418,buffer regr out,All,ProtBERT,190,Lasso,0.16565521063500413
+Rg norm w/0.418,buffer regr out,All,ProtBERT,100,Lasso,0.16565521063521205
+Rg norm w/0.418,buffer regr out,All,ProtBERT,50,Lasso,0.16565521103729478
+Rg norm w/0.427,pH regr out,All,ProtBERT,10,Linear,0.16609467502783962
+Rg norm w/0.427,No regr out,All,ProtBERT,10,Linear,0.16609956617678973
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,50,Kernel Ridge,0.16616122648160675
+Rg norm w/0.427,pH regr out,All,ProtBERT,100,Ridge,0.16622202118877363
+Rg norm w/0.427,No regr out,All,ProtBERT,100,Ridge,0.16622216482703278
+Rg norm w/0.418,buffer regr out,All,ProtBERT,20,Lasso,0.16642192764780453
+Rg norm w/0.418,buffer regr out,All,ProtBERT,10,Lasso,0.1665431389340363
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,190,Kernel Ridge,0.16670355695894212
+Rg norm w/0.418,No regr out,All,ProtBERT,100,GPR,0.16747431264205814
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,190,Ridge,0.16775545500811195
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,100,Kernel Ridge,0.1678041486131191
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,50,Ridge,0.16817201078792765
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,20,Kernel Ridge,0.1684764444849096
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,10,Kernel Ridge,0.16882985569858366
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,100,Ridge,0.1688796136991875
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,190,Kernel Ridge,0.16902256563839424
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,100,Kernel Ridge,0.16940079883855316
+Rg norm w/0.5,buffer regr out,All,ProtBERT,50,Linear,0.1694350042219143
+Rg norm w/0.418,No regr out,All,ProtBERT,20,GPR,0.16996283764212913
+Rg norm w/0.418,pH regr out,All,ProtBERT,10,Ridge,0.17001468110388848
+Rg norm w/0.5,No regr out,All,ProtBERT,10,Ridge,0.17001843014364026
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,190,Ridge,0.1708324906869858
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,50,Ridge,0.17084287811165574
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,100,Ridge,0.17146869833102926
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,10,Kernel Ridge,0.17209598890077293
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,20,Ridge,0.17234424031588705
+Rg norm w/0.427,buffer regr out,All,ProtBERT,20,Ridge,0.17237998267645735
+Rg norm w/0.5,No regr out,All,ProtBERT,190,Ridge,0.17242774942012037
+Rg norm w/0.418,pH regr out,All,ProtBERT,190,Ridge,0.17242795015984502
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,190,GPR,0.1726961414450081
+Rg norm w/0.5,No regr out,All,ProtBERT,50,Ridge,0.17281387117682548
+Rg norm w/0.418,pH regr out,All,ProtBERT,50,Ridge,0.17281395219975615
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,20,Kernel Ridge,0.17309639466130392
+Rg norm w/0.418,pH regr out,All,ProtBERT,100,Ridge,0.17397445368281658
+Rg norm w/0.5,No regr out,All,ProtBERT,100,Ridge,0.17397456675799897
+Rg norm w/0.418,pH regr out,All,ProtBERT,10,Linear,0.17399888524661353
+Rg norm w/0.5,No regr out,All,ProtBERT,10,Linear,0.17400395937551663
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,190,GPR,0.17448040741293394
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,20,Ridge,0.17509486008344832
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,190,Ridge,0.17552027916397575
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,100,Lasso,0.1759506827507383
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,50,Ridge,0.1760152931813477
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,100,Ridge,0.17668441882399302
+Rg norm w/0.427,buffer regr out,All,ProtBERT,10,Ridge,0.17701020172730353
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,190,Lasso,0.1772044924750121
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,50,Lasso,0.1774136157312114
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,20,Lasso,0.17769468355560372
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,190,GPR,0.1778221788404225
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,20,Lasso,0.17794504015156612
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,100,Lasso,0.1779788395328434
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,50,Lasso,0.17845630966497963
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,20,Linear,0.1786156014876257
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,20,Linear,0.17876591034546316
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,50,Ridge,0.17877098591272977
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,100,GPR,0.17964252226719568
+Rg norm w/0.418,buffer regr out,All,ProtBERT,20,Ridge,0.1803408877721053
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,20,Ridge,0.18035663393281384
+Rg norm w/0.427,buffer regr out,All,ProtBERT,20,Linear,0.18145397275713385
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,50,GPR,0.18147028100217746
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,190,Lasso,0.18166448838778448
+Rg norm w/0.427,buffer regr out,All,ProtBERT,190,Ridge,0.1816919157874417
+Rg norm w/0.427,buffer regr out,All,ProtBERT,10,Linear,0.18187546946427766
+Rg norm w/0.427,buffer regr out,All,ProtBERT,100,Ridge,0.18265287436713032
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,10,Kernel Ridge,0.18272429466286919
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,190,GPR,0.18273630643405045
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,10,Ridge,0.18276696916325066
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,20,Ridge,0.18338408710784845
+Rg norm w/0.427,buffer regr out,All,ProtBERT,50,Ridge,0.18359299631551415
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,100,Lasso,0.1843855882876242
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,10,Linear,0.18517397758566234
+Rg norm w/0.418,buffer regr out,All,ProtBERT,10,Ridge,0.1852237027343662
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,10,GPR,0.18538187587883906
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,190,Lasso,0.18556041570115345
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,50,Lasso,0.1856460563971998
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,20,Lasso,0.18608973246125016
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,10,Kernel Ridge,0.18612426473122368
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,100,Lasso,0.18624244597657022
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,10,Ridge,0.18672562672915857
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,50,Lasso,0.1867668504004257
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,20,Linear,0.18682416195795035
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,50,Kernel Ridge,0.18698546736335397
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,20,Linear,0.1871370576804806
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,20,Lasso,0.18744619667184428
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,100,GPR,0.18794146482408924
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,10,Linear,0.1880034328730625
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,190,Kernel Ridge,0.18898616768782514
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,10,Lasso,0.1891671923469834
+Rg norm w/0.418,buffer regr out,All,ProtBERT,20,Linear,0.18981443129508266
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,50,GPR,0.18990415047756773
+Rg norm w/0.418,buffer regr out,All,ProtBERT,190,Ridge,0.1900181381524794
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,190,Lasso,0.1901088707577684
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,100,GPR,0.1901690262411773
+Rg norm w/0.418,buffer regr out,All,ProtBERT,10,Linear,0.19030897925348814
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,100,Kernel Ridge,0.19063423422900705
+Rg norm w/0.418,buffer regr out,All,ProtBERT,100,Ridge,0.19100609818481795
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,100,Kernel Ridge,0.19103928916491286
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,50,Kernel Ridge,0.19119697410932313
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,10,Ridge,0.1912947915761911
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,10,Lasso,0.1916688946153946
+Rg norm w/0.418,buffer regr out,All,ProtBERT,50,Ridge,0.19212770662618653
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,10,GPR,0.19278468265120655
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,190,Kernel Ridge,0.19285468837456674
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,10,GPR,0.1932535040230825
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,20,Kernel Ridge,0.19332233200824214
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,50,GPR,0.1935597526013347
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,10,Linear,0.19378279642432075
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,20,GPR,0.19406906162845386
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,10,GPR,0.1940987736678156
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,50,GPR,0.19447703882688971
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,10,Ridge,0.19556913126916886
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,190,GPR,0.19577662701611356
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,20,GPR,0.19624392297619161
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,100,GPR,0.1967212838356539
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,10,Linear,0.1968664642055046
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,190,GPR,0.19754598584154212
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,10,Lasso,0.1979518853741368
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,20,Kernel Ridge,0.19845656908382744
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,10,Lasso,0.19911439485272786
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,100,GPR,0.1992646169967628
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,190,Lasso,0.19977389752868538
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,100,Lasso,0.19977389752876198
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,50,Lasso,0.1997738991853412
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,190,Kernel Ridge,0.19999274574736284
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,50,Kernel Ridge,0.20012632893481333
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,100,Kernel Ridge,0.20023973984930785
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,20,Lasso,0.20056168728871615
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,10,Lasso,0.20061685655929304
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,20,Lasso,0.2007345069727796
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,10,GPR,0.20105254862456357
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,10,GPR,0.20196484708262596
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,10,Lasso,0.20232822369726508
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,20,Kernel Ridge,0.2024092188059091
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,50,Kernel Ridge,0.20251535612205282
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,190,Lasso,0.20261285027155518
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,100,Lasso,0.20261285027213552
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,50,Lasso,0.20261285070685378
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,20,Ridge,0.2027037123785412
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,20,GPR,0.2031975619979378
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,50,GPR,0.2037215847890795
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,20,GPR,0.2040830396768245
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,190,Kernel Ridge,0.20419401988755462
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,20,Kernel Ridge,0.2042305350968278
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,20,Ridge,0.20435618755734256
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,100,GPR,0.20437936575749502
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,100,Kernel Ridge,0.2044094941075616
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,100,Linear,0.2054329603543961
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,100,Linear,0.2054368351287311
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,20,GPR,0.20619206784050884
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,10,Kernel Ridge,0.2070424661082837
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,190,Ridge,0.20718051318737407
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,20,Linear,0.2084286682706881
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,100,Ridge,0.20867707340639582
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,190,Ridge,0.20912539078096137
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,100,Ridge,0.20925186859502262
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,50,GPR,0.20937767134931617
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,50,Ridge,0.20938227124819878
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,190,Linear,0.20943893029224533
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,10,Kernel Ridge,0.20953793054411804
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,20,Linear,0.2102795965848262
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,190,Ridge,0.21041339553103788
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,20,Ridge,0.21127692949766033
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,100,Ridge,0.21163462792774781
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,190,Ridge,0.21209459407121423
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,100,Ridge,0.2122025222493853
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,10,Ridge,0.21379197330683739
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,50,Ridge,0.21409085649403792
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,50,Ridge,0.21412795622593275
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,10,Ridge,0.2144322639156594
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,50,Linear,0.21566642129159022
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,20,GPR,0.21616972455162012
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,10,Linear,0.21642360426958718
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,50,Ridge,0.21654520342339387
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,20,Linear,0.21676401561966915
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,20,Ridge,0.2171349652129491
+Rg norm w/0.427,No regr out,All,ProtBERT,10,GPR,0.21782823019009198
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,10,Linear,0.21816225075879325
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,20,Lasso,0.21851859536643062
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,190,Linear,0.21919924312566053
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,190,Kernel Ridge,0.22001450876240816
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,20,Lasso,0.22065213515300497
+Rg norm w/0.427,No regr out,All,ProtBERT,190,GPR,0.22111239290070137
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,10,Ridge,0.22123636269661526
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,100,Kernel Ridge,0.22134685087776904
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,100,Lasso,0.2229688297239886
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,190,Lasso,0.2229688348507636
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,20,Linear,0.22317285287575503
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,190,Kernel Ridge,0.22351657591921967
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,10,Linear,0.22374349122850037
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,100,Kernel Ridge,0.2239533763206721
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,50,Kernel Ridge,0.22480254734581817
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,50,Lasso,0.22496348365048716
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,50,Kernel Ridge,0.22546127386037462
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,50,Linear,0.22552024761984776
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,10,Ridge,0.2257633237514246
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,10,Lasso,0.2258042884266622
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,10,Kernel Ridge,0.22664977706377146
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,190,GPR,0.22668772037732263
+Rg norm w/0.5,No regr out,All,ProtBERT,10,GPR,0.2277611575103552
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,10,Linear,0.2278830800223329
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,190,GPR,0.22788390863694244
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,10,Kernel Ridge,0.22884185999405438
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,100,Lasso,0.22920513142012824
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,190,Lasso,0.2292054756408163
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,50,Lasso,0.22979044699878973
+Rg norm w/0.5,buffer regr out,Inliers,ProtBERT,100,Linear,0.2303071146658747
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,20,Kernel Ridge,0.23055939593615463
+Rg norm w/0.5,No regr out,All,ProtBERT,190,GPR,0.23102393555559272
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,10,Lasso,0.23161108510096348
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,20,Kernel Ridge,0.23230746570509464
+Rg norm w/0.427,No regr out,All,ProtBERT,50,GPR,0.23356336109689732
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,20,Ridge,0.23379481254565862
+Rg norm w/0.427,pH regr out,All,ProtBERT,50,Linear,0.23421757515670638
+Rg norm w/0.427,No regr out,All,ProtBERT,50,Linear,0.23422186224229613
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,10,GPR,0.2348934738906088
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,50,GPR,0.23498221324585455
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,190,Linear,0.23540436494452388
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,190,Ridge,0.23602951580509005
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,50,GPR,0.23606069971938726
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,10,GPR,0.23617133299939688
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,50,Linear,0.23670838929167978
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,100,Ridge,0.23685637668991955
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,100,GPR,0.23694076356816776
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,190,Ridge,0.23695958050059093
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,20,Ridge,0.23779036110819898
+Rg norm w/0.427,No regr out,All,ProtBERT,100,GPR,0.23788497416752707
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,100,Ridge,0.23789319749528795
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,50,Lasso,0.2383190606926989
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,190,Lasso,0.23831907201529523
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,100,Lasso,0.23831907202407987
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,10,Lasso,0.23918330434910573
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,20,Linear,0.2393795796513762
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,100,GPR,0.23993658625723688
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,50,Ridge,0.2404001758941141
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,50,Ridge,0.24064754361123
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,20,Lasso,0.2411778249666081
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,20,Lasso,0.24198863739422197
+Rg norm w/0.427,No regr out,All,ProtBERT,20,GPR,0.24334385408982642
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,20,Linear,0.2436982882436836
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,20,GPR,0.24404990469413315
+Rg norm w/0.5,No regr out,All,ProtBERT,50,GPR,0.24407914630321725
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,20,GPR,0.24443488315582362
+Rg norm w/0.427,buffer regr out,All,ProtBERT,50,Linear,0.2449813539585931
+Rg norm w/0.418,pH regr out,All,ProtBERT,50,Linear,0.2452354492507668
+Rg norm w/0.5,No regr out,All,ProtBERT,50,Linear,0.24523990556278463
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,10,GPR,0.24561459095384
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,10,Ridge,0.24608335431358688
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,190,GPR,0.24610860666558257
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,190,Linear,0.24664833956518992
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,10,Lasso,0.2472887038907031
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,50,Linear,0.2477593114523314
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,50,Lasso,0.24837587754548007
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,190,Lasso,0.2483758826586959
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,100,Lasso,0.24837588266607402
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,50,GPR,0.2484050434612409
+Rg norm w/0.5,No regr out,All,ProtBERT,100,GPR,0.2484987126966095
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,190,GPR,0.24850597980193156
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,10,Linear,0.24937557237472852
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,10,Ridge,0.24940684559860946
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,10,GPR,0.250535383384668
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,10,Linear,0.2517945709631914
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,100,GPR,0.25188829755383013
+Rg norm w/0.5,No regr out,All,ProtBERT,20,GPR,0.25444322784895274
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,20,GPR,0.25452909115712685
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,50,GPR,0.25553230600679755
+Rg norm w/0.418,buffer regr out,All,ProtBERT,50,Linear,0.2564414476557109
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,20,GPR,0.25778518650761584
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,100,GPR,0.2588494067416715
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,50,Linear,0.26811286833019626
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,50,Linear,0.2687472374922195
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,50,Linear,0.2718216122472687
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,50,Linear,0.27636133310742755
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,50,Linear,0.3017423152578296
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,50,Linear,0.3045051864854006
+Rg norm w/0.427,pH regr out,Inliers,ProtBERT,100,Linear,0.3065839789892812
+Rg norm w/0.427,No regr out,Inliers,ProtBERT,100,Linear,0.30659161090261006
+Rg norm w/0.5,pH regr out,All,ProtBERT,190,Linear,0.31490764714123676
+Rg norm w/0.418,No regr out,All,ProtBERT,190,Linear,0.3149111156729088
+Rg norm w/0.5,buffer regr out,All,ProtBERT,190,Linear,0.31796232179095374
+Rg norm w/0.418,pH regr out,Inliers,ProtBERT,100,Linear,0.3220706046446283
+Rg norm w/0.418,No regr out,Inliers,ProtBERT,100,Linear,0.3220788185606353
+Rg norm w/0.5,expr pH only regr out,Inliers,ProtBERT,100,Linear,0.3285122039417845
+Rg norm w/0.5,expr buffer only regr out,Inliers,ProtBERT,100,Linear,0.3285531005061695
+Rg norm w/0.427,buffer regr out,Inliers,ProtBERT,100,Linear,0.3378679044701927
+Rg norm w/0.418,buffer regr out,Inliers,ProtBERT,100,Linear,0.3542895998565765
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,190,Linear,0.40547632407448103
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,190,Linear,0.40753084257739575
+Rg norm w/0.427,pH regr out,All,ProtBERT,190,Linear,0.4490988753484651
+Rg norm w/0.427,No regr out,All,ProtBERT,190,Linear,0.44910356371910076
+Rg norm w/0.427,buffer regr out,All,ProtBERT,190,Linear,0.4520759833824293
+Rg norm w/0.418,pH regr out,All,ProtBERT,190,Linear,0.46917937029243323
+Rg norm w/0.5,No regr out,All,ProtBERT,190,Linear,0.46918423804840753
+Rg norm w/0.418,buffer regr out,All,ProtBERT,190,Linear,0.4721201790201263
+Rg norm w/0.427,expr buffer only regr out,Inliers,ProtBERT,100,Linear,0.4729120378195415
+Rg norm w/0.427,expr pH only regr out,Inliers,ProtBERT,100,Linear,0.4789581678647557
+Rg norm w/0.418,expr buffer only regr out,Inliers,ProtBERT,100,Linear,0.4947132461010902
+Rg norm w/0.418,expr pH only regr out,Inliers,ProtBERT,100,Linear,0.501777108993875
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,190,Linear,0.5056898723274362
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,190,Linear,0.5060233555995322
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,190,Linear,0.5188587589045174
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,190,Linear,0.5200541778508168
+Rg norm w/0.5,buffer regr out,All,ProtBERT,100,Linear,0.5230153610777304
+Rg norm w/0.5,pH regr out,All,ProtBERT,100,Linear,0.5496689570295389
+Rg norm w/0.418,No regr out,All,ProtBERT,100,Linear,0.5497016198047049
+Rg norm w/0.5,expr buffer only regr out,All,ProtBERT,100,Linear,0.6068104294512692
+Rg norm w/0.5,expr pH only regr out,All,ProtBERT,100,Linear,0.6384616963563633
+Rg norm w/0.427,buffer regr out,All,ProtBERT,100,Linear,0.7421159089808995
+Rg norm w/0.418,buffer regr out,All,ProtBERT,100,Linear,0.7747780575384144
+Rg norm w/0.427,pH regr out,All,ProtBERT,100,Linear,0.781190702003379
+Rg norm w/0.427,No regr out,All,ProtBERT,100,Linear,0.7812359976715305
+Rg norm w/0.427,expr buffer only regr out,All,ProtBERT,100,Linear,0.8038558530750811
+Rg norm w/0.418,expr buffer only regr out,All,ProtBERT,100,Linear,0.8092796371382264
+Rg norm w/0.418,pH regr out,All,ProtBERT,100,Linear,0.8157450147520783
+Rg norm w/0.5,No regr out,All,ProtBERT,100,Linear,0.8157921932704842
+Rg norm w/0.427,expr pH only regr out,All,ProtBERT,100,Linear,0.8498037099825834
+Rg norm w/0.418,expr pH only regr out,All,ProtBERT,100,Linear,0.8568469055729286
+Rg w/no norm,pH regr out,Inliers,ProtBERT,190,GPR,1.0291236572159017
+Rg w/no norm,pH regr out,Inliers,ProtBERT,100,GPR,1.0483131154178524
+Rg w/no norm,No regr out,Inliers,ProtBERT,190,Kernel Ridge,1.0551303837050459
+Rg w/no norm,No regr out,Inliers,ProtBERT,50,Kernel Ridge,1.061248019676979
+Rg w/no norm,pH regr out,Inliers,ProtBERT,50,GPR,1.0621594714745914
+Rg w/no norm,No regr out,Inliers,ProtBERT,190,GPR,1.0778106888110288
+Rg w/no norm,No regr out,Inliers,ProtBERT,100,Kernel Ridge,1.077824218377396
+Rg w/no norm,pH regr out,Inliers,ProtBERT,190,Kernel Ridge,1.0783493483637956
+Rg w/no norm,No regr out,Inliers,ProtBERT,190,Ridge,1.0915577093468605
+Rg w/no norm,pH regr out,Inliers,ProtBERT,190,Ridge,1.0915634552297486
+Rg w/no norm,No regr out,Inliers,ProtBERT,100,GPR,1.0993808845626274
+Rg w/no norm,pH regr out,Inliers,ProtBERT,50,Kernel Ridge,1.1063166939288034
+Rg w/no norm,pH regr out,Inliers,ProtBERT,50,Ridge,1.1095569386011042
+Rg w/no norm,No regr out,Inliers,ProtBERT,50,Ridge,1.1095579501823802
+Rg w/no norm,pH regr out,Inliers,ProtBERT,100,Kernel Ridge,1.1103595984845227
+Rg w/no norm,No regr out,Inliers,ProtBERT,100,Ridge,1.115443615372097
+Rg w/no norm,pH regr out,Inliers,ProtBERT,100,Ridge,1.1154494298177895
+Rg w/no norm,pH regr out,Inliers,ProtBERT,10,GPR,1.1180553481036346
+Rg w/no norm,No regr out,Inliers,ProtBERT,50,GPR,1.1219949383142838
+Rg w/no norm,pH regr out,Inliers,ProtBERT,50,Linear,1.1464497448826134
+Rg w/no norm,No regr out,Inliers,ProtBERT,50,Linear,1.1464573916377099
+Rg w/no norm,pH regr out,Inliers,ProtBERT,50,Lasso,1.1754053915921914
+Rg w/no norm,No regr out,Inliers,ProtBERT,50,Lasso,1.1754093267671373
+Rg w/no norm,pH regr out,Inliers,ProtBERT,20,GPR,1.1772525530640883
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,190,Kernel Ridge,1.1805753242136114
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,100,Kernel Ridge,1.1860745961187236
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,50,Kernel Ridge,1.1942890720357426
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,100,Ridge,1.2037519030712696
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,190,Ridge,1.2041480298277183
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,50,Ridge,1.2057137047859647
+Rg w/no norm,No regr out,Inliers,ProtBERT,190,Lasso,1.2109733080195992
+Rg w/no norm,pH regr out,Inliers,ProtBERT,190,Lasso,1.2110135435720775
+Rg w/no norm,No regr out,Inliers,ProtBERT,190,Linear,1.216161549926993
+Rg w/no norm,pH regr out,Inliers,ProtBERT,190,Linear,1.2161620401340045
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,190,GPR,1.2346350056169824
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,100,Lasso,1.2361510058526737
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,50,Lasso,1.236557427790705
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,100,GPR,1.2381797776381704
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,20,GPR,1.2382446296754581
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,50,GPR,1.2384655787144905
+Rg w/no norm,No regr out,Inliers,ProtBERT,100,Lasso,1.2385527695591647
+Rg w/no norm,pH regr out,Inliers,ProtBERT,100,Lasso,1.2385572100571942
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,190,Lasso,1.238796037234106
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,10,GPR,1.2402746751406
+Rg w/no norm,No regr out,Inliers,ProtBERT,20,Kernel Ridge,1.253572946914608
+Rg w/no norm,pH regr out,Inliers,ProtBERT,10,Kernel Ridge,1.2627238415418855
+Rg w/no norm,No regr out,Inliers,ProtBERT,10,Kernel Ridge,1.2700602297314783
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,10,Ridge,1.2723006083022412
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,10,Lasso,1.2767039854947557
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,10,Kernel Ridge,1.277655905691541
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,10,Linear,1.2801427962874048
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,20,Kernel Ridge,1.281110962401575
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,20,Ridge,1.2818406886136422
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,20,Lasso,1.2831393944690666
+Rg w/no norm,pH regr out,Inliers,ProtBERT,20,Kernel Ridge,1.2852956399418578
+Rg w/no norm,pH regr out,Inliers,ProtBERT,20,Ridge,1.2922204281331038
+Rg w/no norm,No regr out,Inliers,ProtBERT,20,Ridge,1.2922307808517364
+Rg w/no norm,pH regr out,Inliers,ProtBERT,10,Ridge,1.3133059959544626
+Rg w/no norm,No regr out,Inliers,ProtBERT,10,Ridge,1.3133126421659729
+Rg w/no norm,pH regr out,Inliers,ProtBERT,10,Linear,1.3146019175084933
+Rg w/no norm,No regr out,Inliers,ProtBERT,10,Linear,1.314607740941995
+Rg w/no norm,pH regr out,Inliers,ProtBERT,10,Lasso,1.3163121878213806
+Rg w/no norm,No regr out,Inliers,ProtBERT,10,Lasso,1.3163179530392486
+Rg w/no norm,pH regr out,Inliers,ProtBERT,20,Linear,1.3273811664411048
+Rg w/no norm,No regr out,Inliers,ProtBERT,20,Linear,1.3273937147304584
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,20,Linear,1.3312405710304802
+Rg w/no norm,pH regr out,Inliers,ProtBERT,20,Lasso,1.3377479107778576
+Rg w/no norm,No regr out,Inliers,ProtBERT,20,Lasso,1.3377576267225386
+Rg w/no norm,buffer regr out,All,ProtBERT,100,GPR,1.3541379304863481
+Rg w/no norm,buffer regr out,All,ProtBERT,20,GPR,1.3543593610876161
+Rg w/no norm,buffer regr out,All,ProtBERT,50,GPR,1.3601610490083258
+Rg w/no norm,buffer regr out,All,ProtBERT,10,GPR,1.3628543518601648
+Rg w/no norm,No regr out,Inliers,ProtBERT,20,GPR,1.3671689767988795
+Rg w/no norm,buffer regr out,All,ProtBERT,100,Kernel Ridge,1.37259188945041
+Rg w/no norm,buffer regr out,All,ProtBERT,190,Kernel Ridge,1.3778133754062551
+Rg w/no norm,buffer regr out,All,ProtBERT,10,Kernel Ridge,1.4076644774141396
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,50,Linear,1.4124610573628535
+Rg w/no norm,buffer regr out,All,ProtBERT,50,Kernel Ridge,1.413413211929936
+Rg w/no norm,buffer regr out,All,ProtBERT,190,GPR,1.4279744770227127
+Rg w/no norm,pH regr out,All,ProtBERT,20,GPR,1.438387250763402
+Rg w/no norm,buffer regr out,All,ProtBERT,20,Kernel Ridge,1.4419337798370646
+Rg w/no norm,pH regr out,All,ProtBERT,50,GPR,1.4419811347175973
+Rg w/no norm,pH regr out,All,ProtBERT,100,GPR,1.4436961381686377
+Rg w/no norm,pH regr out,All,ProtBERT,50,Kernel Ridge,1.464775573809434
+Rg w/no norm,pH regr out,All,ProtBERT,100,Kernel Ridge,1.4736886632310997
+Rg w/no norm,pH regr out,All,ProtBERT,10,Kernel Ridge,1.4819043529778682
+Rg w/no norm,pH regr out,All,ProtBERT,190,Kernel Ridge,1.4948837316044106
+Rg w/no norm,pH regr out,All,ProtBERT,20,Kernel Ridge,1.5056004340805638
+Rg w/no norm,pH regr out,All,ProtBERT,10,GPR,1.5116144389224768
+Rg w/no norm,pH regr out,All,ProtBERT,190,GPR,1.522370502339194
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,190,Ridge,1.5411793037701533
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,190,Kernel Ridge,1.5421237341793785
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,100,Kernel Ridge,1.5447945234595286
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,100,Kernel Ridge,1.551364850579897
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,190,Kernel Ridge,1.563624553306637
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,50,Kernel Ridge,1.5755708848881804
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,100,Ridge,1.5809697355656924
+Rg w/no norm,No regr out,All,ProtBERT,10,Kernel Ridge,1.5941512066196255
+Rg w/no norm,No regr out,All,ProtBERT,20,Lasso,1.5974714916936403
+Rg w/no norm,pH regr out,All,ProtBERT,20,Lasso,1.5974804673959069
+Rg w/no norm,No regr out,All,ProtBERT,190,Kernel Ridge,1.6078520455312484
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,190,Ridge,1.6079046072721352
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,50,Kernel Ridge,1.608048572642976
+Rg w/no norm,No regr out,Inliers,ProtBERT,10,GPR,1.6089447429159411
+Rg w/no norm,No regr out,All,ProtBERT,190,Ridge,1.6105549548270721
+Rg w/no norm,pH regr out,All,ProtBERT,190,Ridge,1.610568001055437
+Rg w/no norm,No regr out,All,ProtBERT,100,Kernel Ridge,1.6109768320025075
+Rg w/no norm,No regr out,All,ProtBERT,100,Ridge,1.6135581542624822
+Rg w/no norm,pH regr out,All,ProtBERT,100,Ridge,1.6135696267418453
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,190,Linear,1.6221904221011727
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,100,Ridge,1.6222465985040302
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,190,GPR,1.6249327240552771
+Rg w/no norm,No regr out,All,ProtBERT,50,Kernel Ridge,1.6373785226882465
+Rg w/no norm,No regr out,All,ProtBERT,50,Lasso,1.6441041739129834
+Rg w/no norm,pH regr out,All,ProtBERT,50,Lasso,1.6441363982659116
+Rg w/no norm,No regr out,All,ProtBERT,20,Kernel Ridge,1.6451858066297838
+Rg w/no norm,No regr out,All,ProtBERT,50,Ridge,1.6485912795859627
+Rg w/no norm,pH regr out,All,ProtBERT,50,Ridge,1.6486022927468937
+Rg w/no norm,pH regr out,All,ProtBERT,20,Ridge,1.6499798602165
+Rg w/no norm,No regr out,All,ProtBERT,20,Ridge,1.649980088243094
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,50,Ridge,1.6624293562207777
+Rg w/no norm,buffer regr out,All,ProtBERT,20,Lasso,1.6664154451302153
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,50,Ridge,1.6664320877619243
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,10,Kernel Ridge,1.669980999511471
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,100,Lasso,1.6779480562957516
+Rg w/no norm,buffer regr out,All,ProtBERT,50,Lasso,1.6816022305516747
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,190,Lasso,1.6930069119885542
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,20,Kernel Ridge,1.693900970396438
+Rg w/no norm,No regr out,All,ProtBERT,10,Lasso,1.6954667403390038
+Rg w/no norm,pH regr out,All,ProtBERT,10,Lasso,1.6954667803843844
+Rg w/no norm,buffer regr out,All,ProtBERT,10,Lasso,1.6963596574537478
+Rg w/no norm,buffer regr out,All,ProtBERT,190,Lasso,1.6964581082736527
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,20,Kernel Ridge,1.6978465226675674
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,100,GPR,1.698456202327014
+Rg w/no norm,No regr out,All,ProtBERT,190,Lasso,1.7012320781189019
+Rg w/no norm,pH regr out,All,ProtBERT,190,Lasso,1.701279072777929
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,10,Kernel Ridge,1.709431722092253
+Rg w/no norm,buffer regr out,All,ProtBERT,100,Ridge,1.7154863196507348
+Rg w/no norm,buffer regr out,All,ProtBERT,190,Ridge,1.7166605624170772
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,50,GPR,1.7247273254025324
+Rg w/no norm,No regr out,All,ProtBERT,20,Linear,1.7317945285987537
+Rg w/no norm,pH regr out,All,ProtBERT,20,Linear,1.7318021573103175
+Rg w/no norm,buffer regr out,All,ProtBERT,20,Ridge,1.734024638966299
+Rg w/no norm,No regr out,All,ProtBERT,100,Lasso,1.7366344487294372
+Rg w/no norm,pH regr out,All,ProtBERT,100,Lasso,1.7366804890888143
+Rg w/no norm,buffer regr out,All,ProtBERT,100,Lasso,1.739520960788074
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,50,Lasso,1.7434717432281108
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,20,Ridge,1.7447569596637005
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,50,Lasso,1.7512177959044326
+Rg w/no norm,pH regr out,All,ProtBERT,10,Ridge,1.7551932396662895
+Rg w/no norm,No regr out,All,ProtBERT,10,Ridge,1.7552095058381163
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,190,GPR,1.7590616668176622
+Rg w/no norm,pH regr out,All,ProtBERT,10,Linear,1.7748395498567806
+Rg w/no norm,No regr out,All,ProtBERT,10,Linear,1.7748645667850644
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,20,Lasso,1.7786424344215754
+Rg w/no norm,buffer regr out,All,ProtBERT,50,Ridge,1.7836063525214352
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,20,Linear,1.7858874276141778
+Rg w/no norm,buffer regr out,All,ProtBERT,10,Ridge,1.7883393258081846
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,100,Lasso,1.8034728434543466
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,190,Lasso,1.805959262171221
+Rg w/no norm,buffer regr out,All,ProtBERT,10,Linear,1.8253681480309731
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,10,Lasso,1.835574478836719
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,10,Ridge,1.8357014350689838
+Rg w/no norm,buffer regr out,All,ProtBERT,20,Linear,1.8376686534665572
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,10,Linear,1.8455993361039844
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,20,Ridge,1.8530374090601844
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,20,Lasso,1.8683177085159788
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,20,Linear,1.8718709517034435
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,10,GPR,1.8761129044322165
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,20,GPR,1.939847047344155
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,10,Linear,1.945329956988547
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,10,Ridge,1.9459694885193748
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,10,Lasso,1.9485943459627002
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,100,GPR,1.9655238340089853
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,10,GPR,1.9829022465577786
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,50,Linear,1.987107852622563
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,190,Linear,2.0103252604635466
+Rg w/no norm,No regr out,All,ProtBERT,10,GPR,2.0233412667025483
+Rg w/no norm,No regr out,All,ProtBERT,50,GPR,2.060731847298766
+Rg w/no norm,No regr out,All,ProtBERT,100,GPR,2.0772313337516124
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,190,Kernel Ridge,2.1089191976426807
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,100,Kernel Ridge,2.1106561681219818
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,50,GPR,2.113811375944428
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,50,Kernel Ridge,2.1164059525121073
+Rg w/no norm,expr pH only regr out,All,ProtBERT,190,Kernel Ridge,2.161443592704995
+Rg w/no norm,expr pH only regr out,All,ProtBERT,50,Kernel Ridge,2.1765707168814283
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,20,Kernel Ridge,2.1809433688753015
+Rg w/no norm,No regr out,All,ProtBERT,190,GPR,2.1839784680238883
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,20,GPR,2.194105162317236
+Rg w/no norm,expr pH only regr out,All,ProtBERT,100,Kernel Ridge,2.2002876085506347
+Rg w/no norm,expr pH only regr out,All,ProtBERT,20,Kernel Ridge,2.2203538467944584
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,100,Ridge,2.2234785733982467
+Rg w/no norm,No regr out,All,ProtBERT,20,GPR,2.2253908840651553
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,10,Kernel Ridge,2.225982673928769
+Rg w/no norm,pH regr out,All,ProtBERT,50,Linear,2.2436370464657887
+Rg w/no norm,No regr out,All,ProtBERT,50,Linear,2.243650529515531
+Rg w/no norm,expr pH only regr out,All,ProtBERT,100,Ridge,2.2466431044556514
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,190,Ridge,2.2497732949777087
+Rg w/no norm,expr pH only regr out,All,ProtBERT,10,Kernel Ridge,2.2587052455527243
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,20,Ridge,2.285099470026512
+Rg w/no norm,expr pH only regr out,All,ProtBERT,50,Ridge,2.2868926021586478
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,50,Ridge,2.2869234855453158
+Rg w/no norm,expr pH only regr out,All,ProtBERT,190,Ridge,2.2879580708811367
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,50,Linear,2.291989700361835
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,190,Linear,2.313439886905441
+Rg w/no norm,expr pH only regr out,All,ProtBERT,190,GPR,2.3205145328107455
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,20,Linear,2.32386812987362
+Rg w/no norm,expr pH only regr out,All,ProtBERT,10,GPR,2.3273448897994937
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,190,GPR,2.3586829957416833
+Rg w/no norm,expr pH only regr out,All,ProtBERT,20,Ridge,2.3603240031487127
+Rg w/no norm,buffer regr out,All,ProtBERT,50,Linear,2.3675642033377726
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,20,Lasso,2.3828082794993315
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,10,Ridge,2.4041478189388594
+Rg w/no norm,expr pH only regr out,All,ProtBERT,20,Linear,2.4049651968346812
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,10,Linear,2.418981231931314
+Rg w/no norm,expr pH only regr out,All,ProtBERT,50,GPR,2.4246567382326663
+Rg w/no norm,expr pH only regr out,All,ProtBERT,20,Lasso,2.4250374890550814
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,10,Lasso,2.439595531301225
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,100,Lasso,2.4428009295050725
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,190,Lasso,2.4428083989915286
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,50,Lasso,2.4442730620844135
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,10,GPR,2.4459094539275683
+Rg w/no norm,expr pH only regr out,All,ProtBERT,100,GPR,2.45508275385474
+Rg w/no norm,expr pH only regr out,All,ProtBERT,10,Linear,2.465936919611146
+Rg w/no norm,expr pH only regr out,All,ProtBERT,10,Ridge,2.4676455844983947
+Rg w/no norm,expr pH only regr out,All,ProtBERT,20,GPR,2.4893199215973127
+Rg w/no norm,expr pH only regr out,All,ProtBERT,50,Lasso,2.509483817676663
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,20,GPR,2.5264379737168015
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,100,GPR,2.5265356276165027
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,50,GPR,2.543374018101666
+Rg w/no norm,expr pH only regr out,All,ProtBERT,10,Lasso,2.5639010106087303
+Rg w/no norm,expr pH only regr out,All,ProtBERT,100,Lasso,2.583919988821291
+Rg w/no norm,expr pH only regr out,All,ProtBERT,190,Lasso,2.5954121968804293
+Rg w/no norm,expr pH only regr out,All,ProtBERT,50,Linear,2.745170232392218
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,50,Linear,2.798085487001041
+Rg w/no norm,pH regr out,Inliers,ProtBERT,100,Linear,3.292348015120767
+Rg w/no norm,No regr out,Inliers,ProtBERT,100,Linear,3.2924577723359003
+Rg w/no norm,buffer regr out,Inliers,ProtBERT,100,Linear,3.4869692546839612
+Rg w/no norm,buffer regr out,All,ProtBERT,190,Linear,3.5985389662137224
+Rg w/no norm,pH regr out,All,ProtBERT,190,Linear,3.631595417232999
+Rg w/no norm,No regr out,All,ProtBERT,190,Linear,3.63162784034426
+Rg w/no norm,expr buffer only regr out,Inliers,ProtBERT,100,Linear,4.240290327584815
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,190,Linear,4.309072088725542
+Rg w/no norm,expr pH only regr out,All,ProtBERT,190,Linear,4.336243078015614
+Rg w/no norm,expr pH only regr out,Inliers,ProtBERT,100,Linear,4.516740129850951
+Rg w/no norm,buffer regr out,All,ProtBERT,100,Linear,5.797181885476572
+Rg w/no norm,pH regr out,All,ProtBERT,100,Linear,6.186003571422766
+Rg w/no norm,No regr out,All,ProtBERT,100,Linear,6.186356471400463
+Rg w/no norm,expr buffer only regr out,All,ProtBERT,100,Linear,6.6042453794488205
+Rg w/no norm,expr pH only regr out,All,ProtBERT,100,Linear,7.022484766896091

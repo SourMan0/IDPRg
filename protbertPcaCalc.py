@@ -34,14 +34,14 @@ def pca_calc(inpath, pca_num_components, seq_col="sequence"):
 
     # --- Save output ---
     Path("data").mkdir(exist_ok=True)
-    outpath = f"data/{Path(inpath).stem}PCA{pca_num_components}.csv"
+    outpath = f"data/{Path(inpath).stem}PCA{pca_num_components}2.csv"
     pca_df.to_csv(outpath, index=False)
 
     print(f"Saved PCA-reduced CSV → {outpath}")
     print(f"Output columns: {pca_df.columns.tolist()}")
 
 if __name__ == "__main__":
-    inpath = "data/protbertEmbeddings.csv"
+    inpath = "data/protbertEmbeddings2.csv"
     pca_num_components = 190
     seq_col = "Sequence"  # name of the sequence column in your file
 

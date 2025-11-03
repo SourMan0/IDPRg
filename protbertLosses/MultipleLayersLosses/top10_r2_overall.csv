@@ -1,0 +1,11 @@
+Normalization,Regressing out,Points,Model,LayerGroup,PCA Components,Regression Type,Test Split,Test R2 Score,RMSE Score,Seed
+Rg w/no norm,pH regr out,Inliers,ProtBERT,low,100,GPR,90/10,0.885219893602258,0.5150481171398146,1
+Rg w/no norm,No regr out,Inliers,ProtBERT,low,100,GPR,90/10,0.8681342777939451,0.5520721130870607,1
+Rg w/no norm,No regr out,Inliers,ProtBERT,low,190,GPR,90/10,0.8666266675691527,0.5480625649059592,2
+Rg w/no norm,pH regr out,Inliers,ProtBERT,low,190,GPR,90/10,0.8621027489534078,0.5572824964643487,2
+Rg w/no norm,No regr out,Inliers,ProtBERT,low,190,GPR,90/10,0.8579134035673732,0.573068328108132,1
+Rg w/no norm,No regr out,Inliers,ProtBERT,low,190,Linear,90/10,0.8567253539179839,0.5754591811994652,1
+Rg w/no norm,pH regr out,Inliers,ProtBERT,low,190,Linear,90/10,0.8567186374240855,0.5754523180286186,1
+Rg w/no norm,pH regr out,Inliers,ProtBERT,low,190,GPR,85/15,0.8548108405916164,0.5828970652622738,2
+Rg w/no norm,pH regr out,All,ProtBERT,low,10,GPR,80/20,0.8546729728167762,0.900998012403948,1
+Rg w/no norm,pH regr out,Inliers,ProtBERT,high,50,GPR,90/10,0.8530664044079105,0.5827402896729331,1

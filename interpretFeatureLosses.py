@@ -2,10 +2,10 @@ import csv
 import numpy as np
 import matplotlib.pyplot as plt
 
+
+
 seeds = ['1', '2', '3', '4', '5']
 bestFeatures = []
-
-
 for i in seeds:
     lossesWithLinear = []
     lossesWithRidge = []
@@ -26,7 +26,7 @@ for i in seeds:
     smallSplit = []
 
     allLosses = []
-    with open(f'losses/esmLosses{i}.csv', newline='') as f:
+    with open(f'losses/pfeatureLosses{i}.csv', newline='') as f:
 
 
         reader = csv.reader(f)
@@ -34,36 +34,36 @@ for i in seeds:
         for row in reader:
             if counter > 0:
                 allLosses.append([i] + row) 
-                if row[6] == 'Linear':
+                if row[4] == 'Linear':
                     lossesWithLinear.append(row[-1])
-                elif row[6] == 'Ridge':
+                elif row[4] == 'Ridge':
                     lossesWithRidge.append(row[-1])
-                elif row[6] == 'Lasso':
+                elif row[4] == 'Lasso':
                     lossesWithLasso.append(row[-1])
-                elif row[6] == 'Kernel Ridge':
+                elif row[4] == 'Kernel Ridge':
                     lossesWithKRR.append(row[-1])
-                elif row[6] == 'GPR':
+                elif row[4] == 'GPR':
                     lossesWithGPR.append(row[-1])
                 
-                if row[2] == 'All' and not row[6] == 'Linear':
+                if row[2] == 'All' and not row[4] == 'Linear':
                     lossesOnAll.append(row[-1])
-                elif not row[6] == 'Linear':
+                elif not row[4] == 'Linear':
                     lossesOnInliers.append(row[-1])
 
-                if 'w/no' in row[0] and not row[6] == 'Linear':
+                if 'w/no' in row[0] and not row[4] == 'Linear':
                     lossesOnNoReg.append(row[-1])
-                elif '0.418' in row[0] and not row[6] == 'Linear':
+                elif '0.418' in row[0] and not row[4] == 'Linear':
                     lossesOnlowReg.append(row[-1])
-                elif '0.427' in row[0] and not row[6] == 'Linear':
+                elif '0.427' in row[0] and not row[4] == 'Linear':
                     lossesOnMidReg.append(row[-1])
-                elif '0.5' in row[0] and not row[6] == 'Linear':
+                elif '0.5' in row[0] and not row[4] == 'Linear':
                     lossesOnHighReg.append(row[-1])
                 
-                if row[7] == '80/20' and not row[6] == 'Linear':
+                if row[5] == '80/20' and not row[4] == 'Linear':
                     bigSplit.append(row[-1])
-                elif row[7] == '85/15' and not row[6] == 'Linear':
+                elif row[5] == '85/15' and not row[4] == 'Linear':
                     medSplit.append(row[-1])
-                elif row[7] == '90/10' and not row[6] == 'Linear':
+                elif row[5] == '90/10' and not row[4] == 'Linear':
                     smallSplit.append(row[-1])
         
                 
@@ -116,7 +116,9 @@ for i in seeds:
 
     plt.show()
 
+    print(f"Seed {i}")
     print(sorted[:20, :])
+    x = sorted[:20, :]
     bestFeatures.extend(list(sorted[:20, :]))
 
 bestFeatures = np.array(bestFeatures)

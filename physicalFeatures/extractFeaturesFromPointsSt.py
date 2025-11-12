@@ -1,6 +1,7 @@
 import csv
 import numpy as np
 from Bio.SeqUtils.ProtParam import ProteinAnalysis
+from sklearn.preprocessing import StandardScaler
 
 
 with open('../training/all_points.csv', newline='') as f:
@@ -86,6 +87,7 @@ def seq_features(seq):
     f_arom = sum(aa in aromatic for aa in seq) / L
     f_pro = seq.count('P') / L
     f_gly = seq.count('G') / L
+    f_charged = sum(aa in charged_pos | charged_neg for aa in seq) / L
 
     # 2. Charge features
     n_pos = sum(aa in charged_pos for aa in seq)
@@ -121,14 +123,17 @@ def seq_features(seq):
     return np.array(x)
 
 # --- Run over all sequences ---
+scaler = StandardScaler()
 X_phys = [seq_features(seq) for seq in sequences]
-
+X_phys = np.array(X_phys)
+X_scaled = scaler.fit_transform(X_phys)
+X_phys = X_scaled.tolist()
 
 headers = headers = [
     "Fraction hydrophobic", "Fraction Polar", "Fraction Aromatic", "Fraction Proline", "Fraction Glycine",  "Fraction Non-charged",
     "Fraction Charged", "Charge Asymmetry", "Mean Hydropathy", "Variance of Hydropathy", "MolWt", "Log Length", "Hydropathy:fcr", "fraction aromatic: fraction hydrophobic", "Kappa", "SCD", "SHD"
 ]
-output_file = "protein_features.csv"
+output_file = "protein_featuresSt.csv"
 with open(output_file, "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(["Sequence"] + headers)

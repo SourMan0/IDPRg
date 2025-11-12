@@ -2,6 +2,9 @@ import csv
 import numpy as np
 import matplotlib.pyplot as plt
 
+
+
+
 lossesWithLinear = []
 lossesWithRidge = []
 lossesWithLasso = []
@@ -19,6 +22,7 @@ lossesOnHighReg = []
 bigSplit = []
 medSplit = []
 smallSplit = []
+
 
 # NEW: track losses by principal components
 pc_losses = {}

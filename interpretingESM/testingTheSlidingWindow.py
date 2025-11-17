@@ -80,12 +80,13 @@ def sliding_mask_effect(seq, model, tokenizer, pca, gpr, layer_idx=4, window=5, 
 
     return effects, masked_positions, masked_fragments
 
+'''
 sample_seq = 'MDVFMKGLSKAKEGVVAAAEKTKQGVAEAAGKTKEGVLYVGSKTKEGVVHGVATVAEKTKEQVTNVGGAVVTGVTAVAQKTVEGAGSIAAATGFVKKDQLGKNEEGAPQEGILEDMPVDPDNEAYEMPSEEGYQDYEPEA'
 
 effects, masked_positions, masked_fragmets = sliding_mask_effect(sample_seq, esm_model, tokenizer, pca, model)
 effects2, masked_positions2, masked_fragmets2 = sliding_mask_effect(sample_seq, esm_model, tokenizer, pca, model, window=4)
 
-'''
+
 plt.figure(figsize=(12,4))
 plt.bar(range(len(sample_seq)), effects, color=[color_map.get(aa, 'white') for aa in sample_seq])
 plt.bar(range(len(sample_seq)), effects, color=[color_map.get(aa, 'white') for aa in sample_seq])

@@ -26,6 +26,8 @@ for i in seeds:
     smallSplit = []
 
     allLosses = []
+
+    lossesOnNoRegOut = []
     with open(f'losses/pfeatureLosses{i}St.csv', newline='') as f:
 
 

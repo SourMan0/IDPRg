@@ -3,7 +3,7 @@ import numpy as np
 from testingTheSlidingWindow import sliding_mask_effect
 import joblib
 from transformers import AutoTokenizer, AutoModel
-
+import pickle
 
 
 model = joblib.load('esm_gpr.joblib')
@@ -51,12 +51,13 @@ for s in sequences:
         allFragments[w - 1].append(masked_fragments)
         allMaskedPositions[w - 1].append(masked_positions)
 
-allEffects = np.array(allEffects)
-allFragments = np.array(allFragments)
-allMaskedPositions = np.array(allMaskedPositions)
 
-np.save('allEffects.npy', allEffects)
-np.save('allMaskedPositions.npy', allMaskedPositions)
-np.save('allFragments.npy', allFragments)
+with open("allEffects.pkl", "wb") as f:
+    pickle.dump(allEffects, f)
+with open("allMaskedPositions.pkl", "wb") as f:
+    pickle.dump(allMaskedPositions, f)
+with open("allFragments.pkl", "wb") as f:
+    pickle.dump(allFragments, f)
+
 
 

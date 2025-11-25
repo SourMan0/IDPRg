@@ -39,7 +39,7 @@ for i in range(1, 11):
         baselines.append(baseleine)
         fragmentsList.append(fragments)
         indicesList.append(indices)
-    allEffects.append(effects)
+    allEffects.append(effectsList)
     allFragments.append(fragmentsList)
     allIndices.append(indicesList)
 

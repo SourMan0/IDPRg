@@ -14,12 +14,25 @@ with open('data/rawData.csv', newline='') as f:
         if row[2] != '' and row[3] != '':
             sequences.append(row[2])
             Rgs.append(row[3])
-            lengths.append(len(row[2]))
 #print(Rgs)
 
+
+
 sequences = sequences[1:]
+sequences2 = []
+for s in sequences:
+    if " " in s:
+        sequences2.append(s.replace(" ", ""))
+    else:
+        sequences2.append(s)
+    lengths.append(len(sequences2[-1]))
+
+sequences = sequences2
+
+for s in sequences:
+    if " " in s:
+        print('here')
 Rgs = Rgs[1:]
-lengths = lengths[1:]
 lengths = np.array(lengths)
 sequences = np.array(sequences)
 Rgs = np.array(Rgs, dtype = float)

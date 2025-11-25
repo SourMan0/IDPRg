@@ -40,7 +40,7 @@ for i in range(len(labelHeaders[1:])):
     labels.append([])
     inlierLabels.append([])
 
-with open('training/all_points.csv', newline='') as f:
+with open('../training/all_points.csv', newline='') as f:
     reader = csv.reader(f)
     counter = 0
     for row in reader:
@@ -50,7 +50,7 @@ with open('training/all_points.csv', newline='') as f:
                 labels[c].append(i)
                 c += 1
         counter += 1
-with open('training/inliers.csv', newline='') as f:
+with open('../training/inliers.csv', newline='') as f:
     reader = csv.reader(f)
     counter = 0
     for row in reader:
@@ -121,7 +121,37 @@ labelSplits = [
 
 
 #Try Four other seeds...
-
+with open('esmLosses1.csv', 'w', newline='') as f:
+    writer = csv.writer(f)
+    header = ['Normlaization', 'Regressing out', 'Points', 'ESM Mode', 'Layer', 'Principal Components', 'Regression Type', 'Test Split', 'Test R2 Score', 'RMSE Score']
+    writer.writerow(header)
+    labelCounter = 0
+    for ls in labelSplits:
+        label =  labels[labelCounter]
+        inlierLabel = inlierLabels[labelCounter]
+        for l in layers6:
+            for d in PCAvals:
+                X = features[l][d]
+                Xi = inlierFeatures[l][d]
+                losses = evaluate_models_rmse(X, label)
+                lossesi = evaluate_models_rmse(Xi, inlierLabel)
+                for i in range(len(losses)):
+                    row = [ls[0], ls[1], 'All', 'ESM-6',f'{l}', f'{d}', losses[i][0], losses[i][1], losses[i][2], losses[i][3]]
+                    rowi = [ls[0], ls[1], 'Inliers','ESM-6' ,f'{l}', f'{d}', lossesi[i][0], lossesi[i][1], lossesi[i][2], lossesi[i][3]]
+                    writer.writerow(row)
+                    writer.writerow(rowi)
+        for l in layers12:
+            for d in PCAvals:
+                X = features12[l][d]
+                Xi = inlierFeatures12[l][d]
+                losses = evaluate_models_rmse(X, label)
+                lossesi = evaluate_models_rmse(Xi, inlierLabel)
+                for i in range(len(losses)):
+                    row = [ls[0], ls[1], 'All', 'ESM-12',f'{l}', f'{d}', losses[i][0], losses[i][1], losses[i][2], losses[i][3]]
+                    rowi = [ls[0], ls[1], 'Inliers','ESM-12' ,f'{l}', f'{d}', lossesi[i][0], lossesi[i][1], lossesi[i][2], lossesi[i][3]]
+                    writer.writerow(row)
+                    writer.writerow(rowi)
+        labelCounter += 1
 with open('esmLosses2.csv', 'w', newline='') as f:
     seed = 43
     writer = csv.writer(f)

@@ -27,7 +27,7 @@ def get_mean_embedding(model, tokenizer, seq):
 
 
 
-with open('training/all_points.csv', newline='') as f:
+with open('../training/all_points.csv', newline='') as f:
     reader = csv.reader(f)
     counter = 0
     
@@ -46,7 +46,7 @@ torch.save(x, "esm6layer.pt")
 model_name2 = "facebook/esm2_t12_35M_UR50D"
 tokenizer = AutoTokenizer.from_pretrained(model_name2)
 model2 = AutoModel.from_pretrained(model_name2)
-with open('training/all_points.csv', newline='') as f:
+with open('../training/all_points.csv', newline='') as f:
     reader = csv.reader(f)
     counter = 0
     

@@ -3,6 +3,7 @@ import numpy as np
 from transformers import AutoTokenizer, AutoModel
 import joblib
 import matplotlib.pyplot as plt
+import csv
 ###############################################
 # 1. LOAD ESM MODEL (layer 4 is index = 4)
 ###############################################
@@ -118,34 +119,41 @@ def sliding_occlusion_rg(seq, regressor, pca=None, window=5, mode="zero"):
 
     return np.array(deltas), baseline, fragments, indices
 
-'''
-seq = 'MDVFMKGLSKAKEGVVAAAEKTKQGVAEAAGKTKEGVLYVGSKTKEGVVHGVATVAEKTKEQVTNVGGAVVTGVTAVAQKTVEGAGSIAAATGFVKKDQLGKNEEGAPQEGILEDMPVDPDNEAYEMPSEEGYQDYEPEA'
-regr_model = joblib.load('esm_gpr.joblib')
-pca = joblib.load('esm_pca.joblib')
+sequences = []
+with open('../training/all_points.csv', newline='') as f:
+    reader = csv.reader(f)
+    counter = 0
+    for row in reader:
+        if counter > 0:
+            sequences.append(row[0])
+            print(" " in row[0], counter)
+        counter += 1
+for seq in sequences[:5]:
+    regr_model = joblib.load('esm_gpr.joblib')
+    pca = joblib.load('esm_pca.joblib')
 
-effects, baseleine, fragments, indices = sliding_occlusion_rg(seq, regr_model, pca)
+    effects, baseleine, fragments, indices = sliding_occlusion_rg(seq, regr_model, pca)
 
-color_map = {
-    # Charged
-    'R': 'dodgerblue', 'K': 'blue', 'D': 'red', 'E': 'orangered',
+    color_map = {
+        # Charged
+        'R': 'dodgerblue', 'K': 'blue', 'D': 'red', 'E': 'orangered',
 
-    # Polar uncharged
-    'S': 'lightgreen', 'T': 'limegreen', 'N': 'green', 'Q': 'forestgreen',
+        # Polar uncharged
+        'S': 'lightgreen', 'T': 'limegreen', 'N': 'green', 'Q': 'forestgreen',
 
-    # Hydrophobic
-    'A': 'gray', 'V': 'dimgray', 'L': 'darkgray', 'I': 'slategray',
-    'M': 'silver', 'F': 'black', 'Y': 'brown', 'W': 'maroon',
+        # Hydrophobic
+        'A': 'gray', 'V': 'dimgray', 'L': 'darkgray', 'I': 'slategray',
+        'M': 'silver', 'F': 'black', 'Y': 'brown', 'W': 'maroon',
 
-    # Special
-    'G': 'gold', 'P': 'orange', 'C': 'yellow'
-}
+        # Special
+        'G': 'gold', 'P': 'orange', 'C': 'yellow'
+    }
 
-plt.figure(figsize=(12,4))
-plt.bar(range(len(seq) - 4), effects, color=[color_map.get(aa, 'white') for aa in seq])
-plt.bar(range(len(seq) - 4), effects, color=[color_map.get(aa, 'white') for aa in seq])
-plt.xlabel("Residue index")
-plt.ylabel("ΔRg (Å)")
-plt.title("Per-residue impact on predicted Rg")
-plt.show()
+    plt.figure(figsize=(12,4))
+    plt.bar(range(len(seq) - 4), effects, color=[color_map.get(aa, 'white') for aa in seq])
+    plt.bar(range(len(seq) - 4), effects, color=[color_map.get(aa, 'white') for aa in seq])
+    plt.xlabel("Residue index")
+    plt.ylabel("ΔRg (Å)")
+    plt.title("Per-residue impact on predicted Rg")
+    plt.show()
 
-'''

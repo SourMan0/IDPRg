@@ -313,8 +313,8 @@ def makeResiduals(fileName, X, unadjI, xitem='', yitem='', title='', unadjusted 
     residuals2 = labels - labelsPred
     #print(f"{xitem} explains {r2:.2%} of variance in {yitem}")
     #print(f"{xitem} explains {r22:.2%} of variance in {yitem}")
-
-    return residuals2
+    print(labels[2] - labelsPred[2])
+    return np.array(residuals2, dtype=float)
 
 
     
@@ -336,6 +336,16 @@ with open('data/allRaw.csv', newline='') as f:
             Rgs0.append(row[1])
             sequences.append(row[0])
         counter += 1
+sequences2 = []
+for s in sequences:
+    if " " in s:
+        sequences2.append(s.replace(" ", ""))
+    else:
+        sequences2.append(s)
+
+sequences = sequences2
+
+
 Rgs0 = np.array(Rgs0)
 def readCSVfile(fileName):
     with open(fileName, newline='') as f:
@@ -436,7 +446,7 @@ rgs18 = rgs2.copy()
 rgs18[inliersUnadjI]= makeResiduals('data/inliersNormalizedNaive.csv', inlierTotalUnadj, inliersUnadjI, unadjusted=True)
 rgs19 = rgs3.copy()
 rgs19[inliersUnadjI] = makeResiduals('data/inliersNormalized.csv', inlierTotalUnadj, inliersUnadjI, unadjusted = True)
-
+print(rgs19[2])
 
 with open('inliers.csv', 'w', newline='') as f:
     writer = csv.writer(f)

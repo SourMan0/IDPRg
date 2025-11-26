@@ -102,7 +102,7 @@ print(np.shape(features2))
 print(np.shape(features3))
 
 
-with open('pfeatureLosses.csv', 'w', newline='') as f:
+with open('pfeatureLosses1.csv', 'w', newline='') as f:
     writer = csv.writer(f)
     header = ['Normlaization', 'Regressing out', 'Points', 'Feature Selection', 'Regression Type', 'Test Split', 'Test R2 Score', 'RMSE Score']
     writer.writerow(header)
@@ -136,3 +136,148 @@ with open('pfeatureLosses.csv', 'w', newline='') as f:
             writer.writerow(rowi)
         
         labelCounter += 1
+
+with open('pfeatureLosses2.csv', 'w', newline='') as f:
+    seed = 43
+    writer = csv.writer(f)
+    header = ['Normlaization', 'Regressing out', 'Points', 'Feature Selection', 'Regression Type', 'Test Split', 'Test R2 Score', 'RMSE Score']
+    writer.writerow(header)
+    labelCounter = 0
+    for ls in labelSplits:
+        label =  labels[labelCounter]
+        inlierLabel = inlierLabels[labelCounter]
+
+        losses1 = evaluate_models_rmse(features1, label, seed)
+        lossesi1 = evaluate_models_rmse(inlierFeatures1, inlierLabel, seed)
+        for i in range(len(losses1)):
+            row = [ls[0], ls[1], 'All', '1', losses1[i][0], losses1[i][1], losses1[i][2], losses1[i][3]]
+            rowi = [ls[0], ls[1], 'Inliers','1', lossesi1[i][0], lossesi1[i][1], lossesi1[i][2], lossesi1[i][3]]
+            writer.writerow(row)
+            writer.writerow(rowi)
+        
+        losses2 = evaluate_models_rmse(features2, label, seed)
+        lossesi2 = evaluate_models_rmse(inlierFeatures2, inlierLabel, seed)
+        for i in range(len(losses2)):
+            row = [ls[0], ls[1], 'All', '2', losses2[i][0], losses2[i][1], losses2[i][2], losses2[i][3]]
+            rowi = [ls[0], ls[1], 'Inliers','2', lossesi2[i][0], lossesi2[i][1], lossesi2[i][2], lossesi2[i][3]]
+            writer.writerow(row)
+            writer.writerow(rowi)
+        
+        losses3 = evaluate_models_rmse(features3, label, seed)
+        lossesi3 = evaluate_models_rmse(inlierFeatures3, inlierLabel, seed)
+        for i in range(len(losses3)):
+            row = [ls[0], ls[1], 'All', '1', losses3[i][0], losses3[i][1], losses3[i][2], losses3[i][3]]
+            rowi = [ls[0], ls[1], 'Inliers','1', lossesi3[i][0], lossesi3[i][1], lossesi3[i][2], lossesi3[i][3]]
+            writer.writerow(row)
+            writer.writerow(rowi)
+        
+        labelCounter += 1
+
+with open('pfeatureLosses3.csv', 'w', newline='') as f:
+    seed = 44
+    writer = csv.writer(f)
+    header = ['Normlaization', 'Regressing out', 'Points', 'Feature Selection', 'Regression Type', 'Test Split', 'Test R2 Score', 'RMSE Score']
+    writer.writerow(header)
+    labelCounter = 0
+    for ls in labelSplits:
+        label =  labels[labelCounter]
+        inlierLabel = inlierLabels[labelCounter]
+
+        losses1 = evaluate_models_rmse(features1, label, seed)
+        lossesi1 = evaluate_models_rmse(inlierFeatures1, inlierLabel, seed)
+        for i in range(len(losses1)):
+            row = [ls[0], ls[1], 'All', '1', losses1[i][0], losses1[i][1], losses1[i][2], losses1[i][3]]
+            rowi = [ls[0], ls[1], 'Inliers','1', lossesi1[i][0], lossesi1[i][1], lossesi1[i][2], lossesi1[i][3]]
+            writer.writerow(row)
+            writer.writerow(rowi)
+        
+        losses2 = evaluate_models_rmse(features2, label, seed)
+        lossesi2 = evaluate_models_rmse(inlierFeatures2, inlierLabel, seed)
+        for i in range(len(losses2)):
+            row = [ls[0], ls[1], 'All', '2', losses2[i][0], losses2[i][1], losses2[i][2], losses2[i][3]]
+            rowi = [ls[0], ls[1], 'Inliers','2', lossesi2[i][0], lossesi2[i][1], lossesi2[i][2], lossesi2[i][3]]
+            writer.writerow(row)
+            writer.writerow(rowi)
+        
+        losses3 = evaluate_models_rmse(features3, label, seed)
+        lossesi3 = evaluate_models_rmse(inlierFeatures3, inlierLabel, seed)
+        for i in range(len(losses3)):
+            row = [ls[0], ls[1], 'All', '1', losses3[i][0], losses3[i][1], losses3[i][2], losses3[i][3]]
+            rowi = [ls[0], ls[1], 'Inliers','1', lossesi3[i][0], lossesi3[i][1], lossesi3[i][2], lossesi3[i][3]]
+            writer.writerow(row)
+            writer.writerow(rowi)
+        
+        labelCounter += 1
+
+with open('pfeatureLosses4.csv', 'w', newline='') as f:
+    seed = 45
+    writer = csv.writer(f)
+    header = ['Normlaization', 'Regressing out', 'Points', 'Feature Selection', 'Regression Type', 'Test Split', 'Test R2 Score', 'RMSE Score']
+    writer.writerow(header)
+    labelCounter = 0
+    for ls in labelSplits:
+        label =  labels[labelCounter]
+        inlierLabel = inlierLabels[labelCounter]
+
+        losses1 = evaluate_models_rmse(features1, label, seed)
+        lossesi1 = evaluate_models_rmse(inlierFeatures1, inlierLabel, seed)
+        for i in range(len(losses1)):
+            row = [ls[0], ls[1], 'All', '1', losses1[i][0], losses1[i][1], losses1[i][2], losses1[i][3]]
+            rowi = [ls[0], ls[1], 'Inliers','1', lossesi1[i][0], lossesi1[i][1], lossesi1[i][2], lossesi1[i][3]]
+            writer.writerow(row)
+            writer.writerow(rowi)
+        
+        losses2 = evaluate_models_rmse(features2, label, seed)
+        lossesi2 = evaluate_models_rmse(inlierFeatures2, inlierLabel, seed)
+        for i in range(len(losses2)):
+            row = [ls[0], ls[1], 'All', '2', losses2[i][0], losses2[i][1], losses2[i][2], losses2[i][3]]
+            rowi = [ls[0], ls[1], 'Inliers','2', lossesi2[i][0], lossesi2[i][1], lossesi2[i][2], lossesi2[i][3]]
+            writer.writerow(row)
+            writer.writerow(rowi)
+        
+        losses3 = evaluate_models_rmse(features3, label, seed)
+        lossesi3 = evaluate_models_rmse(inlierFeatures3, inlierLabel, seed)
+        for i in range(len(losses3)):
+            row = [ls[0], ls[1], 'All', '1', losses3[i][0], losses3[i][1], losses3[i][2], losses3[i][3]]
+            rowi = [ls[0], ls[1], 'Inliers','1', lossesi3[i][0], lossesi3[i][1], lossesi3[i][2], lossesi3[i][3]]
+            writer.writerow(row)
+            writer.writerow(rowi)
+        
+        labelCounter += 1
+
+with open('pfeatureLosses5.csv', 'w', newline='') as f:
+    seed = 46
+    writer = csv.writer(f)
+    header = ['Normlaization', 'Regressing out', 'Points', 'Feature Selection', 'Regression Type', 'Test Split', 'Test R2 Score', 'RMSE Score']
+    writer.writerow(header)
+    labelCounter = 0
+    for ls in labelSplits:
+        label =  labels[labelCounter]
+        inlierLabel = inlierLabels[labelCounter]
+
+        losses1 = evaluate_models_rmse(features1, label, seed)
+        lossesi1 = evaluate_models_rmse(inlierFeatures1, inlierLabel, seed)
+        for i in range(len(losses1)):
+            row = [ls[0], ls[1], 'All', '1', losses1[i][0], losses1[i][1], losses1[i][2], losses1[i][3]]
+            rowi = [ls[0], ls[1], 'Inliers','1', lossesi1[i][0], lossesi1[i][1], lossesi1[i][2], lossesi1[i][3]]
+            writer.writerow(row)
+            writer.writerow(rowi)
+        
+        losses2 = evaluate_models_rmse(features2, label, seed)
+        lossesi2 = evaluate_models_rmse(inlierFeatures2, inlierLabel, seed)
+        for i in range(len(losses2)):
+            row = [ls[0], ls[1], 'All', '2', losses2[i][0], losses2[i][1], losses2[i][2], losses2[i][3]]
+            rowi = [ls[0], ls[1], 'Inliers','2', lossesi2[i][0], lossesi2[i][1], lossesi2[i][2], lossesi2[i][3]]
+            writer.writerow(row)
+            writer.writerow(rowi)
+        
+        losses3 = evaluate_models_rmse(features3, label, seed)
+        lossesi3 = evaluate_models_rmse(inlierFeatures3, inlierLabel, seed)
+        for i in range(len(losses3)):
+            row = [ls[0], ls[1], 'All', '1', losses3[i][0], losses3[i][1], losses3[i][2], losses3[i][3]]
+            rowi = [ls[0], ls[1], 'Inliers','1', lossesi3[i][0], lossesi3[i][1], lossesi3[i][2], lossesi3[i][3]]
+            writer.writerow(row)
+            writer.writerow(rowi)
+        
+        labelCounter += 1
+    

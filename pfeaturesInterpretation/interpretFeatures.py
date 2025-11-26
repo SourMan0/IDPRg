@@ -24,7 +24,7 @@ outlierIndices =  [123, 136, 151, 158, 171, 185]
 inl = np.ones(190, dtype=bool)
 inl[outlierIndices] = False
 y = []
-with open('../training/inliers.csv', newline='') as f:
+with open('C:\\Users\\saleh\\Documents\\Python\\NPC-GNN\\IDPregression\\IDPRg\\training\\inliers.csv', newline='') as f:
     reader = csv.reader(f)
     counter = 0
     for row in reader:

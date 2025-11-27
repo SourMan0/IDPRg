@@ -33,11 +33,9 @@ def pca_calc(inpath, pca_num_components, seq_col="Sequence"):
     pca_df.insert(0, seq_col, df[seq_col].values)
 
     # --- Save output ---
-    out_dir = Path("data/protbert_pca")
-    out_dir.mkdir(parents=True, exist_ok=True)
-
+    Path("data").mkdir(exist_ok=True)
     base = Path(inpath).stem
-    outpath = out_dir / f"{base}_PCA{pca_num_components}.csv"
+    outpath = f"data/{base}_PCA{pca_num_components}.csv"
     pca_df.to_csv(outpath, index=False)
 
     print(f"✅ Saved PCA-reduced CSV → {outpath}")
@@ -46,23 +44,18 @@ def pca_calc(inpath, pca_num_components, seq_col="Sequence"):
 
 if __name__ == "__main__":
     # Paths for your three ProtBERT layer group files
-    layer_files = {
-        "low": "data/protbert_embeddings/protbert_low.csv",
-        "mid": "data/protbert_embeddings/protbert_mid.csv",
-        "high": "data/protbert_embeddings/protbert_high.csv"
-    }
+    layer_files = [
+        "data/protbert_embeddings/protbert_low.csv",
+        "data/protbert_embeddings/protbert_mid.csv",
+        "data/protbert_embeddings/protbert_high.csv"
+    ]
 
     # PCA component counts to test
     pca_values = [10, 20, 50, 100, 190]
 
-    for layer_name, inpath in layer_files.items():
-        if not Path(inpath).exists():
-            print(f"⚠️ File for layer '{layer_name}' not found: {inpath}")
-            continue
-
-        print(f"\n🔹 Processing {layer_name.upper()} layer embeddings...")
+    for inpath in layer_files:
         for n_comp in pca_values:
             try:
                 pca_calc(inpath, n_comp, seq_col="Sequence")
             except Exception as e:
-                print(f"⚠️ PCA failed for {layer_name} ({n_comp} comps): {e}")
+                print(f"⚠️ PCA failed for {inpath} with {n_comp} components: {e}")

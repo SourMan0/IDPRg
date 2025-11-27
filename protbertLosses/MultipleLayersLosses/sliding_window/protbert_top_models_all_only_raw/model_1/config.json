@@ -1,0 +1,11 @@
+{
+  "LayerGroup": "low",
+  "PCA Components": 100,
+  "Regression Type": "Kernel Ridge",
+  "Seed": 1,
+  "Normalization": "Rg norm w/0.5",
+  "Regressing out": "pH regr out",
+  "layer_idx_used": 6,
+  "trained_from": "raw ProtBERT pooled embeddings",
+  "target_col_used": "Rg normalized w/0.5 (nm)"
+}

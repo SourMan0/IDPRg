@@ -23,7 +23,7 @@ with open('../training/all_points.csv', newline='') as f:
 
 y = np.array(y, dtype=float)
 # Need to choose layer four and PCA 190. 
-x = torch.load('../esm_embeddings/esm12layer.pt')
+x = torch.load('../esmScripts/esm_embeddings/esm12layer.pt')
 X_np = np.array(x.detach().cpu())
 X_4 = X_np[:, 4, :]
 pca = PCA(n_components=190, random_state=42)

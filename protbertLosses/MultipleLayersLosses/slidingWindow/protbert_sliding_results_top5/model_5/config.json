@@ -1,0 +1,16 @@
+{
+  "LayerGroup": "high",
+  "PCA Components": 190,
+  "Regression Type": "GPR",
+  "Seed": 3,
+  "Normalization": "Rg norm w/0.5",
+  "Regressing out": "pH regr out",
+  "layer_group": "high",
+  "layer_idx": 15,
+  "pca_dim": 190,
+  "reg_type": "GPR",
+  "seed": 3,
+  "target_col": "Normalized Rg with \u03bd = 0.5 (nm)",
+  "sequence_col": "Protein Sequence",
+  "embeddings_csv": "protbert_high.csv"
+}

@@ -1,0 +1,16 @@
+{
+  "LayerGroup": "mid",
+  "PCA Components": 190,
+  "Regression Type": "Ridge",
+  "Seed": 3,
+  "Normalization": "Rg norm w/0.5",
+  "Regressing out": "pH regr out",
+  "layer_group": "mid",
+  "layer_idx": 15,
+  "pca_dim": 190,
+  "reg_type": "Ridge",
+  "seed": 3,
+  "target_col": "Normalized Rg with \u03bd = 0.5 (nm)",
+  "sequence_col": "Protein Sequence",
+  "embeddings_csv": "protbert_mid.csv"
+}

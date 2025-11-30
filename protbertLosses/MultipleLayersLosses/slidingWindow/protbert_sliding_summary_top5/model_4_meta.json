@@ -1,0 +1,72 @@
+{
+  "window_1": {
+    "total_points": 42719,
+    "top_n": 6407,
+    "bottom_n": 6407,
+    "mean_effect_all": -4.3985857391314515e-05,
+    "std_effect_all": 0.0002241628358261265
+  },
+  "window_2": {
+    "total_points": 42529,
+    "top_n": 6379,
+    "bottom_n": 6379,
+    "mean_effect_all": -9.366115101481874e-05,
+    "std_effect_all": 0.00042842476988339386
+  },
+  "window_3": {
+    "total_points": 42346,
+    "top_n": 6351,
+    "bottom_n": 6351,
+    "mean_effect_all": -0.0001475441604693578,
+    "std_effect_all": 0.000639986177244834
+  },
+  "window_4": {
+    "total_points": 42156,
+    "top_n": 6323,
+    "bottom_n": 6323,
+    "mean_effect_all": -0.00020455675070318286,
+    "std_effect_all": 0.000856910302258227
+  },
+  "window_5": {
+    "total_points": 41966,
+    "top_n": 6294,
+    "bottom_n": 6294,
+    "mean_effect_all": -0.000264005012657093,
+    "std_effect_all": 0.0010774418409945123
+  },
+  "window_6": {
+    "total_points": 41776,
+    "top_n": 6266,
+    "bottom_n": 6266,
+    "mean_effect_all": -0.0003250639533326761,
+    "std_effect_all": 0.0012985564621850326
+  },
+  "window_7": {
+    "total_points": 41586,
+    "top_n": 6237,
+    "bottom_n": 6237,
+    "mean_effect_all": -0.0003873578001318767,
+    "std_effect_all": 0.0015190467379575634
+  },
+  "window_8": {
+    "total_points": 41396,
+    "top_n": 6209,
+    "bottom_n": 6209,
+    "mean_effect_all": -0.0004508413120311908,
+    "std_effect_all": 0.0017391835171768157
+  },
+  "window_9": {
+    "total_points": 41206,
+    "top_n": 6180,
+    "bottom_n": 6180,
+    "mean_effect_all": -0.0005145886904233811,
+    "std_effect_all": 0.0019528639773825883
+  },
+  "window_10": {
+    "total_points": 41016,
+    "top_n": 6152,
+    "bottom_n": 6152,
+    "mean_effect_all": -0.0005781926033741379,
+    "std_effect_all": 0.002155906855489629
+  }
+}

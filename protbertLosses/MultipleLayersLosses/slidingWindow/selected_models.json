@@ -1,0 +1,42 @@
+[
+  {
+    "LayerGroup": "mid",
+    "PCA Components": 100,
+    "Regression Type": "Ridge",
+    "Seed": 3,
+    "Normalization": "Rg norm w/0.5",
+    "Regressing out": "No regr out"
+  },
+  {
+    "LayerGroup": "mid",
+    "PCA Components": 100,
+    "Regression Type": "Kernal Ridge",
+    "Seed": 3,
+    "Normalization": "Rg norm w/0.5",
+    "Regressing out": "pH regr out"
+  },
+  {
+    "LayerGroup": "mid",
+    "PCA Components": 190,
+    "Regression Type": "Ridge",
+    "Seed": 3,
+    "Normalization": "Rg norm w/0.5",
+    "Regressing out": "No regr out"
+  },
+  {
+    "LayerGroup": "mid",
+    "PCA Components": 190,
+    "Regression Type": "Kernal Ridge",
+    "Seed": 3,
+    "Normalization": "Rg norm w/0.5",
+    "Regressing out": "pH regr out"
+  },
+  {
+    "LayerGroup": "high",
+    "PCA Components": 190,
+    "Regression Type": "GPR",
+    "Seed": 3,
+    "Normalization": "Rg norm w/0.5",
+    "Regressing out": "pH regr out"
+  }
+]

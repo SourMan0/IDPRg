@@ -1,12 +1,19 @@
-import numpy as np
-import pandas as pd
-import csv
+import os
 import re
 from pathlib import Path
+
+import numpy as np
+import pandas as pd
+import csv  # you actually don't need this anymore, but kept for consistency
 from doAllRegressions import evaluate_models_rmse
 
 # ======================
-# Load label sequences
+# Make sure output directory exists
+# ======================
+os.makedirs("protbertLosses/MultipleLayersLosses", exist_ok=True)
+
+# ======================
+# Load label sequences & dataframes
 # ======================
 
 all_points_df = pd.read_csv('training/all_points.csv')
@@ -18,60 +25,46 @@ inlier_sequences = inliers_df['Sequence'].to_list()
 # ======================
 # Locate all PCA embedding files
 # ======================
-data_path = Path("data")
+data_path = Path("data/protbert_embeddings")
 pca_files = sorted(data_path.glob("protbert_*_PCA*.csv"))
 
 if not pca_files:
-    raise FileNotFoundError("No PCA embedding files found in ./data/. Expected files like protBert_low_PCA10.csv")
+    raise FileNotFoundError("No PCA embedding files found in ./data/protbert_embeddings. "
+                            "Expected files like protbert_low_PCA10.csv")
 
 print(f"Found {len(pca_files)} PCA embedding files:")
 for f in pca_files:
     print(" -", f.name)
 
 # ======================
-# Load label data
+# Label header names (columns in training CSVs)
 # ======================
 labelHeaders = [
-    'Sequence', 'Rg (nm)', 'Rg normalized w/0.427', 'Rg normalized w/0.5 (nm)', 'Rg normalized w/0.418 (nm)',
-    'Rg w/pH regressed out', 'Rg normalized w/0.427 w/pH regressed out', 'Rg normalized w/0.5 w/pH regressed out',
-    'Rg normalized w/0.418 w/pH regressed out', 'Rg w/buffer regressed out', 'Rg normalized w/0.427 w/buffer regressed out',
-    'Rg normalized w/0.5 w/buffer regressed out', 'Rg normalized w/0.418 w/buffer regressed out',
-    'Rg w/experimental pH regressed out', 'Rg normalized w/0.427 w/experimental pH regressed out',
-    'Rg normalized w/0.5 w/experimental pH regressed out', 'Rg normalized w/0.418 w/experimental pH regressed out',
-    'Rg w/experimental buffer regressed out', 'Rg normalized w/0.427 w/experimental buffer regressed out',
-    'Rg normalized w/0.5 w/experimental buffer regressed out', 'Rg normalized w/0.418 w/experimental buffer regressed out'
+    'Sequence',
+    'Rg (nm)',
+    'Rg normalized w/0.427',
+    'Rg normalized w/0.5 (nm)',
+    'Rg normalized w/0.418 (nm)',
+    'Rg w/pH regressed out',
+    'Rg normalized w/0.427 w/pH regressed out',
+    'Rg normalized w/0.5 w/pH regressed out',
+    'Rg normalized w/0.418 w/pH regressed out',
+    'Rg w/buffer regressed out',
+    'Rg normalized w/0.427 w/buffer regressed out',
+    'Rg normalized w/0.5 w/buffer regressed out',
+    'Rg normalized w/0.418 w/buffer regressed out',
+    'Rg w/experimental pH regressed out',
+    'Rg normalized w/0.427 w/experimental pH regressed out',
+    'Rg normalized w/0.5 w/experimental pH regressed out',
+    'Rg normalized w/0.418 w/experimental pH regressed out',
+    'Rg w/experimental buffer regressed out',
+    'Rg normalized w/0.427 w/experimental buffer regressed out',
+    'Rg normalized w/0.5 w/experimental buffer regressed out',
+    'Rg normalized w/0.418 w/experimental buffer regressed out'
 ]
 
-labels = [[] for _ in range(len(labelHeaders) - 1)]
-inlierLabels = [[] for _ in range(len(labelHeaders) - 1)]
-
-with open('training/all_points.csv', newline='') as f:
-    reader = csv.reader(f)
-    next(reader)
-    for row in reader:
-        for i, val in enumerate(row[1:]):
-            labels[i].append(float(val))
-
-with open('training/inliers.csv', newline='') as f:
-    reader = csv.reader(f)
-    next(reader)
-    for row in reader:
-        for i, val in enumerate(row[1:]):
-            inlierLabels[i].append(float(val))
-
-labels = np.array(labels, dtype=float)
-inlierLabels = np.array(inlierLabels, dtype=float)
-
-# ======================
-# Prepare inlier mask (remove outliers)
-# ======================
-outlierIndices = [123, 136, 151, 158, 171, 185]
-inl = np.ones(190, dtype=bool)
-inl[outlierIndices] = False
-
-# ======================
-# Label splits for descriptive output
-# ======================
+# Human-readable descriptions for the 20 label variants (index 0..19)
+# label_idx i --> uses column labelHeaders[i+1]
 labelSplits = [
     ['Rg w/no norm', 'No regr out'],
     ['Rg norm w/0.427', 'No regr out'],
@@ -124,29 +117,67 @@ for idx, seed in enumerate([43, 44, 45, 46]):
 
             # Load embeddings
             df = pd.read_csv(file)
-            seq_col = 'Sequence' if 'Sequence' in df.columns else 'Experimental Sequence'
+
+            # Figure out which column is the sequence column
+            if 'Sequence' in df.columns:
+                seq_col = 'Sequence'
+            elif 'Experimental Sequence' in df.columns:
+                seq_col = 'Experimental Sequence'
+            else:
+                raise KeyError(f"No sequence column found in {filename}")
+
+            # Rename PCA columns uniformly: pc1, pc2, ...
             df.columns = [seq_col] + [f'pc{i+1}' for i in range(df.shape[1] - 1)]
 
+            # Filter to sequences present in all_points / inliers
             df_all = df[df[seq_col].isin(all_sequences)].copy()
             df_inl = df[df[seq_col].isin(inlier_sequences)].copy()
 
-            X_all = df_all.drop(columns=[seq_col]).to_numpy()
-            X_inl = df_inl.drop(columns=[seq_col]).to_numpy()
-
-            print(f"Running PCA{pca_num} | {layer_group}: {X_all.shape[0]} all, {X_inl.shape[0]} inliers")
+            X_cols = [c for c in df_all.columns if c.startswith('pc')]
+            print(f"Running PCA{pca_num} | {layer_group}: {df_all.shape[0]} all, {df_inl.shape[0]} inliers")
 
             for label_idx, ls in enumerate(labelSplits):
-                y_all = labels[label_idx]
-                y_inl = inlierLabels[label_idx]
+                # label_idx 0..19 -> column labelHeaders[label_idx+1]
+                target_col = labelHeaders[label_idx + 1]
+
+                # ===== All points =====
+                merged_all = df_all.merge(
+                    all_points_df[['Sequence', target_col]],
+                    left_on=seq_col,
+                    right_on='Sequence',
+                    how='inner'
+                )
+
+                X_all = merged_all[X_cols].to_numpy()
+                y_all = merged_all[target_col].to_numpy()
+
+                # ===== Inliers =====
+                merged_inl = df_inl.merge(
+                    inliers_df[['Sequence', target_col]],
+                    left_on=seq_col,
+                    right_on='Sequence',
+                    how='inner'
+                )
+
+                X_inl = merged_inl[X_cols].to_numpy()
+                y_inl = merged_inl[target_col].to_numpy()
+
+                # Sanity check (optional)
+                # print(label_idx, target_col, X_all.shape, y_all.shape, X_inl.shape, y_inl.shape)
 
                 losses_all = evaluate_models_rmse(X_all, y_all, seed)
                 losses_inl = evaluate_models_rmse(X_inl, y_inl, seed)
 
                 for loss in losses_all:
-                    writer.writerow([ls[0], ls[1], 'All', 'ProtBERT', layer_group, pca_num,
-                                     loss[0], loss[1], loss[2], loss[3]])
-                for loss in losses_inl:
-                    writer.writerow([ls[0], ls[1], 'Inliers', 'ProtBERT', layer_group, pca_num,
-                                     loss[0], loss[1], loss[2], loss[3]])
+                    writer.writerow([
+                        ls[0], ls[1], 'All', 'ProtBERT', layer_group, pca_num,
+                        loss[0], loss[1], loss[2], loss[3]
+                    ])
 
-print("✅ All ProtBERT PCA regressions completed. Results saved to protbertLosses_allLayers_seed*.csv")
+                for loss in losses_inl:
+                    writer.writerow([
+                        ls[0], ls[1], 'Inliers', 'ProtBERT', layer_group, pca_num,
+                        loss[0], loss[1], loss[2], loss[3]
+                    ])
+
+print(" All ProtBERT PCA regressions completed. Results saved to protbertLosses/MultipleLayersLosses/protbertLosses*.csv")

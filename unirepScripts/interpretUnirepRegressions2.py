@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 #added cycling over all of the seeds
 
-seeds = ['42', '43', '44', '45', '46']
+seeds = ['1']
 bestFeatures = []
 
 for i in seeds:

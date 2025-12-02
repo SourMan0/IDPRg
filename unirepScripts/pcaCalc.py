@@ -11,6 +11,8 @@ def pca_calc(inpath, pca_num_components, emb_col="UniRep Embedding"):
     df = pd.read_csv(inpath, converters={emb_col: ast.literal_eval})
 
     emb = df[emb_col].tolist()
+    pca_num_components = min(pca_num_components, len(emb))
+
     print(f"Reducing dimensions from {len(emb[0])} to {pca_num_components}")
 
     # Define PCA and scaler
@@ -26,8 +28,16 @@ def pca_calc(inpath, pca_num_components, emb_col="UniRep Embedding"):
 
 if __name__ == "__main__":
     # Settings
-    inpath = "data/protbertEmbeddings.csv"
-    pca_num_components = 10
-    emb_col = "Protbert Embedding"
+    inpath = "data/unirep_allRaw.csv"
+    pca_num_components = [10, 20, 50, 100, 190]
+    emb_col = "UniRep Embedding"
 
-    pca_calc(inpath, pca_num_components, emb_col)
+    for n_components in pca_num_components:
+        pca_calc(inpath, n_components, emb_col)
+
+    inpath = "data/unirep_inliersRaw.csv"
+    pca_num_components = [10, 20, 50, 100, 190]
+    emb_col = "UniRep Embedding"
+
+    for n_components in pca_num_components:
+        pca_calc(inpath, n_components, emb_col)

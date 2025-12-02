@@ -28,7 +28,7 @@ smallSplit = []
 pc_losses = {}
 
 allLosses = []
-with open('losses/unirepMeanLosses.csv', newline='') as f:
+with open('losses/unirep_best_losses.csv', newline='') as f:
     reader = csv.reader(f)
     counter = 0
     for row in reader:

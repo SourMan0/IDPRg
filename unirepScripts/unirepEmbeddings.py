@@ -26,13 +26,13 @@ def unirep_embed(inpath, outpath=None, pca_toggle=False, pca_num_components=1):
     prot_df["UniRep Embedding"] = avg.tolist()
 
     if outpath is None:
-        outpath = f"data/unirep_{Path(inpath).stem}.csv"
+        outpath = f"unirep_{Path(inpath).stem}.csv"
 
     prot_df.to_csv(outpath, index=False)
 
 if __name__ == "__main__":
     # Settings
-    inpath = "data/inliersRaw.csv"
+    inpath = "data/allRaw.csv"
     pca_toggle = False  # If toggled, will do PCA on embeddings before saving
     pca_num_components = 190
 

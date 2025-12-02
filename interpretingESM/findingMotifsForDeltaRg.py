@@ -11,6 +11,9 @@ with open("allEffects3.pkl", "rb") as f:
 with open("allFragments3.pkl", "rb") as f:
     allFragments = pickle.load(f)
 
+
+
+# Counts number of amino acids per position
 def position_counts(motifs):
     if len(motifs) == 0:
         return []
@@ -24,39 +27,151 @@ def position_counts(motifs):
 
     return pos_counts
 
+# Normalizes the delta Rgs based on which sequence it's in. Since some sequences may have bigger changes based on 
+# which protein it is, we want the *relative* change in Rg
+def normalize_dRg(dRg):
+    dRg = np.asarray(dRg)
+    hi = np.percentile(np.abs(dRg), 95)
+    if hi < 1e-12:
+        return np.zeros_like(dRg)
+    return dRg / hi
+'''
 def normalize_dRg(dRg):
     dRg = np.asarray(dRg)
     maxval = np.max(np.abs(dRg))
     if maxval < 1e-12:
         return np.zeros_like(dRg)
     return dRg / maxval
+'''
+# This function extracts the normalized sequences motifs, looking at the top/bottom percentage which will determine
+# whether they are expanding or contracting
 
 def extract_motifs_normalized(all_dRg, all_frags, k_values, top_pct=0.10, bot_pct=0.10):
     expanding = {k: [] for k in k_values}
     compacting = {k: [] for k in k_values}
-
     for k in k_values:
+        pooled_dRg = []
+        pooled_frags = []
         for dRg_seq, frag_seq in zip(all_dRg[k - 1], all_frags[k - 1]):
+            
+            dRg_norm = normalize_dRg(dRg_seq).tolist()
 
-            dRg_norm = normalize_dRg(dRg_seq)
-            frags = np.asarray(frag_seq)
+            pooled_dRg.extend(dRg_norm)
+            pooled_frags.extend(frag_seq)
 
-            hi = np.percentile(dRg_norm, 100*(1-top_pct))
-            lo = np.percentile(dRg_norm, 100*bot_pct)
+        hi = np.percentile(pooled_dRg, 100*(1-top_pct))
+        lo = np.percentile(pooled_dRg, 100*bot_pct)
 
-            exp_mask  = dRg_norm >= hi
-            comp_mask = dRg_norm <= lo
+        pooled_frags = np.array(pooled_frags)
+        pooled_dRg = np.array(pooled_dRg)
 
-            for f, d in zip(frags[exp_mask], dRg_norm[exp_mask]):
-                expanding[k].append((f, float(d)))
+        comp_mask  = pooled_dRg >= hi
+        exp_mask = pooled_dRg <= lo
 
-            for f, d in zip(frags[comp_mask], dRg_norm[comp_mask]):
-                compacting[k].append((f, float(d)))
-
+        expanding[k]  = list(zip(pooled_frags[exp_mask],  pooled_dRg[exp_mask]))
+        compacting[k] = list(zip(pooled_frags[comp_mask], pooled_dRg[comp_mask]))
+            
     return expanding, compacting
 
+def compute_diff_enrichment(exp_counts, comp_counts, min_total=20, compOrExp = 'exp'):
+    enrich = []
+    for pos in range(len(exp_counts)):
+        exp = exp_counts[pos]
+        comp = comp_counts[pos]
 
-def compute_log_enrichment(exp_counts, comp_counts, pseudocount=1):
+        total_exp  = sum(exp.values())
+        total_comp = sum(comp.values())
+
+        all_aas = sorted(set(exp.keys()) | set(comp.keys()))
+        pos_dict = {}
+
+        for aa in all_aas:
+            e = exp.get(aa, 0)
+            c = comp.get(aa, 0)
+
+            if e + c < min_total:
+                pos_dict[aa] = 0.0
+                continue
+
+            f_exp  = e / total_exp
+            f_comp = c / total_comp
+            if compOrExp == 'exp':
+                pos_dict[aa] = f_exp - f_comp
+            else:
+                pos_dict[aa] = f_comp - f_exp   # absolute difference
+
+        enrich.append(pos_dict)
+
+    return enrich
+
+def compute_log_enrichment(exp_counts,
+                           comp_counts,
+                           pseudocount=1.0,
+                           min_total=20):
+    """
+    Compute log2 enrichment of amino acids in expanding vs compacting motifs.
+
+    Parameters
+    ----------
+    exp_counts : list of Counter
+        exp_counts[pos][aa] = count of 'aa' at position 'pos' in expanding motifs.
+    comp_counts : list of Counter
+        comp_counts[pos][aa] = count of 'aa' at position 'pos' in compacting motifs.
+    pseudocount : float
+        Smoothing added to each amino-acid count (Dirichlet prior) to avoid
+        log(0) and stabilize low counts.
+    min_total : int
+        Minimum total (exp + comp) count for an amino acid at a position to be
+        considered. Below this, enrichment is set to 0 (treated as noise).
+
+    Returns
+    -------
+    enrich : list of dict
+        enrich[pos][aa] = log2( f_exp(aa,pos) / f_comp(aa,pos) ).
+        Positive → enriched in expanding motifs.
+        Negative → enriched in compacting motifs.
+    """
+
+    enrich = []  # will hold one dict per position
+
+    # Loop over positions in the motif (0..k-1)
+    for pos in range(len(exp_counts)):
+        exp = exp_counts[pos]   # Counter for this position in expanding motifs
+        comp = comp_counts[pos] # Counter for this position in compacting motifs
+
+        # Total counts at this position in each group
+        total_exp  = sum(exp.values())
+        total_comp = sum(comp.values())
+
+        # Union of all amino acids seen in expanding or compacting at this position
+        all_aas = sorted(set(exp.keys()) | set(comp.keys()))
+        K = len(all_aas)  # number of distinct residue types at this position
+
+        pos_dict = {}  # enrichment scores for this position
+
+        for aa in all_aas:
+            # Raw counts for this amino acid
+            e = exp.get(aa, 0)
+            c = comp.get(aa, 0)
+
+            # If we barely see this residue at this position, treat as noise
+            if e + c < min_total:
+                pos_dict[aa] = 0.0
+                continue
+
+            # Smoothed frequencies (Dirichlet smoothing with pseudocount)
+            f_exp  = (e + pseudocount) / (total_exp  + pseudocount * K)
+            f_comp = (c + pseudocount) / (total_comp + pseudocount * K)
+
+            # Log2 enrichment: positive → enriched in expanding vs compacting
+            pos_dict[aa] = np.log2(f_exp / f_comp)
+
+        enrich.append(pos_dict)
+
+    return enrich
+
+'''
+def compute_log_enrichment(exp_counts, comp_counts, pseudocount=1, min_total = 20):
     enrich = []
 
     for pos in range(len(exp_counts)):
@@ -74,7 +189,7 @@ def compute_log_enrichment(exp_counts, comp_counts, pseudocount=1):
         enrich.append(pos_dict)
 
     return enrich
-
+'''
 def context_flips(motifs_pos, motifs_neg):
     flips = defaultdict(lambda: {"exp": Counter(), "comp": Counter()})
 
@@ -207,8 +322,20 @@ k = 5  # choose motif length
 
 # MSA-style counts and enrichment
 exp_counts = position_counts([f for f, d in expanding[k]])
+
 comp_counts = position_counts([f for f, d in compacting[k]])
-enrich = compute_log_enrichment(exp_counts, comp_counts)
+
+k = len(exp_counts)  # motif length, e.g. 5
+
+for pos in range(k):
+    print(f"\nPosition {pos+1}")
+    print("expanding counts:", exp_counts[pos].most_common())
+    print("compacting counts:", comp_counts[pos].most_common())
+
+    eC = exp_counts[pos].get('C', 0)
+    cC = comp_counts[pos].get('C', 0)
+    print(f"  C: exp={eC}, comp={cC}, total={eC + cC}")
+enrich = compute_diff_enrichment(exp_counts, comp_counts, compOrExp= 'comp')
 
 # Visuals
 plot_enrichment_heatmap(enrich, title=f"Motif Enrichment Heatmap (k={k})")

@@ -11,13 +11,21 @@ from sklearn.kernel_ridge import KernelRidge
 import numpy as np
 import csv
 from sklearn.inspection import permutation_importance
+import pandas as pd
+import matplotlib.pyplot as plt
+
 
 feature_names = [
     "Fraction hydrophobic", "Fraction Polar", "Fraction Aromatic", "Fraction Proline", "Fraction Glycine",  "Fraction Non-charged",
     "Fraction Charged", "Charge Asymmetry", "Mean Hydropathy", "Variance of Hydropathy", "MolWt", "Log Length", "Hydropathy:fcr", "fraction aromatic: fraction hydrophobic", "Kappa", "SCD", "SHD"
 ]
+feature_names_abridge = [
+    'FracHydroPhob', 'FracPol', 'FracArom', 'FracProl', 'FracGly', 'FracNCharged', 'FracCharged', 'ChargeAsymm', 'MeanHydropathy', "VarHydropathy", "MolWt", "LogLen", "Hydropathy:fcr", "FracAro:FracHydropath", "kappa", "SCD", "SHD"]
+
 seed = 46
 ridge_alphas = np.logspace(-3, 3, 10)
+lasso_alphas = np.logspace(-4, 1, 10)
+
 krr_alphas = [0.001, 0.01, 0.1, 1, 10]
 krr_gammas = [1e-4, 1e-3, 1e-2, 1e-1, 1]
 outlierIndices =  [123, 136, 151, 158, 171, 185]
@@ -90,6 +98,9 @@ lin2 = LinearRegression().fit(X2, y)
 best_ridge2 = GridSearchCV(Ridge(), {"alpha": ridge_alphas}, cv=5, scoring="r2")
 best_ridge2.fit(X2, y)
 
+best_lasso = GridSearchCV(Lasso(max_iter=10000), {"alpha": lasso_alphas}, cv=5, scoring="r2")
+best_lasso.fit(X2, y)
+
 best_krr2 = GridSearchCV(
 KernelRidge(kernel="rbf"),
 {"alpha": krr_alphas, "gamma": krr_gammas},
@@ -99,18 +110,75 @@ best_krr2.fit(X2, y)
 
 lin_coef2 = lin2.coef_
 ridge_coef2 = best_ridge2.best_estimator_.coef_
+lasso_coef = best_lasso.best_estimator_.coef_
 r2 = permutation_importance(best_krr2.best_estimator_, X2, y, n_repeats=20, random_state=0)
 perm_importance2 = r2.importances_mean
 
 print("Standardized inputs")
 print("\n=== Linear Regression Coefficients ===")
 for i in np.argsort(-np.abs(lin_coef2)):
-    print(f"{feature_names[i]:25s}  coef={lin_coef[i]:+7.3f}")
+    print(f"{feature_names[i]:25s}  coef={lin_coef2[i]:+7.3f}")
 
 print("\n=== Ridge Regression Coefficients ===")
 for i in np.argsort(-np.abs(ridge_coef2)):
-    print(f"{feature_names[i]:25s}  coef={ridge_coef[i]:+7.3f}")
+    print(f"{feature_names[i]:25s}  coef={ridge_coef2[i]:+7.3f}")
 
 print("\n=== Kernel Ridge Permutation Importance ===")
 for i in np.argsort(-perm_importance2):
-    print(f"{feature_names[i]:25s}  importance={perm_importance[i]:.4f}")
+    print(f"{feature_names[i]:25s}  importance={perm_importance2[i]:.4f}")
+
+print("\n=== Lasso Coefficients ===")
+for i in np.argsort(-perm_importance2):
+    print(f"{feature_names[i]:25s}  importance={perm_importance2[i]:.4f}")
+
+idx = np.argsort(ridge_coef2)        # ascending
+features_sorted = np.array(feature_names)[idx]
+coefs_sorted = np.array(ridge_coef2)[idx]
+
+plt.figure(figsize=(8, 5))
+plt.bar(features_sorted, coefs_sorted)
+plt.axhline(0, color='black', linewidth=1)
+plt.title("Feature Coefficients")
+plt.ylabel("Coefficient")
+plt.xticks(rotation=45, ha = "right")
+plt.tight_layout()
+plt.show()
+
+idx = np.argsort(perm_importance2)        # ascending
+features_sorted = np.array(feature_names)[idx]
+coefs_sorted = np.array(perm_importance2)[idx]
+
+plt.figure(figsize=(8, 5))
+plt.bar(features_sorted, coefs_sorted)
+plt.axhline(0, color='black', linewidth=1)
+plt.title("Feature Importances")
+plt.ylabel("Importance")
+plt.xticks(rotation=45, ha = "right")
+plt.tight_layout()
+plt.show()
+
+idx = np.argsort(lin_coef2)        # ascending
+features_sorted = np.array(feature_names)[idx]
+coefs_sorted = np.array(lin_coef2)[idx]
+
+plt.figure(figsize=(8, 5))
+plt.bar(features_sorted, coefs_sorted)
+plt.axhline(0, color='black', linewidth=1)
+plt.title("Feature Coefficients")
+plt.ylabel("Coefficient")
+plt.xticks(rotation=45, ha = "right")
+plt.tight_layout()
+plt.show()
+
+idx = np.argsort(lasso_coef)        # ascending
+features_sorted = np.array(feature_names)[idx]
+coefs_sorted = np.array(lasso_coef)[idx]
+
+plt.figure(figsize=(8, 5))
+plt.bar(features_sorted, coefs_sorted)
+plt.axhline(0, color='black', linewidth=1)
+plt.title("Feature Coefficients")
+plt.ylabel("Coefficient")
+plt.xticks(rotation=45, ha = "right")
+plt.tight_layout()
+plt.show()

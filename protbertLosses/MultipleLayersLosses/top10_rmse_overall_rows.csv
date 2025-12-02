@@ -1,0 +1,11 @@
+Normalization,Regressing out,Points,Model,LayerGroup,PCA Components,Regression Type,Test Split,Test R2 Score,RMSE Score,Seed
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,mid,100,Lasso,85/15,0.6436527327296392,0.0290371675294993,3
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,mid,100,Lasso,85/15,0.6436120215870632,0.0290388172779417,3
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,mid,190,Lasso,85/15,0.6421137967636819,0.0290998005330198,3
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,mid,190,Lasso,85/15,0.6420866672241348,0.0291008945573902,3
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,high,190,GPR,85/15,0.6169244067376711,0.0301064564919153,3
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,high,100,GPR,85/15,0.5976728717723893,0.0308536863008914,3
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,mid,190,GPR,85/15,0.5970998339210565,0.0308756510626274,3
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,mid,100,Ridge,85/15,0.5954533098787673,0.030938685661474,3
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,mid,100,Ridge,85/15,0.5954425258592597,0.0309390885540184,3
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,190,Kernel Ridge,85/15,0.5675619174712033,0.0319874313950629,3

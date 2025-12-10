@@ -1,416 +1,182 @@
-import joblib
+# unirep_sliding_window.py
+
 import numpy as np
-import pandas as pd
-import jax
-import jax.numpy as jnp
-from jax.example_libraries import stax
+from jax_unirep import get_reps
 import csv
+import pickle
+import joblib
 
-from jax_unirep.layers import AAEmbedding, mLSTM, mLSTMHiddenStates
-from jax_unirep.utils import load_params  # or your own loader for evotuned weights
-
-
-# ============================================================
-# 1. Amino-acid alphabet and one-hot encoding
-# ============================================================
-
-# From jax_unirep
-aa_to_int = {
-    "-": 0,
-    "M": 1,
-    "R": 2,
-    "H": 3,
-    "K": 4,
-    "D": 5,
-    "E": 6,
-    "S": 7,
-    "T": 8,
-    "N": 9,
-    "Q": 10,
-    "C": 11,
-    "U": 12,
-    "G": 13,
-    "P": 14,
-    "A": 15,
-    "V": 16,
-    "I": 17,
-    "F": 18,
-    "Y": 19,
-    "W": 20,
-    "L": 21,
-    "O": 22,  # Pyrrolysine
-    "X": 23,  # Unknown
-    "Z": 23,  # Glu/Gln ambiguity
-    "B": 23,  # Asn/Asp ambiguity
-    "J": 23,  # Leu/Ile ambiguity
-    "start": 24,
-    "stop": 25,
-}
-
-proposal_valid_letters = "ACDEFGHIKLMNPQRSTVWY"
-
-VOCAB_SIZE = 26
-UNKNOWN_INDEX = aa_to_int["X"]  # 23
-
-def one_hot_encode_sequence(seq: str) -> jnp.ndarray:
+def unirep_predict_rg(seq, regressor, pca=None):
     """
-    One-hot encode a protein sequence using the UniRep aa_to_int mapping.
+    Predict Rg for a protein sequence using UniRep + your top model.
 
     Parameters
     ----------
     seq : str
-        Amino-acid sequence (e.g., 'MKTLLILAVALAVFAA').
-        Characters should be in the UniRep vocabulary:
-        '-', A,C,D,E,F,G,H,I,K,L,M,N,P,Q,R,S,T,V,W,Y,
-        plus rare/ambiguous ones (O, U, B, Z, J, X).
+        Amino-acid sequence.
+    regressor : sklearn-like model
+        Must support .predict(X) where X shape is (1, D).
+    pca : sklearn.decomposition.PCA or None
+        If you used PCA when training the regressor, pass that here.
 
     Returns
     -------
-    X : jnp.ndarray, shape (L, 26)
-        One-hot encoding of the sequence, where L = len(seq) and
-        the last dimension matches the UniRep vocabulary size.
-        Unknown characters are mapped to the 'X' class (index 23).
+    float
+        Predicted Rg.
     """
-    seq = seq.strip()
-    L = len(seq)
-    X_np = np.zeros((L, VOCAB_SIZE), dtype=np.float32)
+    # get_reps can take a single string or a list; we assume single here.
+    # It returns (h_avg, h_final, c_final), each shape (1, 1900).
+    h_avg, _, _ = get_reps(seq)  # shape (1, 1900)
 
-    for t, aa in enumerate(seq):
-        # Normal AAs are single characters; 'start'/'stop' tokens are not expected
-        # to appear in raw sequences you pass to get_reps.
-        idx = aa_to_int.get(aa, UNKNOWN_INDEX)
-        X_np[t, idx] = 1.0
+    X = h_avg
+    if pca is not None:
+        X = pca.transform(X)
 
-    return jnp.array(X_np)
-
-# ============================================================
-# 2. UniRep model (AAEmbedding + mLSTM + mLSTMHiddenStates)
-# ============================================================
-
-# Build a UniRep model that outputs per-position hidden states.
-# This mirrors the architecture used internally by get_reps.
-unirep_init, unirep_apply = stax.serial(
-    AAEmbedding(10),         # amino-acid embedding dim (10 is UniRep default)
-    mLSTM(1900),             # multiplicative LSTM with 1900 hidden units
-    mLSTMHiddenStates(),     # output shape: (batch, T, 1900)
-)
-
-_, unirep_params = unirep_init(jax.random.PRNGKey(0), input_shape=(-1, VOCAB_SIZE))
-
-# Load UniRep parameters compatible with this architecture.
-# If you have evotuned weights, load those instead of paper_weights.
-unirep_params = load_params(paper_weights=1900)
+    y_pred = regressor.predict(X)[0]
+    return float(y_pred)
 
 
-# ============================================================
-# 3. PCA + regression parameters (from sklearn)
-# ============================================================
-
-# You need to fit PCA and regression externally (using sklearn or similar)
-# on your training pipeline: h_avg -> PCA -> regression.
-#
-# Here we assume you have:
-#   - pca : fitted sklearn.decomposition.PCA
-#   - reg : fitted sklearn.linear_model (or similar)
-#
-# Example (UNCOMMENT and adapt in your actual code):
-#
-# from sklearn.decomposition import PCA
-# from sklearn.linear_model import LinearRegression
-#
-# pca = ...  # fitted PCA on h_avg
-# reg = ...  # fitted regression on PCA features
-
-
-# Placeholder: supply real sklearn objects here.
-pca = joblib.load("unirep_pca.joblib")
-reg = joblib.load("unirep_krr.joblib") 
-
-if (pca is not None) and (reg is not None):
-    # Extract PCA and regression parameters
-    C_np = pca.components_.astype(np.float32)   # shape (D_pca, 1900)
-    mu_np = pca.mean_.astype(np.float32)        # shape (1900,)
-    
-    # ---------------------------------------------
-    # Extract KernelRidge (RBF) parameters from GridSearchCV
-    # ---------------------------------------------
-
-    # reg: your GridSearchCV object (or a plain KernelRidge).
-    best_reg = getattr(reg, "best_estimator_", reg)
-
-    # Sanity: make sure it's KernelRidge with rbf kernel
-    if getattr(best_reg, "kernel", None) != "rbf":
-        raise ValueError(f"Expected KernelRidge with kernel='rbf', got {best_reg}")
-
-    # Training PCA features used by KernelRidge
-    X_fit_np = best_reg.X_fit_.astype(np.float32)           # (n_train, D_pca)
-
-    # Dual coefficients (alpha_i in the dual representation)
-    dual_np = np.asarray(best_reg.dual_coef_, dtype=np.float32).ravel()  # (n_train,)
-
-    # Gamma for the RBF kernel: k(z, z') = exp(-gamma * ||z - z'||^2)
-    gamma_value = best_reg.gamma
-    if not np.isscalar(gamma_value):
-        raise ValueError(
-            f"KernelRidge.gamma should be numeric after fit; got {gamma_value!r}"
-        )
-
-    # KernelRidge typically has no intercept, but we allow for intercept_ if set
-    intercept_value = getattr(best_reg, "intercept_", 0.0)
-
-    # Convert to JAX arrays
-    Z_fit = jnp.array(X_fit_np)                         # (n_train, D_pca)
-    dual = jnp.array(dual_np)                           # (n_train,)
-    gamma = jnp.array(float(gamma_value), dtype=jnp.float32)
-    krr_intercept = jnp.array(float(intercept_value), dtype=jnp.float32)
-
-    C = jnp.array(C_np)
-    mu = jnp.array(mu_np)
-else:
-    # If you haven't plugged PCA/reg yet, define dummy values to avoid NameErrors.
-    # Replace these with real ones before using integrated_gradients_seq.
-    C = None
-    mu = None
-    Z_fit = None
-    dual = None
-    gamma = None
-    krr_intercept = None
-
-
-
-
-def _krr_predict_from_h_avg_np(
-    h_avg_np: np.ndarray,
-    C_np: np.ndarray,
-    mu_np: np.ndarray,
-    Z_fit_np: np.ndarray,
-    dual_np: np.ndarray,
-    gamma_val: float,
-    intercept_val: float,
-) -> float:
-    """
-    Helper: given a mean hidden state h_avg (1900-dim), compute Rg using:
-        h_avg -> PCA -> KernelRidge (rbf).
-    Works entirely in NumPy (no gradients needed).
-    """
-    # PCA: z = (h_avg - mu) @ C.T
-    z = (h_avg_np - mu_np) @ C_np.T             # (D_pca,)
-
-    # RBF kernel between z and each training point in Z_fit
-    diff = Z_fit_np - z                         # (n_train, D_pca)
-    sq_dists = np.sum(diff * diff, axis=1)      # (n_train,)
-    k = np.exp(-gamma_val * sq_dists)           # (n_train,)
-
-    # KernelRidge prediction
-    y_pred = float(dual_np @ k + intercept_val)
-    return y_pred
-
-
-def window_omission_effects(
-    seq: str,
-    unirep_params,
-    C,
-    mu,
-    Z_fit,
-    dual,
-    gamma,
-    krr_intercept,
-    max_w: int = 11,
+def sliding_window_unirep(
+    seq,
+    regressor,
+    window=5,
+    pca=None,
+    mode="delete",
 ):
     """
-    For a given sequence, compute the effect of omitting each possible
-    contiguous window of hidden states (length 1..max_w) from the mean
-    UniRep embedding used for Rg prediction.
-
-    Process for one sequence:
-      1) Compute hidden states h_t (L, 1900).
-      2) Compute original Rg using mean over all t.
-      3) For each window size w = 1..max_w, and each start index n:
-           - Exclude steps [n, n+w-1] from the mean,
-           - Recompute mean embedding over remaining steps,
-           - Predict Rg_window,
-           - delta_Rg = Rg_window - Rg_original,
-           - Store omitted subsequence seq[n:n+w], delta_Rg, and n (1-based).
+    Naive sliding-window occlusion for UniRep:
+    for each window [start:end), actually modify the sequence,
+    recompute UniRep embedding from scratch, and see ΔRg.
 
     Parameters
     ----------
     seq : str
-        Protein sequence of length L.
-    unirep_params :
-        Parameters for UniRep model (AAEmbedding + mLSTM + mLSTMHiddenStates).
-    C : jnp.ndarray, shape (D_pca, 1900)
-        PCA components.
-    mu : jnp.ndarray, shape (1900,)
-        PCA mean.
-    Z_fit : jnp.ndarray, shape (n_train, D_pca)
-        Training PCA features for KernelRidge.
-    dual : jnp.ndarray, shape (n_train,)
-        Dual coefficients for KernelRidge.
-    gamma : jnp.ndarray, scalar
-        RBF gamma parameter.
-    krr_intercept : jnp.ndarray, scalar
-        KernelRidge intercept (usually 0).
-    max_w : int, optional
-        Maximum window size to test (default 11).
+        Original amino-acid sequence.
+    regressor : sklearn-like model
+        Trained Rg model on UniRep h_avg (optionally PCA-reduced).
+    window : int, default=5
+        Window size in residues.
+    pca : PCA or None
+        PCA used in training, if any.
+    mode : {'delete', 'mask'}, default='delete'
+        - 'delete': remove the window residues from the sequence.
+        - 'mask'  : replace residues in the window with 'X'.
 
     Returns
     -------
-    omitted_seqs : list of str
-        Each entry is the subsequence that was indirectly omitted (window).
-    delta_rgs : list of float
-        Each entry is Rg_window - Rg_original for that subsequence/window.
-    n_values : list of int
-        Each entry is the 1-based start index n of the omitted window
-        in the original sequence.
+    deltas : np.ndarray, shape (L - window + 1,)
+        ΔRg for each window (rg_occ - baseline).
+    baseline : float
+        Rg prediction for the full, unmodified sequence.
+    fragments : list[str]
+        The sequence fragments that were occluded.
+    indices : list[tuple[int, int]]
+        (start, end) indices of each window, 0-based, end-exclusive.
     """
-    # --- Encode sequence and run UniRep once ---
-    X_jax = one_hot_encode_sequence(seq)         # (L, 26), jnp
-    L = X_jax.shape[0]
+    L = len(seq)
+    if window > L:
+        raise ValueError(f"window ({window}) > sequence length ({L})")
 
-    # Hidden states: (L, 1900)
-    h_states_jax = unirep_apply(unirep_params, X_jax)
-    h_states_np = np.asarray(h_states_jax, dtype=np.float32)  # (L, 1900)
+    # 1. Baseline prediction on full sequence
+    baseline = unirep_predict_rg(seq, regressor, pca=pca)
 
-    # --- Convert PCA/KRR params to NumPy once ---
-    C_np = np.asarray(C, dtype=np.float32)               # (D_pca, 1900)
-    mu_np = np.asarray(mu, dtype=np.float32)             # (1900,)
-    Z_fit_np = np.asarray(Z_fit, dtype=np.float32)       # (n_train, D_pca)
-    dual_np = np.asarray(dual, dtype=np.float32)         # (n_train,)
-    gamma_val = float(gamma)
-    intercept_val = float(krr_intercept)
+    deltas = []
+    fragments = []
+    indices = []
 
-    print("Predicting base Rg")
-    # --- Original Rg with full mean embedding ---
-    h_avg_full = h_states_np.mean(axis=0)                # (1900,)
-    rg_original = _krr_predict_from_h_avg_np(
-        h_avg_full,
-        C_np,
-        mu_np,
-        Z_fit_np,
-        dual_np,
-        gamma_val,
-        intercept_val,
-    )
+    # 2. Slide the window
+    for start in range(L - window + 1):
+        if start % 20 == 0:
+            print(f"  Processing window starting at residue {start}")
+        end = start + window
+        frag = seq[start:end]
+        fragments.append(frag)
+        indices.append((start, end))
 
-    omitted_seqs = []
-    delta_rgs = []
-    n_values = []   # 1-based positions
+        if mode == "delete":
+            # Remove these residues entirely
+            seq_occ = seq[:start] + seq[end:]
+        elif mode == "mask":
+            # Replace them with 'X' (or choose another neutral AA)
+            seq_occ = seq[:start] + ("X" * window) + seq[end:]
+        else:
+            raise ValueError("mode must be 'delete' or 'mask'")
 
-    # --- Loop over window sizes and positions ---
-    # Ensure we never remove ALL positions: w <= L-1
-    max_w_eff = min(max_w, max(L - 1, 0))
+        # If deletion leaves an empty sequence, skip (cannot compute UniRep)
+        if len(seq_occ) == 0:
+            # You can choose to append np.nan here instead
+            deltas.append(np.nan)
+            continue
 
-    for w in range(1, max_w_eff + 1):
-        print("Window size:", w)
-        # Python indices: start in [0, L-w]
-        for start in range(0, L - w + 1):
-            # Build a boolean mask for included positions
-            mask = np.ones(L, dtype=bool)
-            mask[start : start + w] = False
+        rg_occ = unirep_predict_rg(seq_occ, regressor, pca=pca)
+        delta = rg_occ - baseline
+        deltas.append(delta)
 
-            # Safety: ensure at least one position remains
-            if not mask.any():
-                continue
-
-            h_avg_omit = h_states_np[mask].mean(axis=0)   # (1900,)
-
-            rg_omit = _krr_predict_from_h_avg_np(
-                h_avg_omit,
-                C_np,
-                mu_np,
-                Z_fit_np,
-                dual_np,
-                gamma_val,
-                intercept_val,
-            )
-
-            delta_rg = rg_omit - rg_original  # "Rg with omitted layers vs original"
-
-            subseq = seq[start : start + w]
-            n_1_based = start + 1
-
-            omitted_seqs.append(subseq)
-            delta_rgs.append(float(delta_rg))
-            n_values.append(n_1_based)
-
-    return omitted_seqs, delta_rgs, n_values
+    return np.array(deltas, dtype=np.float32), baseline, fragments, indices
 
 
-if __name__ == "__main__":
-    # ----------------------------------------------------
-    # Big accumulators over ALL proteins
-    # ----------------------------------------------------
-    all_omitted_seqs = []   # list[str]
-    all_delta_rgs = []      # list[float]
-    all_n_values = []       # list[int]
 
-    # ----------------------------------------------------
-    # Load sequences from training/all_points.csv
-    # ----------------------------------------------------
-    df = pd.read_csv("training/all_points.csv")
+# Load model and PCA once
+regr_model = joblib.load("interpretingUnirep/unirep_krr.joblib")
+pca = joblib.load("interpretingUnirep/unirep_pca.joblib")
 
-    if "Sequence" not in df.columns:
-        raise KeyError("Expected a 'Sequence' column in training/all_points.csv")
+# Output CSV: one row per (window_size, sequence, window_position)
+out_path = "unirep_sliding_windows_seqDelete.csv"
 
-    sequences = df["Sequence"].astype(str).tolist()
+with open(out_path, "w", newline="") as out_f:
+    writer = csv.writer(out_f)
+    # Header row: tweak columns as you like
+    writer.writerow([
+        "window_size",
+        "sequence_index",
+        "window_index",
+        "start",
+        "end",
+        "baseline_rg",
+        "delta_rg",
+        "fragment",
+        "sequence_id"  # optional: e.g. original row index or any id
+    ])
 
-    # ----------------------------------------------------
-    # Loop over every protein and run the window method
-    # ----------------------------------------------------
-    for i, seq in enumerate(sequences):
-        seq = seq.strip()
-        if not seq:
-            continue  # skip empty sequences just in case
+    # Loop over window sizes
+    for w in range(1, 11):
+        print(f"Window size {w}")
 
-        # Run window-omission analysis on this sequence
-        omitted_seqs, delta_rgs, n_values = window_omission_effects(
-            seq,
-            unirep_params,
-            C,
-            mu,
-            Z_fit,
-            dual,
-            gamma,
-            krr_intercept,
-            max_w=11,   # windows of size 1..11
-        )
+        # Re-open the input file for each window size to avoid keeping all sequences in RAM
+        with open("training/all_points.csv", newline="") as f:
+            reader = csv.reader(f)
+            header = next(reader)  # skip header
 
-        # Append this protein's results to the global lists
-        all_omitted_seqs.extend(omitted_seqs)
-        all_delta_rgs.extend(delta_rgs)
-        all_n_values.extend(n_values)
+            for seq_idx, row in enumerate(reader):
+                seq = row[0]  # assuming sequence is in column 0
 
-        # Optional progress print
-        if (i + 1) % 1 == 0:
-            print(f"Processed {i + 1} sequences")
+                # Run sliding-window occlusion for this sequence and window size
+                deltas, baseline, frags, idxs = sliding_window_unirep(
+                    seq,
+                    regr_model,
+                    window=w,
+                    pca=pca,
+                    mode="delete",
+                )
 
-    # Save three lists as separate .txt files (one item per line)
-    with open("all_omitted_seqs.txt", "w", encoding="utf-8") as f:
-        for s in all_omitted_seqs:
-            f.write(f"{s}\n")
+                # Stream each window result as its own CSV row
+                for win_idx, (delta, frag, (start, end)) in enumerate(zip(deltas, frags, idxs)):
+                    writer.writerow([
+                        w,                 # window_size
+                        seq_idx,           # sequence_index within the CSV (0-based after header)
+                        win_idx,           # window_index along this sequence
+                        int(start),
+                        int(end),
+                        float(baseline),
+                        float(delta),
+                        frag,
+                        seq_idx            # sequence_id (here just same as seq_idx; replace if you have real IDs)
+                    ])
 
-    with open("all_delta_rgs.txt", "w", encoding="utf-8") as f:
-        for v in all_delta_rgs:
-            f.write(f"{v}\n")
+                # Let Python reclaim these per-sequence arrays quickly
+                del deltas, baseline, frags, idxs
 
-    with open("all_n_values.txt", "w", encoding="utf-8") as f:
-        for n in all_n_values:
-            f.write(f"{n}\n")
+                if (seq_idx + 1) % 1 == 0:
+                    print(f"  {seq_idx + 1} sequences processed for window size {w}")
 
-    
-    # Save aggregated results to a single CSV
-    assert len(all_omitted_seqs) == len(all_delta_rgs) == len(all_n_values), "Result lists must be same length"
-
-    out_df = pd.DataFrame({
-        "omitted_seq": all_omitted_seqs,
-        "delta_rg": all_delta_rgs,
-        "start_pos": all_n_values,
-    })
-
-    out_df.to_csv("window_omissions_all.csv", index=False)
-    print(f"Wrote {len(out_df)} rows to window_omissions_all.csv")
-
-    # At this point you have:
-    #   all_omitted_seqs : list of all subsequences omitted across the dataset
-    #   all_delta_rgs    : corresponding list of delta Rg values
-    #   all_n_values     : corresponding list of 1-based start positions
+print(f"Done. Results written to {out_path}")

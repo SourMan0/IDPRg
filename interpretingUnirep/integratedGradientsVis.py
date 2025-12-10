@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 # Load per-AA IG scores from earlier IG pipeline
 # (ensure you've run the IG aggregation and saved aa_ig_scores.csv)
 # -------------------------------------------------
-aa_df = pd.read_csv("interpretingUnirep/aa_ig_scores_oldpolyA.csv")
+aa_df = pd.read_csv("interpretingUnirep/aa_ig_scores_zero.csv")
 
 # aa_df columns should be: ["channel_index", "aa_label", "ig_score"]
 print(aa_df.head())

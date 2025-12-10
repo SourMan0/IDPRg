@@ -1,4 +1,4 @@
-# Best model: ['Rg norm w/0.5' 'pH regr out' 'All' '100' 'Kernel Ridge' '90/10' '0.4933035002817223' '0.047864804488206444']
+# Best model: ['Rg norm w/0.418' 'No regr out' 'All' '10' 'Kernel Ridge' '90/10']
 
 import csv
 import ast
@@ -49,7 +49,7 @@ def main():
         header = next(reader)  # skip header
         for row in reader:
             seq = row[0]
-            target = float(row[3])  # adjust index if your target column is different
+            target = float(row[4])  # adjust index if your target column is different
             sequences.append(seq)
             y.append(target)
 
@@ -70,7 +70,7 @@ def main():
     X_raw = np.stack(X_list, axis=0)  # (N, 1900)
 
     # 3. PCA
-    pca = PCA(n_components=100, random_state=42)
+    pca = PCA(n_components=10, random_state=42)
     X = pca.fit_transform(X_raw)
     joblib.dump(pca, "unirep_pca.joblib")
     print("Saved PCA to unirep_pca.joblib")
@@ -86,7 +86,7 @@ def main():
     print("Fitting model...")
     model.fit(X, y)
     joblib.dump(model, "unirep_krr.joblib")
-    print("Saved GPR to unirep_krrr.joblib")
+    print("Saved KRR to unirep_krr.joblib")
 
 
 if __name__ == "__main__":

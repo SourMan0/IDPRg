@@ -32,7 +32,25 @@ sequences = sequences2
 for s in sequences:
     if " " in s:
         print('here')
+sequences3 = []
 Rgs = Rgs[1:]
+Rgs2 = []
+lengths2 = []
+counter = 0
+for s in sequences:
+    if s not in sequences3:
+        sequences3.append(s)
+        Rgs2.append(Rgs[counter])
+        lengths2.append(lengths[counter])
+    else:
+        print(s)
+        print([i for i, x in enumerate(sequences) if x == s])
+    counter += 1
+
+sequences = sequences3
+Rgs = Rgs2
+lengths = lengths2
+
 lengths = np.array(lengths)
 sequences = np.array(sequences)
 Rgs = np.array(Rgs, dtype = float)
@@ -151,28 +169,27 @@ RgNormSt = Rgs / (lengths ** 0.5)
 
 
 #Uncomment if you want to remake the files
-'''
+
 # 1. All data (raw)
 write_csv('allRaw.csv', sequences, Rgs, "Protein Sequence", "Rg (nm)")
 
 # 2. All data (normalized with ν = 0.427)
-write_csv('allNormalized.csv', sequences, RgNorminit, "Protein Sequence", "Normalized Rg with ν = 0.427 (nm)")
+write_csv('allNormalized.csv', sequences, RgNorminit, "Protein Sequence", "Normalized Rg with ν = 0.0.421 (nm)")
 
 # 3. Inliers only (raw)
 write_csv('inliersRaw.csv', sequences[mask_inliners], Rgs[mask_inliners], "Protein Sequence", "Rg (nm)")
 
 # 4. Inliers only (normalized with ν = 0.418)
-write_csv('inliersNormalized.csv', sequences[mask_inliners], RgNormRefit[mask_inliners], "Protein Sequence", "Normalized Rg with ν = 0.418  (nm)")
+write_csv('inliersNormalized.csv', sequences[mask_inliners], RgNormRefit[mask_inliners], "Protein Sequence", "Normalized Rg with ν = 0.406  (nm)")
 
 #5 All data (normalized at ν = 0.5)
 write_csv('allNormalizedNaive.csv', sequences, RgNormSt, "Protein Sequence", "Normalized Rg with ν = 0.5 (nm)")
 
 #6 All data (normalized  ν = 0.418)
-write_csv('allNormalizedWithInliers.csv', sequences, RgNormRefit, "Protein Sequence", "Normalized Rg with ν = 0.418 (nm)")
+write_csv('allNormalizedWithInliers.csv', sequences, RgNormRefit, "Protein Sequence", "Normalized Rg with ν = 0.406 (nm)")
 
 #7 Inlier data (normalized  ν = 0.427)
-write_csv('inliersNormalizedWithAll.csv', sequences[mask_inliners], RgNorminit[mask_inliners], "Protein Sequence", "Normalized Rg with ν = 0.427 (nm)")
+write_csv('inliersNormalizedWithAll.csv', sequences[mask_inliners], RgNorminit[mask_inliners], "Protein Sequence", "Normalized Rg with ν = 0.421 (nm)")
 
 #9 Inlier data (normalized at ν = 0.5)
 write_csv('inliersNormalizedNaive.csv', sequences[mask_inliners], RgNormSt[mask_inliners], "Protein Sequence", "Normalized Rg with ν = 0.5 (nm)")
-'''

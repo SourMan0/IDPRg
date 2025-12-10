@@ -5,7 +5,7 @@ from collections import defaultdict
 import matplotlib.pyplot as plt
 
 sequences = []
-with open('training/all_points.csv', newline='') as f:
+with open('../training/all_points.csv', newline='') as f:
     reader = csv.reader(f)
     counter = 0
     for row in reader:
@@ -13,9 +13,9 @@ with open('training/all_points.csv', newline='') as f:
             sequences.append(row[0])
             print(" " in row[0], counter)
         counter += 1
-with open("interpretingESM/allEffects2.pkl", "rb") as f:
+with open("allEffects2.pkl", "rb") as f:
     allEffects = pickle.load(f)
-with open("interpretingESM/allFragments2.pkl", "rb") as f:
+with open("allFragments2.pkl", "rb") as f:
     allFragments = pickle.load(f)
 
 print(len(allEffects))

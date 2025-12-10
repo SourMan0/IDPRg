@@ -51,20 +51,26 @@ def regressOutFrom(fileName, features, unAdjI, xitem, yitem, unadjusted = False)
     plt.show()
     return residuals, r2
 
+sequences3 = []
 with open('data/rawData.csv', newline='') as f:
     reader = csv.reader(f)
     for row in reader:
-        if row[3] != '' and row[34]!= '' and row[2] != '':
+        s = row[2]
+        s = s.replace(" ", "")
+
+        if row[3] != '' and row[34]!= '' and row[2] != '' and s not in sequences3:
             Phs.append(row[34])
             Rgs.append(row[3])
             RgsAdj.append(row[3])
             PhsAdj.append(row[34])
             unadjI.append(True)
-        elif row[3] != '' and row[2] != '':
+            sequences3.append(s)
+        elif row[3] != '' and row[2] != '' and s not in sequences3:
             RgsAdj.append(row[3])
             #hard code in 7.0
             PhsAdj.append(7.0)
             unadjI.append(False)
+            sequences3.append(s)
 unadjI = np.array(unadjI[1:])
 AdjI = ~unadjI
 Phs = np.array(Phs[1:], dtype= float).reshape(-1, 1)
@@ -85,7 +91,7 @@ RgsAdj = np.array(Rgs[1:], dtype=float)
 #pHResiduals4, pHR24 = regressOutFrom('data/allNormalizedNaive.csv', PhsAdj, AdjI, 'pH', 'Norm Rg w/0.5')
 
 #Adjust for Outliers
-outlierIndices =  [123, 136, 151, 158, 171, 185]
+outlierIndices = [114, 125, 137, 163]
 x = np.ones(len(PhsAdj), dtype=bool)
 x[outlierIndices] = False
 inlierPh = PhsAdj[x]
@@ -116,14 +122,19 @@ inlierPhUnadj = inlierPh[inliersUnadjI]
 
 bufferIndices = {"Monovalent Salt": [6, 10, 21, 26], "Divalent Chloride": [16, 20], "Sulfates": [24, 28], "Phosphates": [7,8,9,23,27], "Tris":[14, 15], "Goods":[18, 19, 22, 29, 31], "Reducing Agents":[13, 17, 25], "EDTA": [11], "Urea": [12], "CHAPS": [33], "NaN3": [30], "PMSF": [12]}
 
+sequencesSaw = []
 totalMatrix = []
 totals = []
 counter = 1
 with open('data/rawData.csv', newline='') as f:
     reader = csv.reader(f)
     for row in reader:
+        s = row[2]
+        s = s.replace(" ", "")
         #salts
-        if row[6] != '' and counter != 1:
+        if row[6] != '' and counter != 1 and s not in sequencesSaw:
+            sequencesSaw.append(s)
+
             monovalent = 0
             divalent = 0
             sulfates = 0
@@ -206,18 +217,19 @@ with open('data/rawData.csv', newline='') as f:
             total = salt_vec + buffer_vec + others
             totals.append(total)
             totalMatrix.append(total)
-        elif counter != 1:
+        elif counter != 1 and s not in sequencesSaw:
             total = [150,2,0,0,0,1.0,0,0,2,1,0,0,7.0]
             totalMatrix.append(total)
+            sequencesSaw.append(s)
         counter += 1
 
-print(len(totalMatrix))
-print(len(PhsAdj))
+print("totalMatrix: ", len(totalMatrix))
+print("PhsAdj: ", len(PhsAdj))
 print(len(totals))
 print(len(Phs))
 print(totalMatrix[0])
 
-outlierIndices =  [123, 136, 151, 158, 171, 185]
+outlierIndices =  [114, 125, 137, 163]
 x = np.ones(len(PhsAdj), dtype=bool)
 x[outlierIndices] = False
 totalMatrix = np.array(totalMatrix)
@@ -307,13 +319,13 @@ def makeResiduals(fileName, X, unadjI, xitem='', yitem='', title='', unadjusted 
     kr.fit(X, labels)
     r2 = kr.score(X, labels)
     r22 = kr2.score(X, labels)
+    print(r22)
     labelsPred2 = kr2.predict(X)
     labelsPred = kr.predict(X)
     residuals = labels - labelsPred
     residuals2 = labels - labelsPred
     #print(f"{xitem} explains {r2:.2%} of variance in {yitem}")
     #print(f"{xitem} explains {r22:.2%} of variance in {yitem}")
-    print(labels[2] - labelsPred[2])
     return np.array(residuals2, dtype=float)
 
 
@@ -393,11 +405,11 @@ Rgs19[unadjI] = makeResiduals('data/allNormalizedWithInliers.csv', totals, unadj
 
 with open('all_points.csv', 'w', newline='') as f:
     writer = csv.writer(f)
-    labels = ['Sequence', 'Rg (nm)', 'Rg normalized w/0.427','Rg normalized w/0.5 (nm)', 'Rg normalized w/0.418 (nm)', 
-    'Rg w/pH regressed out', 'Rg normalized w/0.427 w/pH regressed out','Rg normalized w/0.5 w/pH regressed out', 'Rg normalized w/0.418 w/pH regressed out',
-     'Rg w/buffer regressed out', 'Rg normalized w/0.427 w/buffer regressed out','Rg normalized w/0.5 w/buffer regressed out', 'Rg normalized w/0.418 w/buffer regressed out', 
-     'Rg w/experimental pH regressed out', 'Rg normalized w/0.427 w/experimental pH regressed out','Rg normalized w/0.5 w/experimental pH regressed out', 'Rg normalized w/0.418 w/experimental pH regressed out',
-      'Rg w/experimental buffer regressed out', 'Rg normalized w/0.427 w/experimental buffer regressed out','Rg normalized w/0.5 w/experimental buffer regressed out', 'Rg normalized w/0.418 w/experimental buffer regressed out']
+    labels = ['Sequence', 'Rg (nm)', 'Rg normalized w/0.421','Rg normalized w/0.5 (nm)', 'Rg normalized w/0.406 (nm)', 
+    'Rg w/pH regressed out', 'Rg normalized w/0.421 w/pH regressed out','Rg normalized w/0.5 w/pH regressed out', 'Rg normalized w/0.406 w/pH regressed out',
+     'Rg w/buffer regressed out', 'Rg normalized w/0.421 w/buffer regressed out','Rg normalized w/0.5 w/buffer regressed out', 'Rg normalized w/0.406 w/buffer regressed out', 
+     'Rg w/experimental pH regressed out', 'Rg normalized w/0.421 w/experimental pH regressed out','Rg normalized w/0.5 w/experimental pH regressed out', 'Rg normalized w/0.406 w/experimental pH regressed out',
+      'Rg w/experimental buffer regressed out', 'Rg normalized w/0.421 w/experimental buffer regressed out','Rg normalized w/0.5 w/experimental buffer regressed out', 'Rg normalized w/0.406 w/experimental buffer regressed out']
     writer.writerow(labels)
     for a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u in zip(sequences, Rgs0, Rgs1, Rgs2, Rgs3, Rgs4, Rgs5, Rgs6, Rgs7, Rgs8, Rgs9, Rgs10, Rgs11, Rgs12, Rgs13, Rgs14, Rgs15, Rgs16, Rgs17, Rgs18, Rgs19):
         y = [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u]
@@ -450,11 +462,11 @@ print(rgs19[2])
 
 with open('inliers.csv', 'w', newline='') as f:
     writer = csv.writer(f)
-    labels = ['Sequence', 'Rg (nm)', 'Rg normalized w/0.427','Rg normalized w/0.5 (nm)', 'Rg normalized w/0.418 (nm)', 
-    'Rg w/pH regressed out', 'Rg normalized w/0.427 w/pH regressed out','Rg normalized w/0.5 w/pH regressed out', 'Rg normalized w/0.418 w/pH regressed out',
-     'Rg w/buffer regressed out', 'Rg normalized w/0.427 w/buffer regressed out','Rg normalized w/0.5 w/buffer regressed out', 'Rg normalized w/0.418 w/buffer regressed out', 
-     'Rg w/experimental pH regressed out', 'Rg normalized w/0.427 w/experimental pH regressed out','Rg normalized w/0.5 w/experimental pH regressed out', 'Rg normalized w/0.418 w/experimental pH regressed out',
-      'Rg w/experimental buffer regressed out', 'Rg normalized w/0.427 w/experimental buffer regressed out','Rg normalized w/0.5 w/experimental buffer regressed out', 'Rg normalized w/0.418 w/experimental buffer regressed out']
+    labels = ['Sequence', 'Rg (nm)', 'Rg normalized w/0.421','Rg normalized w/0.5 (nm)', 'Rg normalized w/0.406 (nm)', 
+    'Rg w/pH regressed out', 'Rg normalized w/0.421 w/pH regressed out','Rg normalized w/0.5 w/pH regressed out', 'Rg normalized w/0.406 w/pH regressed out',
+     'Rg w/buffer regressed out', 'Rg normalized w/0.421 w/buffer regressed out','Rg normalized w/0.5 w/buffer regressed out', 'Rg normalized w/0.406 w/buffer regressed out', 
+     'Rg w/experimental pH regressed out', 'Rg normalized w/0.421 w/experimental pH regressed out','Rg normalized w/0.5 w/experimental pH regressed out', 'Rg normalized w/0.406 w/experimental pH regressed out',
+      'Rg w/experimental buffer regressed out', 'Rg normalized w/0.421 w/experimental buffer regressed out','Rg normalized w/0.5 w/experimental buffer regressed out', 'Rg normalized w/0.406 w/experimental buffer regressed out']
     writer.writerow(labels)
     for a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u in zip(Sequences, rgs0, rgs1, rgs2, rgs3, rgs4, rgs5, rgs6, rgs7, rgs8, rgs9, rgs10, rgs11, rgs12, rgs13, rgs14, rgs15, rgs16, rgs17, rgs18, rgs19):
         y = [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u]

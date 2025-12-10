@@ -21,6 +21,9 @@ with open("allFragments3.pkl", "rb") as f:
 print(len(allEffects))
 print(len(allFragments))
 
+
+# Normalizing sequences to smooth out any issues with the z-scores
+
 def normalize_per_sequence(d):
     """
     Normalize a ΔRg array (per sequence) using z-score.
@@ -159,7 +162,7 @@ def getInfluences(global_pairs, min_count = 30):
     return stats
 
 
-k_values = [1,2,3]   # whatever you use
+k_values = [1]   # whatever you use
 
 pairs = getPerResidueDataset(sequences, allEffects, k_values)
 stats = getInfluences(pairs)

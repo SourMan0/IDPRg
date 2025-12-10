@@ -27,6 +27,12 @@ def position_counts(motifs):
 
     return pos_counts
 
+def get_background_counts_for_k(all_frags_for_k):
+    flat = []
+    for frag_list in all_frags_for_k:
+        flat.extend(frag_list)
+    return position_counts(flat)
+
 # Normalizes the delta Rgs based on which sequence it's in. Since some sequences may have bigger changes based on 
 # which protein it is, we want the *relative* change in Rg
 def normalize_dRg(dRg):

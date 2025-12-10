@@ -13,7 +13,7 @@ print(x.shape)
 X_np = np.array(x.detach().cpu())
 
 
-target_dims = [190, 100, 50, 20, 10]
+target_dims = [167, 100, 50, 20, 10]
 n_layers = X_np.shape[1]
 
 pca_results = {}

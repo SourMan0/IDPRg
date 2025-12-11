@@ -13,9 +13,9 @@ with open('../training/inliers.csv', newline='') as f:
             sequences.append(row[0])
             print(" " in row[0], counter)
         counter += 1
-with open("allEffects3.pkl", "rb") as f:
+with open("allEffects4.pkl", "rb") as f:
     allEffects = pickle.load(f)
-with open("allFragments3.pkl", "rb") as f:
+with open("allFragments4.pkl", "rb") as f:
     allFragments = pickle.load(f)
 
 print(len(allEffects))
@@ -162,7 +162,7 @@ def getInfluences(global_pairs, min_count = 30):
     return stats
 
 
-k_values = [1]   # whatever you use
+k_values = [1,2,3,4,5,6,7,8,9,10]   # whatever you use
 
 pairs = getPerResidueDataset(sequences, allEffects, k_values)
 stats = getInfluences(pairs)

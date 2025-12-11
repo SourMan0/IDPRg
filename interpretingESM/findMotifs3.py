@@ -5,9 +5,9 @@ import pickle
 import logomaker
 import matplotlib.pyplot as plt
 
-with open("allEffects3.pkl", "rb") as f:
+with open("allEffects4.pkl", "rb") as f:
     allEffects = pickle.load(f)
-with open("allFragments3.pkl", "rb") as f:
+with open("allFragments4.pkl", "rb") as f:
     allFragments = pickle.load(f)
 
 
@@ -83,7 +83,7 @@ def effects_to_df(mean_effect):
 
 k_vals = list(range(1, 11))
 results = computeWeightedResidueEffects(allEffects, allFragments, k_vals, min_count = 400)
-df = effects_to_df(results[6])
+df = effects_to_df(results[10])
 df_expand = df.clip(lower = 0.0)
 df_compact = (-df).clip(lower = 0.0)
 

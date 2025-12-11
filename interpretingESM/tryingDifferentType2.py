@@ -10,18 +10,18 @@ import pickle
 # 1. LOAD ESM MODEL (layer 6 is index = 6)
 ###############################################
 
-tok = AutoTokenizer.from_pretrained("facebook/esm2_t12_35M_UR50D")
-model = AutoModel.from_pretrained("facebook/esm2_t12_35M_UR50D")
+tok = AutoTokenizer.from_pretrained("facebook/esm2_t6_8M_UR50D")
+model = AutoModel.from_pretrained("facebook/esm2_t6_8M_UR50D")
 model.eval()
 
-regrModel = joblib.load('lasso.joblib')
-pca = joblib.load('esm_pca.joblib')
+regrModel = joblib.load('krr.joblib')
+pca = joblib.load('esm_pca2.joblib')
 
 ###############################################
 # 2. GET LAYER-4 EMBEDDINGS FOR A SEQUENCE
 ###############################################
 
-def get_layer6_embeddings(seq):
+def get_layer3_embeddings(seq):
     """
     Returns per-residue embeddings from layer 6 (shape L x 320).
     Strips BOS/EOS automatically.
@@ -30,9 +30,9 @@ def get_layer6_embeddings(seq):
     with torch.no_grad():
         out = model(**tokens, output_hidden_states=True)
     # hidden_states: list of length 13 (0–12), each shape (1, L+2, 320)
-    emb_l6 = out.hidden_states[6][0]  # choose layer 6
-    emb_l6 = emb_l6[1:-1]            # strip BOS/EOS → (L, 320)
-    return emb_l6
+    emb_l3 = out.hidden_states[3][0]  # choose layer 3
+    emb_l3 = emb_l3[1:-1]            # strip BOS/EOS → (L, 320)
+    return emb_l3
 
 
 def occlude_embedding_window(E, start, k, method="mean"):
@@ -143,11 +143,10 @@ with open('../training/inliers.csv', newline='') as f:
 
 embeddings = []
 for i in sequences:
-    embeddings.append(get_layer6_embeddings(i))
+    embeddings.append(get_layer3_embeddings(i))
 allEffects, allFragments = run_occlusion_all_sequences(sequences, embeddings, list(range(1,11)), pca, regrModel, method = 'zero')
 
-with open("allEffects3.pkl", "wb") as f:
+with open("allEffects4.pkl", "wb") as f:
     pickle.dump(allEffects, f)
-with open("allFragments3.pkl", "wb") as f:
+with open("allFragments4.pkl", "wb") as f:
     pickle.dump(allFragments, f)
-

@@ -25,9 +25,11 @@ for i in seeds:
     medSplit = []
     smallSplit = []
 
+    noRegrOut = []
+
     allLosses = []
     with open(f'losses/esmLosses{i}.csv', newline='') as f:
-
+        
 
         reader = csv.reader(f)
         counter = 0
@@ -52,9 +54,9 @@ for i in seeds:
 
                 if 'w/no' in row[0] and not row[6] == 'Linear':
                     lossesOnNoReg.append(row[-1])
-                elif '0.418' in row[0] and not row[6] == 'Linear':
+                elif '0.406' in row[0] and not row[6] == 'Linear':
                     lossesOnlowReg.append(row[-1])
-                elif '0.427' in row[0] and not row[6] == 'Linear':
+                elif '0.421' in row[0] and not row[6] == 'Linear':
                     lossesOnMidReg.append(row[-1])
                 elif '0.5' in row[0] and not row[6] == 'Linear':
                     lossesOnHighReg.append(row[-1])
@@ -65,6 +67,9 @@ for i in seeds:
                     medSplit.append(row[-1])
                 elif row[7] == '90/10' and not row[6] == 'Linear':
                     smallSplit.append(row[-1])
+                
+                if row[1] == 'No regr out':
+                    noRegrOut.append([i] + row)
         
                 
             counter += 1
@@ -100,7 +105,7 @@ for i in seeds:
 
     plt.show()
 
-    regs = ['No reg', 'Reg w/0.418', 'Reg w/0.427', 'Reg w/0.5']
+    regs = ['No reg', 'Reg w/0.406', 'Reg w/0.421', 'Reg w/0.5']
     losses = [np.mean(np.array(lossesOnNoReg, dtype=float)), np.mean(np.array(lossesOnlowReg, dtype=float)), np.mean(np.array(lossesOnMidReg, dtype=float)), np.mean(np.array(lossesOnHighReg, dtype=float))]
     plt.bar(regs, losses)
     plt.xlabel('Regularizations')
@@ -124,4 +129,12 @@ bestFeatures[:, -1] = bestFeatures[:, -1].astype(float)
 sort_indices = bestFeatures[:, -1].argsort()
 sorted = bestFeatures[sort_indices]
 print("Overall best Ones")
+print(sorted[:20, :])
+
+print(noRegrOut)
+bestNoRegrOut = np.array(noRegrOut)
+bestNoRegrOut[:, -1] = bestNoRegrOut[:, -1].astype(float)
+sort_indices = bestNoRegrOut[:, -1].argsort()
+sorted = bestNoRegrOut[sort_indices]
+print("Overall best no regr out:")
 print(sorted[:20, :])

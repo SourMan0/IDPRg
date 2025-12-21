@@ -40,8 +40,8 @@ lasso_alphas = np.logspace(-4, 1, 10)
 
 krr_alphas = [0.001, 0.01, 0.1, 1, 10]
 krr_gammas = [1e-4, 1e-3, 1e-2, 1e-1, 1]
-outlierIndices =  [123, 136, 151, 158, 171, 185]
-inl = np.ones(190, dtype=bool)
+outlierIndices =  [114, 125, 137, 163]
+inl = np.ones(167, dtype=bool)
 inl[outlierIndices] = False
 y = []
 with open('../training/inliers.csv', newline='') as f:

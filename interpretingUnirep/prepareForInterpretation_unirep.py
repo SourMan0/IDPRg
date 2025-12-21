@@ -1,4 +1,4 @@
-# Best model: ['Rg norm w/0.418' 'No regr out' 'All' '10' 'Kernel Ridge' '90/10']
+# Best model: ['Rg norm w/0.5' 'pH regr out' 'Inliers' '50' 'Kernel Ridge' '85/15']
 
 import csv
 import ast
@@ -44,12 +44,12 @@ def main():
     sequences = []
     y = []
 
-    with open('training/all_points.csv', newline='') as f:
+    with open('training/inliers.csv', newline='') as f:
         reader = csv.reader(f)
         header = next(reader)  # skip header
         for row in reader:
             seq = row[0]
-            target = float(row[4])  # adjust index if your target column is different
+            target = float(row[3])  # adjust index if your target column is different
             sequences.append(seq)
             y.append(target)
 
@@ -57,7 +57,7 @@ def main():
 
     # 2. Compute UniRep h_avg for each sequence
     X_list = []
-    df_X = pd.read_csv("data/unirep_allRaw.csv", converters={"UniRep Embedding": ast.literal_eval})
+    df_X = pd.read_csv("data/unirep_inliersRaw.csv", converters={"UniRep Embedding": ast.literal_eval})
     X_list = df_X["UniRep Embedding"].tolist()
     # for i, seq in enumerate(sequences):
     #     per_res = get_unirep_per_res(seq)  # (L, 1900)
@@ -70,7 +70,7 @@ def main():
     X_raw = np.stack(X_list, axis=0)  # (N, 1900)
 
     # 3. PCA
-    pca = PCA(n_components=10, random_state=42)
+    pca = PCA(n_components=50, random_state=42)
     X = pca.fit_transform(X_raw)
     joblib.dump(pca, "unirep_pca.joblib")
     print("Saved PCA to unirep_pca.joblib")

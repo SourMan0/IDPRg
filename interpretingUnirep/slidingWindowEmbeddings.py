@@ -345,12 +345,12 @@ if __name__ == "__main__":
     all_n_values = []       # list[int]
 
     # ----------------------------------------------------
-    # Load sequences from training/all_points.csv
+    # Load sequences from training/inliers.csv
     # ----------------------------------------------------
-    df = pd.read_csv("training/all_points.csv")
+    df = pd.read_csv("training/inliers.csv")
 
     if "Sequence" not in df.columns:
-        raise KeyError("Expected a 'Sequence' column in training/all_points.csv")
+        raise KeyError("Expected a 'Sequence' column in training/inliers.csv")
 
     sequences = df["Sequence"].astype(str).tolist()
 

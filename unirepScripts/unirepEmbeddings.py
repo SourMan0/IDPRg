@@ -32,7 +32,7 @@ def unirep_embed(inpath, outpath=None, pca_toggle=False, pca_num_components=1):
 
 if __name__ == "__main__":
     # Settings
-    inpath = "data/allRaw.csv"
+    inpath = "data/inliersRaw.csv"
     pca_toggle = False  # If toggled, will do PCA on embeddings before saving
     pca_num_components = 190
 

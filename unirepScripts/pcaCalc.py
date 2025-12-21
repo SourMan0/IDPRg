@@ -29,14 +29,14 @@ def pca_calc(inpath, pca_num_components, emb_col="UniRep Embedding"):
 if __name__ == "__main__":
     # Settings
     inpath = "data/unirep_allRaw.csv"
-    pca_num_components = [10, 20, 50, 100, 190]
+    pca_num_components = [10, 20, 50, 100, 167]
     emb_col = "UniRep Embedding"
 
     for n_components in pca_num_components:
         pca_calc(inpath, n_components, emb_col)
 
     inpath = "data/unirep_inliersRaw.csv"
-    pca_num_components = [10, 20, 50, 100, 190]
+    pca_num_components = [10, 20, 50, 100, 163]
     emb_col = "UniRep Embedding"
 
     for n_components in pca_num_components:

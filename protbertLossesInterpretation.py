@@ -3,7 +3,7 @@ import glob
 import os
 
 def main():
-    folder = "protbertLosses"
+    folder = "protbertLosses/MultipleLayersLosses"
     os.makedirs(folder, exist_ok=True)
 
 

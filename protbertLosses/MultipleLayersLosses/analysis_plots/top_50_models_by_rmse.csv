@@ -1,0 +1,51 @@
+Normalization,Regressing out,Points,Model,LayerGroup,PCA Components,Regression Type,Test Split,Test R2 Score,RMSE Score,Seed,Combined Score,_source_file
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,100,Kernel Ridge,90/10,0.7381390655084343,0.0340675924416349,1.0,0.9999145326153804,all_sorted_by_rmse.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,100,Kernel Ridge,90/10,0.7381390655084343,0.0340675924416349,1.0,0.9999145326153804,top10_combined_overall.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,100,Kernel Ridge,90/10,0.7381390655084343,0.0340675924416349,,,protbertLosses1.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,100,Kernel Ridge,90/10,0.7381390655084343,0.0340675924416349,1.0,,top10_rmse_overall.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,100,GPR,90/10,0.7245279370266122,0.0349417672925567,1.0,0.9998812917721874,top10_combined_overall.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,100,GPR,90/10,0.7245279370266122,0.0349417672925567,,,protbertLosses1.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,100,GPR,90/10,0.7245279370266122,0.0349417672925567,1.0,,top10_rmse_overall.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,100,GPR,90/10,0.7245279370266122,0.0349417672925567,1.0,0.9998812917721874,all_sorted_by_rmse.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,190,GPR,90/10,0.7211692437393109,0.0351541356872769,1.0,,top10_rmse_overall.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,190,GPR,90/10,0.7211692437393109,0.0351541356872769,,,protbertLosses1.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,190,GPR,90/10,0.7211692437393109,0.0351541356872769,1.0,0.9998731861272462,top10_combined_overall.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,190,GPR,90/10,0.7211692437393109,0.0351541356872769,1.0,0.9998731861272462,all_sorted_by_rmse.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,high,50,Kernel Ridge,90/10,0.7127505049076611,0.0356808936767027,1.0,,top10_rmse_overall.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,high,50,Kernel Ridge,90/10,0.7127505049076611,0.0356808936767027,,,protbertLosses1.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,high,50,Kernel Ridge,90/10,0.7127505049076611,0.0356808936767027,1.0,0.9998530298615164,all_sorted_by_rmse.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,high,50,Kernel Ridge,90/10,0.7127505049076611,0.0356808936767027,1.0,0.9998530298615164,top10_combined_overall.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,190,Kernel Ridge,90/10,0.7118080899576655,0.0357393771082494,1.0,0.999850787519846,all_sorted_by_rmse.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,190,Kernel Ridge,90/10,0.7118080899576655,0.0357393771082494,1.0,0.999850787519846,top10_combined_overall.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,190,Kernel Ridge,90/10,0.7118080899576655,0.0357393771082494,1.0,,top10_rmse_overall.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,190,Kernel Ridge,90/10,0.7118080899576655,0.0357393771082494,,,protbertLosses1.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,high,100,Kernel Ridge,90/10,0.6997653002041336,0.0364784627801041,1.0,0.9998223725919178,top10_combined_overall.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,high,100,Kernel Ridge,90/10,0.6997653002041336,0.0364784627801041,1.0,0.9998223725919178,all_sorted_by_rmse.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,high,100,Kernel Ridge,90/10,0.6997653002041336,0.0364784627801041,,,protbertLosses1.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,high,100,Kernel Ridge,90/10,0.6997653002041336,0.0364784627801041,1.0,,top10_rmse_overall.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,high,190,Kernel Ridge,90/10,0.699363418174869,0.0365028689132116,1.0,0.9998214318293293,top10_combined_overall.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,high,190,Kernel Ridge,90/10,0.699363418174869,0.0365028689132116,,,protbertLosses1.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,high,190,Kernel Ridge,90/10,0.699363418174869,0.0365028689132116,1.0,,top10_rmse_overall.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,high,190,Kernel Ridge,90/10,0.699363418174869,0.0365028689132116,1.0,0.9998214318293293,all_sorted_by_rmse.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,high,190,GPR,90/10,0.6954669578358504,0.036738658726567,,,protbertLosses1.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,high,190,GPR,90/10,0.6954669578358504,0.036738658726567,1.0,0.999812334994914,top10_combined_overall.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,high,190,GPR,90/10,0.6954669578358504,0.036738658726567,1.0,0.999812334994914,all_sorted_by_rmse.csv
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,low,50,GPR,90/10,0.6840574537024252,0.0374227519534331,1.0,0.9997858816157056,all_sorted_by_rmse.csv
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,low,50,GPR,90/10,0.6840574537024252,0.0374227519534331,1.0,0.9997858816157056,top10_combined_overall.csv
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,low,50,GPR,90/10,0.6840574537024252,0.0374227519534331,,,protbertLosses1.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,high,100,GPR,90/10,0.6787048702220418,0.0377361993590884,,,protbertLosses1.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,high,100,GPR,90/10,0.6787048702220418,0.0377361993590884,1.0,0.999773688306104,top10_combined_overall.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,high,100,GPR,90/10,0.6787048702220418,0.0377361993590884,1.0,0.999773688306104,all_sorted_by_rmse.csv
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,low,190,GPR,90/10,0.67710308001166,0.0378323758214396,1.0,0.9997699705516696,all_sorted_by_rmse.csv
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,low,190,GPR,90/10,0.67710308001166,0.0378323758214396,,,protbertLosses1.csv
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,low,10,Kernel Ridge,90/10,0.5677130758471709,0.0380651793606697,,,protbertLosses4.csv
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,low,10,Kernel Ridge,90/10,0.5677130758471709,0.0380651793606697,4.0,0.9996996588755198,all_sorted_by_rmse.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,100,Kernel Ridge,85/15,0.6018886405675095,0.0382004749481739,4.0,0.9997155974491344,all_sorted_by_rmse.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,100,Kernel Ridge,85/15,0.6018886405675095,0.0382004749481739,,,protbertLosses4.csv
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,high,190,GPR,90/10,0.6704112556089237,0.0382223909249812,,,protbertLosses1.csv
+Rg norm w/0.5,No regr out,Inliers,ProtBERT,high,190,GPR,90/10,0.6704112556089237,0.0382223909249812,1.0,0.9997547802687008,all_sorted_by_rmse.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,190,Kernel Ridge,85/15,0.5542570522382564,0.0385133211136989,2.0,0.9996788536016028,all_sorted_by_rmse.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,190,Kernel Ridge,85/15,0.5542570522382564,0.0385133211136989,,,protbertLosses2.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,190,Kernel Ridge,85/15,0.593143848141602,0.0386177459608405,4.0,0.9996984243921064,all_sorted_by_rmse.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,190,Kernel Ridge,85/15,0.593143848141602,0.0386177459608405,,,protbertLosses4.csv
+Rg norm w/0.5,pH regr out,Inliers,ProtBERT,low,20,Kernel Ridge,90/10,0.6615351329823945,0.0387313722184658,,,protbertLosses1.csv

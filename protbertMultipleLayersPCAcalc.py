@@ -56,6 +56,6 @@ if __name__ == "__main__":
     for inpath in layer_files:
         for n_comp in pca_values:
             try:
-                pca_calc(inpath, n_comp, seq_col="Sequence")
+                pca_calc(inpath, n_comp, seq_col="Experimental Sequence")
             except Exception as e:
                 print(f"⚠️ PCA failed for {inpath} with {n_comp} components: {e}")

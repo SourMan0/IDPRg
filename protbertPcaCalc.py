@@ -43,6 +43,6 @@ def pca_calc(inpath, pca_num_components, seq_col="sequence"):
 if __name__ == "__main__":
     inpath = "data/protbertEmbeddings2.csv"
     pca_num_components = 190
-    seq_col = "Sequence"  # name of the sequence column in your file
+    seq_col = "Experimental Sequence"  # name of the sequence column in your file
 
     pca_calc(inpath, pca_num_components, seq_col)

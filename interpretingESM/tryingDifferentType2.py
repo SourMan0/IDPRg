@@ -7,32 +7,36 @@ import csv
 import pickle
 
 ###############################################
-# 1. LOAD ESM MODEL (layer 6 is index = 6)
+# 1. LOAD ESM MODEL (layer 3 of esm2_t6, which is index = 3)
 ###############################################
 
 tok = AutoTokenizer.from_pretrained("facebook/esm2_t6_8M_UR50D")
 model = AutoModel.from_pretrained("facebook/esm2_t6_8M_UR50D")
 model.eval()
 
-regrModel = joblib.load('krr.joblib')
-pca = joblib.load('esm_pca2.joblib')
+# Single artifact now: Pipeline([StandardScaler, PCA, KernelRidge]) fit
+# without leakage by prepareForInterpretation.py. pipeline.predict applies
+# scaler -> pca -> krr in one shot, so the helper below no longer needs to
+# load (and align) a separate PCA object.
+pipeline = joblib.load('krr_pipeline.joblib')
 
 ###############################################
-# 2. GET LAYER-4 EMBEDDINGS FOR A SEQUENCE
+# 2. GET LAYER-1 EMBEDDINGS FOR A SEQUENCE
 ###############################################
+# Layer chosen to match the leak-free best config from the new sweep
+# (ESM-6 layer 1, PCA=100). The pipeline joblib expects 320-d features
+# from this exact layer.
+ESM_LAYER = 1
 
-def get_layer3_embeddings(seq):
-    """
-    Returns per-residue embeddings from layer 6 (shape L x 320).
-    Strips BOS/EOS automatically.
-    """
+
+def get_layer_embeddings(seq):
+    """Per-residue embeddings from ESM_LAYER, shape (L, 320), BOS/EOS stripped."""
     tokens = tok(seq, return_tensors="pt", add_special_tokens=True)
     with torch.no_grad():
         out = model(**tokens, output_hidden_states=True)
-    # hidden_states: list of length 13 (0–12), each shape (1, L+2, 320)
-    emb_l3 = out.hidden_states[3][0]  # choose layer 3
-    emb_l3 = emb_l3[1:-1]            # strip BOS/EOS → (L, 320)
-    return emb_l3
+    emb = out.hidden_states[ESM_LAYER][0]
+    emb = emb[1:-1]
+    return emb
 
 
 def occlude_embedding_window(E, start, k, method="mean"):
@@ -60,77 +64,43 @@ def occlude_embedding_window(E, start, k, method="mean"):
 
     return E_occ
 
-def predict_rg_from_embedding(E, pca, reg_model):
-    """
-    E: (L, D)
-    pca: fitted PCA object
-    reg_model: your regression model (kernel ridge, GPR, etc.)
+def predict_rg_from_embedding(E, pipe):
+    """E: (L, D); pipe: fitted sklearn Pipeline(StandardScaler, PCA, model).
 
     Returns: predicted Rg (float)
     """
-    # Mean pool → 1D vector
     pooled = E.mean(dim=0).cpu().numpy()
-
-    # Apply PCA transform
-    X = pca.transform(pooled.reshape(1, -1))
-
-    # Predict Rg
-    pred = reg_model.predict(X)[0]
+    pred = pipe.predict(pooled.reshape(1, -1))[0]
     return float(pred)
 
-def sliding_embedding_occlusion_with_fragments(seq, E, k, pca, reg_model, method="mean"):
-    """
-    seq: string protein sequence
-    E: (L, D) tensor of embeddings for this sequence
-    k: window size
-    pca, reg_model: fitted models
-    method: occlusion style
 
-    returns:
-        drg_list: list of ΔRg values (length L-k+1)
-        fragments: list of sequence fragments (length L-k+1)
-    """
+def sliding_embedding_occlusion_with_fragments(seq, E, k, pipe, method="mean"):
+    """Slide a window of size k along the embedding, occlude, and record ΔRg."""
     L = len(seq)
     drg_list = []
     fragments = []
 
-    # reference prediction
-    rg_orig = predict_rg_from_embedding(E, pca, reg_model)
+    rg_orig = predict_rg_from_embedding(E, pipe)
 
     for start in range(L - k + 1):
         E_occ = occlude_embedding_window(E, start, k, method)
-        rg_occ = predict_rg_from_embedding(E_occ, pca, reg_model)
-
-        drg = rg_occ - rg_orig
-        drg_list.append(drg)
-
-        frag = seq[start:start+k]
-        fragments.append(frag)
+        rg_occ = predict_rg_from_embedding(E_occ, pipe)
+        drg_list.append(rg_occ - rg_orig)
+        fragments.append(seq[start:start + k])
 
     return np.array(drg_list), fragments
 
-def run_occlusion_all_sequences(sequences, embeddings, k_values, pca, reg_model, method="mean"):
-    """
-    sequences: list of strings
-    embeddings: list of tensors (each (L, D) )
-    k_values: list of window sizes
 
-    returns:
-        all_dRg[k][i]  → ΔRg array for sequence i
-        all_frags[k][i] → list of fragments for sequence i
-    """
-    all_dRg = [[] for k in k_values]
-    all_frags = [[] for k in k_values]
-
+def run_occlusion_all_sequences(sequences, embeddings, k_values, pipe, method="mean"):
+    all_dRg = [[] for _ in k_values]
+    all_frags = [[] for _ in k_values]
     for i, (seq, E) in enumerate(zip(sequences, embeddings)):
         for k in k_values:
-            drg, frags = sliding_embedding_occlusion_with_fragments(
-                seq, E, k, pca, reg_model, method
-            )
+            drg, frags = sliding_embedding_occlusion_with_fragments(seq, E, k, pipe, method)
             all_dRg[k - 1].append(drg)
             all_frags[k - 1].append(frags)
-
     return all_dRg, all_frags
+
 
 sequences = []
 with open('../training/inliers.csv', newline='') as f:
@@ -143,8 +113,10 @@ with open('../training/inliers.csv', newline='') as f:
 
 embeddings = []
 for i in sequences:
-    embeddings.append(get_layer3_embeddings(i))
-allEffects, allFragments = run_occlusion_all_sequences(sequences, embeddings, list(range(1,11)), pca, regrModel, method = 'zero')
+    embeddings.append(get_layer_embeddings(i))
+allEffects, allFragments = run_occlusion_all_sequences(
+    sequences, embeddings, list(range(1, 11)), pipeline, method='zero'
+)
 
 with open("allEffects4.pkl", "wb") as f:
     pickle.dump(allEffects, f)

@@ -1,8 +1,13 @@
 import csv
 import numpy as np
 from Bio.SeqUtils.ProtParam import ProteinAnalysis
-from sklearn.preprocessing import StandardScaler
+from kappa import kappa_simple_from_sequence
 
+# LEAK-FREE: this script no longer applies StandardScaler before saving.
+# Scaling is now performed inside the regression Pipeline so that it's only
+# ever fit on the training fold. Downstream consumers
+# (doRegressions3.py, interpretFeatures2.py) wrap StandardScaler+model in a
+# sklearn Pipeline and pass it raw features.
 
 with open('../training/all_points.csv', newline='') as f:
     reader = csv.reader(f)
@@ -114,22 +119,19 @@ def seq_features(seq):
         f_hydro, f_polar, f_arom, f_pro, f_gly, fcr, logL,
     ]
     #For patterning features
-    x.extend(patterning_features(seq))
+    x.append(kappa_simple_from_sequence(seq))
     return np.array(x)
 
 # --- Run over all sequences ---
-scaler = StandardScaler()
 X_phys = [seq_features(seq) for seq in sequences]
-X_phys = np.array(X_phys)
-X_scaled = scaler.fit_transform(X_phys)
-X_phys = X_scaled.tolist()
+X_phys = np.array(X_phys).tolist()
 
 
-headers = headers = [
-    "Fraction hydrophobic", "Fraction Polar", "Fraction Aromatic", "Fraction Proline", "Fraction Glycine", 
-    "Fraction Charged", "Log Length", "Kappa", 
+headers = [
+    "Fraction hydrophobic", "Fraction Polar", "Fraction Aromatic", "Fraction Proline", "Fraction Glycine",
+    "Fraction Charged", "Log Length", "Kappa",
 ]
-output_file = "protein_features3St.csv"
+output_file = "protein_features3St2.csv"
 with open(output_file, "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(["Sequence"] + headers)

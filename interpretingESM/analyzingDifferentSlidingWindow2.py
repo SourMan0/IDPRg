@@ -3,6 +3,7 @@ import numpy as np
 import csv
 from collections import defaultdict
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 
 sequences = []
 with open('../training/inliers.csv', newline='') as f:
@@ -167,16 +168,208 @@ k_values = [1,2,3,4,5,6,7,8,9,10]   # whatever you use
 pairs = getPerResidueDataset(sequences, allEffects, k_values)
 stats = getInfluences(pairs)
 
-# Plot
+
+# -----------------------------
+# Global style (baseline-safe)
+# -----------------------------
+mpl.rcParams.update({
+    "font.size": 8,
+    "axes.labelsize": 8,
+    "axes.titlesize": 9,
+    "xtick.labelsize": 7,
+    "ytick.labelsize": 7,
+    "axes.linewidth": 0.8,
+})
+
+# -----------------------------
+# Data
+# -----------------------------
 aas = sorted(stats.keys())
-means = [stats[a]['mean'] for a in aas]
+means = np.array([stats[a]["mean"] for a in aas])
 
+# -----------------------------
+# Restrained sign encoding
+# -----------------------------
+pos_color = "#6F7F99"   # muted blue-gray (positive ΔRg)
+neg_color = "#B7C0CC"   # lighter same-hue gray (negative ΔRg)
 
-plt.figure(figsize=(10,4))
-plt.bar(aas, means)
-plt.axhline(0, color='black', linewidth=1)
-plt.title("Mean ΔRg by Residue Type (Corrected Aggregation)")
-plt.xlabel("Residue")
-plt.ylabel("Mean ΔRg")
+colors = []
+alphas = []
+for m in means:
+    if m >= 0:
+        colors.append(pos_color)
+        alphas.append(0.75)
+    else:
+        colors.append(neg_color)
+        alphas.append(0.85)
+
+# -----------------------------
+# Figure (single-column)
+# -----------------------------
+fig, ax = plt.subplots(figsize=(3.4, 2.2))
+
+for a, m, c, al in zip(aas, means, colors, alphas):
+    ax.bar(
+        a,
+        m,
+        width=0.6,
+        color=c,
+        alpha=al,
+        edgecolor="none"
+    )
+
+# Zero as reference anchor (not decision boundary)
+ax.axhline(0, color="black", linewidth=0.8, alpha=0.8)
+
+# -----------------------------
+# Labels and title
+# -----------------------------
+ax.set_xlabel("Residue")
+ax.set_ylabel("Mean ΔRg")
+ax.set_title("Reference distribution of mean ΔRg")
+
+# -----------------------------
+# Axes cleanup
+# -----------------------------
+ax.spines["top"].set_visible(False)
+ax.spines["right"].set_visible(False)
+
+ax.tick_params(axis="x", length=2)
+ax.tick_params(axis="y", length=2)
+ax.yaxis.set_major_locator(plt.MaxNLocator(4))
+
 plt.tight_layout()
+plt.savefig("reference_mean_dRg_by_residue.pdf", bbox_inches="tight")
 plt.show()
+
+'''
+mpl.rcParams.update({
+    "font.size": 8,
+    "axes.labelsize": 8,
+    "axes.titlesize": 9,
+    "xtick.labelsize": 7,
+    "ytick.labelsize": 7,
+    "axes.linewidth": 0.8,
+})
+
+aas = sorted(stats.keys())
+means = np.array([stats[a]["mean"] for a in aas])
+
+# Sign-aware but restrained colors
+pos_color = "#5B6F8E"   # darker blue-gray
+neg_color = "#B7C0CC"   # lighter blue-gray
+colors = np.where(means >= 0, pos_color, neg_color)
+
+fig, ax = plt.subplots(figsize=(3.4, 2.2))  # single-column baseline
+
+ax.bar(
+    aas,
+    means,
+    width=0.6,
+    color=colors,
+    alpha=0.8,
+    edgecolor="none"
+)
+
+# Zero as reference, not decision boundary
+ax.axhline(0, color="black", linewidth=0.6, alpha=0.7)
+
+ax.set_xlabel("Residue")
+ax.set_ylabel("Mean ΔRg")
+ax.set_title("Mean ΔRg by residue type")
+
+# Clean spines
+ax.spines["top"].set_visible(False)
+ax.spines["right"].set_visible(False)
+
+# Quiet ticks
+ax.tick_params(axis="x", length=2)
+ax.tick_params(axis="y", length=2)
+
+plt.tight_layout()
+plt.savefig("baseline_mean_dRg_by_residue.pdf", bbox_inches="tight")
+plt.show()
+'''
+'''
+# --- Style setup (do this once per script) ---
+mpl.rcParams.update({
+    "font.size": 8,
+    "axes.labelsize": 8,
+    "axes.titlesize": 9,
+    "xtick.labelsize": 7,
+    "ytick.labelsize": 7,
+    "axes.linewidth": 0.8,
+    "lines.linewidth": 1.0,
+})
+
+mpl.rcParams.update({
+    "font.size": 8,
+    "axes.labelsize": 8,
+    "axes.titlesize": 9,
+    "xtick.labelsize": 7,
+    "ytick.labelsize": 7,
+    "axes.linewidth": 0.8,
+})
+
+aas = sorted(stats.keys())
+means = np.array([stats[a]["mean"] for a in aas])
+
+fig, ax = plt.subplots(figsize=(3.4, 2.2))  # single-column baseline
+
+ax.bar(
+    aas,
+    means,
+    width=0.6,
+    color="#7A7A7A",
+    alpha=0.7,
+    edgecolor="none"
+)
+
+ax.axhline(0, color="black", linewidth=0.6, alpha=0.7)
+
+ax.set_xlabel("Residue")
+ax.set_ylabel("Mean ΔRg")
+ax.set_title("Mean ΔRg by residue type")
+
+ax.spines["top"].set_visible(False)
+ax.spines["right"].set_visible(False)
+
+ax.tick_params(axis="x", length=2)
+ax.tick_params(axis="y", length=2)
+
+plt.tight_layout()
+plt.savefig("baseline_mean_dRg_by_residue.pdf", bbox_inches="tight")
+plt.show()
+'''
+'''
+# Data
+aas = sorted(stats.keys())
+means = np.array([stats[a]['mean'] for a in aas])
+
+# Colors: positive vs negative
+colors = np.where(means >= 0, "#4C72B0", "#DD8452")
+
+# Figure sized for single-column output
+fig, ax = plt.subplots(figsize=(3.4, 2.2))
+
+ax.bar(aas, means, color=colors, edgecolor="none")
+
+# Zero reference line
+ax.axhline(0, color="black", linewidth=0.8)
+
+# Labels
+ax.set_xlabel("Residue")
+ax.set_ylabel("Mean ΔRg")
+
+# Clean up spines
+ax.spines["top"].set_visible(False)
+ax.spines["right"].set_visible(False)
+
+# Ticks
+ax.tick_params(axis="x", rotation=0, length=3)
+ax.tick_params(axis="y", length=3)
+
+plt.tight_layout()
+plt.savefig("mean_dRg_by_residue.pdf", bbox_inches="tight")
+plt.show()
+'''

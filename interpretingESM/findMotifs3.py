@@ -2,6 +2,7 @@ import numpy as np
 from collections import defaultdict
 import pandas as pd
 import pickle
+import matplotlib as mpl
 import logomaker
 import matplotlib.pyplot as plt
 
@@ -82,12 +83,88 @@ def effects_to_df(mean_effect):
 
 
 k_vals = list(range(1, 11))
-results = computeWeightedResidueEffects(allEffects, allFragments, k_vals, min_count = 400)
-df = effects_to_df(results[10])
+results = computeWeightedResidueEffects(allEffects, allFragments, k_vals, min_count = 500)
+df3 = effects_to_df(results[3])
+df6 = effects_to_df(results[6])
+df10  = effects_to_df(results[10])
+
+mpl.rcParams.update({
+    "font.size": 8,
+    "axes.labelsize": 8,
+    "axes.titlesize": 9,
+    "xtick.labelsize": 7,
+    "ytick.labelsize": 7,
+    "axes.linewidth": 0.8,
+})
+fig, axes = plt.subplots(nrows = 3, ncols = 2, figsize=(6.8, 4.8), sharex = "col", gridspec_kw={"wspace": 0.25, "hspace": 0.25})
+
+dfs = {3: df3, 6: df6, 10: df10}
+aa_colors = {
+    # Hydrophobic (deep slate blue)
+    'A': '#4C72B0', 'V': '#4C72B0', 'L': '#4C72B0',
+    'I': '#4C72B0', 'M': '#4C72B0',
+
+    # Aromatic (near-black charcoal)
+    'F': '#2F2F2F', 'Y': '#2F2F2F', 'W': '#2F2F2F',
+
+    # Polar uncharged (deep teal)
+    'S': '#3C8D7D', 'T': '#3C8D7D', 'N': '#3C8D7D', 'Q': '#3C8D7D',
+
+    # Positively charged (navy)
+    'K': '#2B4F81', 'R': '#2B4F81', 'H': '#2B4F81',
+
+    # Negatively charged (muted maroon)
+    'D': '#8C3B3B', 'E': '#8C3B3B',
+
+    # Special cases
+    'P': '#6B8E23',   # olive (rigidity)
+    'G': '#B58900',   # dark mustard
+    'C': '#6E6E6E'    # neutral gray
+}
+for row, (frag_size, df) in enumerate(dfs.items()):
+    df_expand = df.clip(lower = 0.0)
+    axes[row, 0].set_xlim(0, frag_size)
+    axes[row, 1].set_xlim(0, frag_size)
+    logomaker.Logo(
+        df_expand, ax = axes[row, 0],
+        color_scheme = aa_colors, shade_below=0.6,
+        fade_below=0.6, stack_order = 'small_on_top', baseline_width = 0
+    )
+
+    df_compact = (-df).clip(lower = 0.0)
+    
+    logomaker.Logo(
+        df_compact, 
+        ax=axes[row, 1],
+        color_scheme=aa_colors,
+        shade_below = 0.6,
+        fade_below = 0.6,
+        stack_order = "small_on_top",
+        baseline_width = 0
+    )
+    axes[row, 0].set_ylabel(f"Size {frag_size}")
+
+axes[0, 0].set_title("Expansion")
+axes[0, 1].set_title("Compaction")
+
+for ax in axes.flat:
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.tick_params(length=2)
+    ax.yaxis.set_ticks([])   # qualitative baseline
+
+# X labels only on bottom row
+axes[-1, 0].set_xlabel("Position in motif")
+axes[-1, 1].set_xlabel("Position in motif")
+
+plt.tight_layout()
+plt.savefig("baseline_logos_fragment_sizes.pdf", bbox_inches="tight")
+plt.savefig("baseline_logos_fragment_sizes.png", bbox_inches="tight", dpi=300)
+plt.show()
+
+'''
 df_expand = df.clip(lower = 0.0)
 df_compact = (-df).clip(lower = 0.0)
-
-
 
 
 plt.figure(figsize=(12, 4))
@@ -100,3 +177,4 @@ plt.show()
 logomaker.Logo(df_compact, color_scheme = 'chemistry')
 plt.title("Compaction Logo")
 plt.show()
+'''

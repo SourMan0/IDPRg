@@ -5,8 +5,8 @@ import numpy as np
 from transformers import AutoTokenizer, AutoModel
 import matplotlib.pyplot as plt
 
-regr_model = joblib.load('esm_gpr.joblib')
-pca = joblib.load('esm_pca.joblib')
+regr_model = joblib.load('krr.joblib')
+pca = joblib.load('esm_pca2.joblib')
 color_map = {
     # Charged
     'R': 'dodgerblue', 'K': 'blue', 'D': 'red', 'E': 'orangered',
@@ -118,7 +118,7 @@ plt.bar(range(len(nup153nus) - 4), effects, color=[color_map.get(aa, 'white') fo
 plt.bar(range(len(nup153nus) - 4), effects, color=[color_map.get(aa, 'white') for aa in nup153nus])
 plt.xlabel("Residue index")
 plt.ylabel("ΔRg (Å)")
-plt.title("Per-residue impact on predicted Rg")
+plt.title("Per-residue impact on predicted Rg, nup153nus, k = 5")
 plt.show()
 
 effects, frags = sliding_embedding_occlusion_with_fragments(nup153nus, emb_l4, 1, pca, regr_model, method="zero")
@@ -127,7 +127,7 @@ plt.bar(range(len(nup153nus)), effects, color=[color_map.get(aa, 'white') for aa
 plt.bar(range(len(nup153nus)), effects, color=[color_map.get(aa, 'white') for aa in nup153nus])
 plt.xlabel("Residue index")
 plt.ylabel("ΔRg (Å)")
-plt.title("Per-residue impact on predicted Rg, k = 1")
+plt.title("Per-residue impact on predicted Rg, k = 1, nup153nus")
 plt.show()
 
 effects, frags = sliding_embedding_occlusion_with_fragments(nup153nus, emb_l4, 2, pca, regr_model, method="zero")
@@ -145,7 +145,7 @@ plt.bar(range(len(nup153nus) - 2), effects, color=[color_map.get(aa, 'white') fo
 plt.bar(range(len(nup153nus) - 2), effects, color=[color_map.get(aa, 'white') for aa in nup153nus])
 plt.xlabel("Residue index")
 plt.ylabel("ΔRg (Å)")
-plt.title("Per-residue impact on predicted Rg, k = 3")
+plt.title("Per-residue impact on predicted Rg, k = 3, nup153nus")
 plt.show()
 
 tokens = tok(nup98, return_tensors="pt", add_special_tokens=True)
@@ -161,7 +161,7 @@ plt.bar(range(len(nup98) - 4), effects, color=[color_map.get(aa, 'white') for aa
 plt.bar(range(len(nup98) - 4), effects, color=[color_map.get(aa, 'white') for aa in nup98])
 plt.xlabel("Residue index")
 plt.ylabel("ΔRg (Å)")
-plt.title("nup98 Per-residue impact on predicted Rg, k = 5")
+plt.title("nup98 Per-residue impact on predicted Rg, k = 5, nup98")
 plt.show()
 
 effects, frags = sliding_embedding_occlusion_with_fragments(nup98, emb_l4, 1, pca, regr_model, method="zero")

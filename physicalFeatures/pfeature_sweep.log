@@ -1,0 +1,6 @@
+features1 shape: (167, 8)
+>>> seed 42 -> pfeatureLosses1St3.csv
+>>> seed 43 -> pfeatureLosses2St3.csv
+>>> seed 44 -> pfeatureLosses3St3.csv
+>>> seed 45 -> pfeatureLosses4St3.csv
+>>> seed 46 -> pfeatureLosses5St3.csv

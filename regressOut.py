@@ -82,10 +82,10 @@ RgsAdj = np.array(Rgs[1:], dtype=float)
 #pHResiduals1, phR21 = regressOutFrom('data/allRaw.csv', PhsAdj, AdjI, 'pH', 'Unnorm Rg')
 
 #Try with normalized w/0.427
-#pHResiduals2, pHR22 = regressOutFrom('data/allNormalized.csv', PhsAdj, AdjI, 'pH', 'Norm Rg w/0.427')
+pHResiduals2, pHR22 = regressOutFrom('data/allNormalized.csv', PhsAdj, AdjI, 'pH', 'Norm Rg w/0.421')
 
 #Try Normalized w/0.418
-#pHResiduals3, pHR23 = regressOutFrom('data/allNormalizedWithInliers.csv', PhsAdj, AdjI, 'pH', 'Norm Rg w/0.418')
+#pHResiduals3, pHR23 = regressOutFrom('data/allNormalizedWithInliers.csv', PhsAdj, AdjI, 'pH', 'Norm Rg w/0.406')
 
 #Try Normalized w/0.5
 #pHResiduals4, pHR24 = regressOutFrom('data/allNormalizedNaive.csv', PhsAdj, AdjI, 'pH', 'Norm Rg w/0.5')
@@ -117,7 +117,7 @@ inlierPhUnadj = inlierPh[inliersUnadjI]
 
 #pHResiduals13, pHR213 = regressOutFrom('data/inliersRaw.csv', inlierPhUnadj, inliersUnadjI, 'pH', 'Unnorm Rg', True)
 #pHResiduals14, pHR214 = regressOutFrom('data/inliersNormalized.csv', inlierPhUnadj, inliersUnadjI, 'pH', 'Norm Rg w/0/418', True)
-#pHResiduals15, pHR215 = regressOutFrom('data/inliersNormalizedWithAll.csv', inlierPhUnadj, inliersUnadjI, 'pH', 'Norm Rg w/0.427', True)
+pHResiduals15, pHR215 = regressOutFrom('data/inliersNormalizedWithAll.csv', inlierPhUnadj, inliersUnadjI, 'pH', 'Norm Rg w/0.421', True)
 #pHResiduals8, pHR28 = regressOutFrom('data/inliersNormalizedNaive.csv', inlierPhUnadj, inliersUnadjI, 'pH', 'Norm Rg w/0.5', True)
 
 bufferIndices = {"Monovalent Salt": [6, 10, 21, 26], "Divalent Chloride": [16, 20], "Sulfates": [24, 28], "Phosphates": [7,8,9,23,27], "Tris":[14, 15], "Goods":[18, 19, 22, 29, 31], "Reducing Agents":[13, 17, 25], "EDTA": [11], "Urea": [12], "CHAPS": [33], "NaN3": [30], "PMSF": [12]}
@@ -304,7 +304,7 @@ def regressOutBuffer(fileName, X, unadjI, xitem, yitem, title, unadjusted = Fals
     print(f"Train R²: {r2_train:.3f}, Test R²: {r2_test:.3f}")
 
 
-def makeResiduals(fileName, X, unadjI, xitem='', yitem='', title='', unadjusted = False):
+def makeResiduals(fileName, X, unadjI, xitem='', yitem='', title='', unadjusted = False, printl = False):
     with open(fileName, newline='') as f:
         reader = csv.reader(f)
         labels = []
@@ -324,8 +324,9 @@ def makeResiduals(fileName, X, unadjI, xitem='', yitem='', title='', unadjusted 
     labelsPred = kr.predict(X)
     residuals = labels - labelsPred
     residuals2 = labels - labelsPred
-    #print(f"{xitem} explains {r2:.2%} of variance in {yitem}")
-    #print(f"{xitem} explains {r22:.2%} of variance in {yitem}")
+    if print:
+        print(f"{xitem} explains {r2:.2%} of variance in {yitem}")
+        print(f"{xitem} explains {r22:.2%} of variance in {yitem}")
     return np.array(residuals2, dtype=float)
 
 
@@ -395,14 +396,14 @@ Rgs15[unadjI] = makeResiduals('data/allNormalizedWithInliers.csv', Phs, unadjI, 
 Rgs16 = Rgs0.copy()
 Rgs16[unadjI] = makeResiduals('data/allRaw.csv', totals, unadjI, unadjusted=True)
 Rgs17 = Rgs1.copy()
-Rgs17[unadjI] = makeResiduals('data/allNormalized.csv', totals, unadjI, unadjusted=True)
+Rgs17[unadjI] = makeResiduals('data/allNormalized.csv', totals, unadjI, unadjusted=True, printl = True)
 Rgs18 = Rgs2.copy()
 Rgs18[unadjI]= makeResiduals('data/allNormalizedNaive.csv', totals, unadjI, unadjusted=True)
 Rgs19 = Rgs3.copy()
 Rgs19[unadjI] = makeResiduals('data/allNormalizedWithInliers.csv', totals, unadjI, unadjusted = True)
 
 
-
+'''
 with open('all_points.csv', 'w', newline='') as f:
     writer = csv.writer(f)
     labels = ['Sequence', 'Rg (nm)', 'Rg normalized w/0.421','Rg normalized w/0.5 (nm)', 'Rg normalized w/0.406 (nm)', 
@@ -414,7 +415,7 @@ with open('all_points.csv', 'w', newline='') as f:
     for a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u in zip(sequences, Rgs0, Rgs1, Rgs2, Rgs3, Rgs4, Rgs5, Rgs6, Rgs7, Rgs8, Rgs9, Rgs10, Rgs11, Rgs12, Rgs13, Rgs14, Rgs15, Rgs16, Rgs17, Rgs18, Rgs19):
         y = [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u]
         writer.writerow(y)
-
+'''
 with open('data/inliersRaw.csv', newline='') as f:
     rgs0 = []
     Sequences = []
@@ -459,7 +460,7 @@ rgs18[inliersUnadjI]= makeResiduals('data/inliersNormalizedNaive.csv', inlierTot
 rgs19 = rgs3.copy()
 rgs19[inliersUnadjI] = makeResiduals('data/inliersNormalized.csv', inlierTotalUnadj, inliersUnadjI, unadjusted = True)
 print(rgs19[2])
-
+'''
 with open('inliers.csv', 'w', newline='') as f:
     writer = csv.writer(f)
     labels = ['Sequence', 'Rg (nm)', 'Rg normalized w/0.421','Rg normalized w/0.5 (nm)', 'Rg normalized w/0.406 (nm)', 
@@ -471,3 +472,4 @@ with open('inliers.csv', 'w', newline='') as f:
     for a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u in zip(Sequences, rgs0, rgs1, rgs2, rgs3, rgs4, rgs5, rgs6, rgs7, rgs8, rgs9, rgs10, rgs11, rgs12, rgs13, rgs14, rgs15, rgs16, rgs17, rgs18, rgs19):
         y = [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u]
         writer.writerow(y)
+'''

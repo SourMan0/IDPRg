@@ -57,6 +57,17 @@ These were the leakage source: `StandardScaler().fit_transform` and `PCA().fit_t
 | `interpretingESM/allEffects.pkl`, `allFragments.pkl`, `allMaskedPositions.pkl` | `applySlidingWindowToAll.py` | requires `esm_gpr.joblib` which isn't produced by `prepareForInterpretation.py`; unchanged |
 | `interpretingESM/allEffects2.pkl`, `allFragments2.pkl`, `allMaskedPositions2.pkl`, `baselines.pkl` | `applyingOtherSlidingWindowToAll.py` | same — uses `esm_gpr.joblib` |
 
+## Stage 4b — FG-Nup case study (sliding occlusion on 4 Nups)
+
+`exploringFGNups.py` slides a k=3 occlusion window along each of Nup98, Nup49, Nup153 NUS domain, and Nup153 NUL domain, asks the leak-free KRR pipeline how the predicted Rg changes, and plots per-residue ΔRg with F (Phe) and G (Gly) highlighted.
+
+| File | Status |
+|------|--------|
+| `interpretingESM/exploringFGNups.py` | refactored to load `krr_pipeline.joblib` directly, use ESM-6 layer 1, drop duplicate `plt.bar` bug, save a single 4-panel figure |
+| `interpretingESM/fgnup_per_residue_drg.pdf` / `.png` | **NEW** 4-panel figure (one row per Nup) |
+
+The script also prints the reference Rg and ΔRg range per Nup at runtime.
+
 ## Stage 5 — Final journal logos
 
 | File | Producer | Description | Status |

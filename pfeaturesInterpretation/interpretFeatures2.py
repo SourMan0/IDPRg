@@ -62,15 +62,28 @@ outlierIndices = [114, 125, 137, 163]
 inl = np.ones(167, dtype=bool)
 inl[outlierIndices] = False
 
-# Target: column 4 of inliers.csv == "Rg normalized w/0.406 (nm)"
-# (matches the unchanged behaviour of the previous version of this script)
+# Final headline configs: two targets, both with no covariate regressed out.
+#   - "0.5"  -> column 3  ("Rg normalized w/0.5 (nm)")  -- KRR R²=0.221, RMSE=0.060
+#   - "0.406"-> column 4  ("Rg normalized w/0.406 (nm)") -- KRR R²=0.192, RMSE=0.097
+# Pick which target this run produces via the FIG_TARGET environment variable
+# (defaults to 0.5). Output filenames are suffixed _target0p5 / _target0p406.
+import os
+TARGET = os.environ.get("FIG_TARGET", "0.5")
+TARGET_COL = {"0.5": 3, "0.406": 4}[TARGET]
+OUT_DIR = "target_0p5" if TARGET == "0.5" else "target_0p406"
+os.makedirs(OUT_DIR, exist_ok=True)
+def _out(name):
+    return os.path.join(OUT_DIR, name)
+print(f"Target = Rg normalized w/{TARGET}, no regr out (col {TARGET_COL}); "
+      f"figures -> {OUT_DIR}/")
+
 y = []
 with open('../training/inliers.csv', newline='') as f:
     reader = csv.reader(f)
     for i, row in enumerate(reader):
         if i == 0:
             continue
-        y.append(row[4])
+        y.append(row[TARGET_COL])
 y = np.asarray(y, dtype=np.float64)
 
 # Raw features (no longer pre-scaled in the CSV)
@@ -184,28 +197,167 @@ for c in coefs_sorted:
         colors.append(neg_color)
         alphas.append(0.85)
 
-fig, ax = plt.subplots(figsize=(3.4, 2.4))
-for f, c, col, al in zip(features_sorted, coefs_sorted, colors, alphas):
-    ax.bar(f, c, width=0.6, color=col, alpha=al, edgecolor="none")
-ax.axhline(0, color="black", linewidth=0.8, alpha=0.8)
-ax.set_ylabel("Ridge coefficient")
-ax.set_title("Reference distribution of ridge coefficients")
-for label in ax.get_xticklabels():
-    label.set_horizontalalignment('right')
-ax.spines["top"].set_visible(False)
-ax.spines["right"].set_visible(False)
-ax.tick_params(axis="x", rotation=45, length=2)
-ax.tick_params(axis="y", length=2)
-ax.yaxis.set_major_locator(plt.MaxNLocator(4))
-plt.tight_layout()
-plt.savefig("reference_ridge_coefficients_sorted.pdf", bbox_inches="tight")
-plt.savefig("reference_ridge_coefficients_sorted.png", bbox_inches="tight", dpi=300)
-plt.close(fig)
-print('-> reference_ridge_coefficients_sorted.pdf (+ .png)')
+def _journal_style_bar(values, ylabel, title, path):
+    """Bar plot styled to match the journal Ridge-coefficient figure.
+
+    Same compact figsize (3.4 × 2.4), same muted positive / light-grey
+    negative colour palette, same sort order (most negative → most positive),
+    same axis cleanup. Used for both the Ridge headline figure and the KRR
+    feature-directionality plot so they're visually comparable.
+    """
+    idx = np.argsort(values)
+    sorted_names = feature_names_arr[idx]
+    sorted_vals = np.array(values)[idx]
+
+    colors, alphas = [], []
+    for v in sorted_vals:
+        if v >= 0:
+            colors.append("#6F7F99")
+            alphas.append(0.72)
+        else:
+            colors.append("#A9B2BF")
+            alphas.append(0.85)
+
+    fig, ax = plt.subplots(figsize=(3.4, 2.4))
+    for name, val, col, al in zip(sorted_names, sorted_vals, colors, alphas):
+        ax.bar(name, val, width=0.6, color=col, alpha=al, edgecolor="none")
+    ax.axhline(0, color="black", linewidth=0.8, alpha=0.8)
+    ax.set_ylabel(ylabel)
+    ax.set_title(title)
+    for label in ax.get_xticklabels():
+        label.set_horizontalalignment('right')
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.tick_params(axis="x", rotation=45, length=2)
+    ax.tick_params(axis="y", length=2)
+    ax.yaxis.set_major_locator(plt.MaxNLocator(4))
+    plt.tight_layout()
+    plt.savefig(path, bbox_inches="tight")
+    plt.savefig(path[:-4] + ".png", bbox_inches="tight", dpi=300)
+    plt.close(fig)
+    print(f"-> {path} (+ .png)")
+
+
+# Headline Ridge figure (unchanged content, refactored to share the helper)
+_journal_style_bar(ridge_coef2, "Ridge coefficient",
+                   "Reference distribution of ridge coefficients",
+                   _out("reference_ridge_coefficients_sorted.pdf"))
+
+# KRR directionality figure, styled identically to the Ridge one
+_journal_style_bar(direction, "KRR directionality",
+                   "Reference distribution of KRR directionality",
+                   _out("reference_krr_directionality.pdf"))
 
 
 # ------------------------------------------------------------------
-# Supplementary plots (KRR / GPR directionality, Linear / Lasso bars)
+# SHAP-based KRR interpretation (replaces the single-scalar directionality
+# above for the journal-quality KRR panel).
+#
+# Two figures:
+#   1. Global importance: mean(|SHAP|) per feature -- styled like the Ridge
+#      headline figure, with bars coloured by the sign of the mean signed
+#      SHAP (so direction and magnitude are decoupled rather than averaged
+#      together).
+#   2. Beeswarm: per-instance SHAP attribution coloured by raw feature
+#      value -- shows whether the effect is monotonic, U-shaped, or
+#      heterogeneous across the 163 inliers.
+#
+# We use KernelExplainer because KRR has no built-in SHAP support. The
+# background distribution is summarised to 25 k-means medoids so that the
+# explainer's reference expectation is well-conditioned without being too
+# slow.
+# ------------------------------------------------------------------
+import shap
+
+print('\n>>> Computing SHAP values for the KRR pipeline...')
+background = shap.kmeans(X2, 25)
+explainer = shap.KernelExplainer(best_krr2.best_estimator_.predict, background)
+# Explain every inlier. silent=True suppresses the per-sample progress bar.
+shap_vals = explainer.shap_values(X2, silent=True, nsamples='auto')
+shap_vals = np.asarray(shap_vals)                # (163, 8)
+mean_abs_shap = np.abs(shap_vals).mean(axis=0)   # global importance
+
+# Direction: sign of corr(feature_raw, SHAP). If raising the feature value
+# tends to raise its SHAP (= push the prediction up), correlation is
+# positive and we colour the bar like a "positive ridge coefficient".
+# Otherwise we colour it like a negative one.  This is the same signal the
+# beeswarm encodes via dot colour, just collapsed to a single sign per
+# feature for the journal bar plot.
+shap_direction_sign = np.zeros(shap_vals.shape[1])
+for j in range(shap_vals.shape[1]):
+    feat_col = X2[:, j]
+    if feat_col.std() < 1e-12:
+        shap_direction_sign[j] = 0.0
+    else:
+        shap_direction_sign[j] = np.corrcoef(feat_col, shap_vals[:, j])[0, 1]
+
+print('  Global importance (mean |SHAP|) and direction (sign corr(feat, SHAP)):')
+for i in np.argsort(-mean_abs_shap):
+    print(f'    {feature_names[i]:25s}  mean|SHAP|={mean_abs_shap[i]:.4f}  '
+          f'direction corr={shap_direction_sign[i]:+.3f}')
+
+
+def _shap_signed_bar(mean_abs, direction, path):
+    """Signed SHAP importance, styled to match the Ridge journal figure.
+
+    Bar height = mean(|SHAP|) * sign(corr(feature, SHAP)). Negative bars
+    point below zero (features whose increase compacts the chain),
+    positive bars point above (features whose increase expands it).
+    Bars sorted from most negative (left) to most positive (right) so the
+    layout reads like the Ridge figure.
+    """
+    signed = mean_abs * np.sign(direction)
+    idx = np.argsort(signed)
+    sorted_names = feature_names_arr[idx]
+    sorted_vals = signed[idx]
+
+    colors, alphas = [], []
+    for v in sorted_vals:
+        if v >= 0:
+            colors.append("#6F7F99")
+            alphas.append(0.72)
+        else:
+            colors.append("#A9B2BF")
+            alphas.append(0.85)
+
+    fig, ax = plt.subplots(figsize=(3.4, 2.4))
+    for name, val, col, al in zip(sorted_names, sorted_vals, colors, alphas):
+        ax.bar(name, val, width=0.6, color=col, alpha=al, edgecolor="none")
+    ax.axhline(0, color="black", linewidth=0.8, alpha=0.8)
+    ax.set_ylabel("signed mean |SHAP|")
+    ax.set_title("Reference distribution of KRR SHAP importance")
+    for label in ax.get_xticklabels():
+        label.set_horizontalalignment('right')
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.tick_params(axis="x", rotation=45, length=2)
+    ax.tick_params(axis="y", length=2)
+    ax.yaxis.set_major_locator(plt.MaxNLocator(4))
+    plt.tight_layout()
+    plt.savefig(path, bbox_inches="tight")
+    plt.savefig(path[:-4] + ".png", bbox_inches="tight", dpi=300)
+    plt.close(fig)
+    print(f"-> {path} (+ .png)")
+
+
+_shap_signed_bar(mean_abs_shap, shap_direction_sign,
+                 _out("reference_krr_shap_importance.pdf"))
+
+
+# Supplementary beeswarm
+fig = plt.figure(figsize=(6, 4))
+shap.summary_plot(shap_vals, X2, feature_names=feature_names,
+                  plot_type="dot", show=False, color_bar=True)
+plt.tight_layout()
+plt.savefig(_out("krr_shap_beeswarm.pdf"), bbox_inches="tight")
+plt.savefig(_out("krr_shap_beeswarm.png"), bbox_inches="tight", dpi=300)
+plt.close(fig)
+print(f'-> {_out("krr_shap_beeswarm.pdf")} (+ .png)')
+
+
+# ------------------------------------------------------------------
+# Supplementary plots (GPR directionality, Linear / Lasso bars) — kept
+# at the larger exploratory size since they're not headline figures.
 # ------------------------------------------------------------------
 def _save_bar(values, title, path):
     idx = np.argsort(values)
@@ -226,11 +378,16 @@ def _save_bar(values, title, path):
     print(f'-> {path} (+ .png)')
 
 
-_save_bar(direction, "KRR feature directionality (∂PD / ∂x mean)",
-          "krr_feature_directionality.pdf")
+# KRR directionality already has a journal-styled version above; only keep
+# the GPR exploratory plot here since GPR has no headline counterpart.
 _save_bar(direction2, "GPR feature directionality (∂PD / ∂x mean)",
-          "gpr_feature_directionality.pdf")
-_save_bar(lin_coef2, "Linear regression feature coefficients",
-          "linear_feature_coefficients.pdf")
-_save_bar(lasso_coef, "Lasso feature coefficients",
-          "lasso_feature_coefficients.pdf")
+          _out("gpr_feature_directionality.pdf"))
+
+# Linear and Lasso coefficient figures, formatted in the same journal style
+# as the Ridge headline and KRR-SHAP plots.
+_journal_style_bar(lin_coef2, "Linear coefficient",
+                   "Reference distribution of linear coefficients",
+                   _out("reference_linear_coefficients_sorted.pdf"))
+_journal_style_bar(lasso_coef, "Lasso coefficient",
+                   "Reference distribution of lasso coefficients",
+                   _out("reference_lasso_coefficients_sorted.pdf"))
